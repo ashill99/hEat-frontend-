@@ -17,12 +17,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.adam.hEat",
+      "config": {
+        "googleMapsApiKey": "AIzaSyBhhTTzdTS92mqoXSjqh7TMTAjjMqRLIIw"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.adam.hEat",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCMi13WW2emxWLYkht4OBxU--mqlqhzn6I"
+        }
       }
     },
     "web": {
