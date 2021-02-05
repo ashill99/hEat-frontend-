@@ -7,7 +7,7 @@ import MapView, { Marker } from 'react-native-maps';
 import { PROVIDER_GOOGLE } from 'react-native-maps' 
 
 
-  const Screen2 = ({ navigation, route }) => {
+  const Screen2 = ({ navigation, route, allLocations }) => {
 
     const [region, setRegion] = useState({
       latitude: 40.6942696,
@@ -15,7 +15,7 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
       latitudeDelta: 0.06,
       longitudeDelta: 0.06
     })
-    
+
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Screen 2</Text>
@@ -31,7 +31,7 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
         region={region}
         navigation={navigation}
       >
-      {allLocations.map((location, index) => {
+      {route.allLocations.map((location, index) => {
         return (
           <Marker 
             coordinate={{ latitude: location.latitude, longitude: location.longitude }}

@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { PROVIDER_GOOGLE } from 'react-native-maps' 
 import MapView, { Marker } from 'react-native-maps';
 import { useNavigation } from '@react-navigation/native';
-// import Screen2 from './src/Screen2'
+import Screen2 from './src/Screen2'
 
 // import './assets/fireMarker'
 
@@ -75,46 +75,46 @@ function logLocation(location) {
       <Button
         title="Go to Screen 2 (Map)"
         onPress={() => {
-          navigation.push('Screen2')
+          navigation.push('Screen2', {params: {allLocations: allLocations}})
         }}
       />
     </View>
   )
 
-  const Screen2 = ({ navigation, route }) => (
-    <View style={styles.screen}>
-      <Text style={styles.title}>Screen 2</Text>
-      <Button
-        title="Go back"
-        onPress={() => {
-          navigation.pop()
-        }}
-      />
-      <MapView 
-        style={styles.map}
-        provider={PROVIDER_GOOGLE} 
-        region={region}
-        navigation={navigation}
-      >
-      {allLocations.map((location, index) => {
-        return (
-          <Marker 
-            coordinate={{ latitude: location.latitude, longitude: location.longitude }}
-            key={index}
-            onPress={() => {
-              {getLocationDetails(location.id)}
-                navigation.push('Screen3', { id: location.id })
-            logLocation(location.id)
-            }}> 
-              <View styles={styles.marker}>
-                <Text styles={styles.text}>{location.name}🔥</Text>
-              </View>
-          </Marker>
-        )
-      })}
-        </MapView>
-    </View>
-  )
+  // const Screen2 = ({ navigation, route }) => (
+  //   <View style={styles.screen}>
+  //     <Text style={styles.title}>Screen 2</Text>
+  //     <Button
+  //       title="Go back"
+  //       onPress={() => {
+  //         navigation.pop()
+  //       }}
+  //     />
+  //     <MapView 
+  //       style={styles.map}
+  //       provider={PROVIDER_GOOGLE} 
+  //       region={region}
+  //       navigation={navigation}
+  //     >
+  //     {allLocations.map((location, index) => {
+  //       return (
+  //         <Marker 
+  //           coordinate={{ latitude: location.latitude, longitude: location.longitude }}
+  //           key={index}
+  //           onPress={() => {
+  //             {getLocationDetails(location.id)}
+  //               navigation.push('Screen3', { id: location.id })
+  //           logLocation(location.id)
+  //           }}> 
+  //             <View styles={styles.marker}>
+  //               <Text styles={styles.text}>{location.name}🔥</Text>
+  //             </View>
+  //         </Marker>
+  //       )
+  //     })}
+  //       </MapView>
+  //   </View>
+  // )
 
 function getLocationDetails(id) {
     fetch(`http://localhost:3000/api/v1/locations/${id}`)
