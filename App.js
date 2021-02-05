@@ -140,8 +140,17 @@ function getLocationDetails(id) {
 
   return (
 <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Screen1" component={Screen1} options={{ title: "🍴hEat🔥"}} />
+      <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+            backgroundColor: '#F4C430',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          }}>
+        <Stack.Screen name="Screen1" component={Screen1} options={{title: 'hEat'}} />
         <Stack.Screen name="Screen2" component={Screen2} />
         <Stack.Screen name="Screen3" component={Screen3} />
       </Stack.Navigator>
