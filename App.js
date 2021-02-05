@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { PROVIDER_GOOGLE } from 'react-native-maps' 
 import MapView, { Marker } from 'react-native-maps';
 import { useNavigation } from '@react-navigation/native';
+// import Screen2 from './src/Screen2'
 
 // import './assets/fireMarker'
 
