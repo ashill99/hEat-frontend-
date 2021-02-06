@@ -5,9 +5,39 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet, Button, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { PROVIDER_GOOGLE } from 'react-native-maps' 
+ import {useSelector} from 'react-redux'
+ import {useDispatch} from 'react-redux'
+ import { addItems } from "./redux/location";
+//  import Screen3 from './Screen3'
 
 
-  const Screen2 = ({ navigation, route, allLocations }) => {
+
+  const Screen2 = ({ navigation, route }) => {
+
+    const dispatch = useDispatch()
+
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/v1/locations")
+    .then(res => res.json())
+    .then(locationArray => {
+      // const mappedLocation = locationArray.map((location) => {
+      //   return {
+      //     ...location, 
+      //   }
+      // })
+      const action = addItems(locationArray)
+      dispatch(action)
+    })
+    // the dispatch won't effect the useeffect but will stop console warning
+  },[dispatch])
+
+
+    const locations = useSelector(state => {
+      return state.location.items
+    })
+
+    console.log(locations)
 
     const [region, setRegion] = useState({
       latitude: 40.6942696,
@@ -16,8 +46,8 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
       longitudeDelta: 0.06
     })
 
-  return (
-    <View style={styles.screen}>
+    return(
+      <View style={styles.screen}>
       <Text style={styles.title}>Screen 2</Text>
       <Button
         title="Go back"
@@ -31,15 +61,17 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
         region={region}
         navigation={navigation}
       >
-      {route.allLocations.map((location, index) => {
+      {locations.map((location, index) => {
         return (
           <Marker 
             coordinate={{ latitude: location.latitude, longitude: location.longitude }}
             key={index}
             onPress={() => {
-              {getLocationDetails(location.id)}
-                navigation.push('Screen3', { id: location.id })
-            logLocation(location.id)
+              // {getLocationDetails(location.id)}
+              // console.log(location.id)
+              let id = location.id
+                navigation.push('Screen3', id={id} )
+            // logLocation(location.id)
             }}> 
               <View styles={styles.marker}>
                 <Text styles={styles.text}>{location.name}🔥</Text>

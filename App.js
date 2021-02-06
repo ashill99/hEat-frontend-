@@ -7,7 +7,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { PROVIDER_GOOGLE } from 'react-native-maps' 
 import MapView, { Marker } from 'react-native-maps';
 import { useNavigation } from '@react-navigation/native';
+import Screen1 from './src/Screen1'
 import Screen2 from './src/Screen2'
+import Screen3 from './src/Screen3'
+import { Provider } from 'react-redux'
+import store from './src/redux/store'
 
 // import './assets/fireMarker'
 
@@ -15,7 +19,7 @@ import Screen2 from './src/Screen2'
 
 // import RestaurantList from './src/RestaurantList'
 
-const Stack = createStackNavigator();
+// const Stack = createStackNavigator();
 
 // function HomeScreen( ) {
 //   return (
@@ -23,33 +27,27 @@ const Stack = createStackNavigator();
 //   );
 // }
 
-export default function App({ navigation }) {
+export default function App() {
 
-  const [allLocations, setAllLocations] = useState([])
-  const [currentLocation, setCurrentLocation] = useState([])
-  
-    useEffect(() => {
-      fetch("http://localhost:3000/api/v1/locations")
-    .then(r => r.json())
-    .then(restData => {setAllLocations(restData)})
-    .catch((error) => console.log(error))
-    },[])
-    
-  
-    console.log(allLocations)
+  const Stack = createStackNavigator();
 
-const [region, setRegion] = useState({
-  latitude: 40.6942696,
-  longitude: -73.9187482,
-  latitudeDelta: 0.06,
-  longitudeDelta: 0.06
-})
+  // const firstScreen = Screen1
+  // const [allLocations, setAllLocations] = useState([])
+  // const [currentLocation, setCurrentLocation] = useState([])
+
+
+// const [region, setRegion] = useState({
+//   latitude: 40.6942696,
+//   longitude: -73.9187482,
+//   latitudeDelta: 0.06,
+//   longitudeDelta: 0.06
+// })
 
 // const customMarker = () {
 // }
-function logLocation(location) {
-  console.log(location)
-}
+// // function logLocation(location) {
+//   console.log(location)
+// }
 
 
 // const allMarkers = allLocations.map((location, index) => {
@@ -67,19 +65,19 @@ function logLocation(location) {
 //   )
 // })
 
-  const Screen1 = ({ navigation, route }) => (
-    <View style={styles.screen}>
-      <Text style={styles.title}>Screen 1</Text>
-      <Text style={styles.title}>Welcome to hEat NY</Text>
-      <Text style={styles.text}>Only New York's hottest bars and restaurants. Literally.</Text>
-      <Button
-        title="Go to Screen 2 (Map)"
-        onPress={() => {
-          navigation.push('Screen2', {params: {allLocations: allLocations}})
-        }}
-      />
-    </View>
-  )
+  // const Screen1 = ({ navigation, route }) => (
+  //   <View style={styles.screen}>
+  //     <Text style={styles.title}>Screen 1</Text>
+  //     <Text style={styles.title}>Welcome to hEat NY</Text>
+  //     <Text style={styles.text}>Only New York's hottest bars and restaurants. Literally.</Text>
+  //     <Button
+  //       title="Go to Screen 2 (Map)"
+  //       onPress={() => {
+  //         navigation.push('Screen2', {params: {allLocations: allLocations}})
+  //       }}
+  //     />
+  //   </View>
+  // )
 
   // const Screen2 = ({ navigation, route }) => (
   //   <View style={styles.screen}>
@@ -116,30 +114,31 @@ function logLocation(location) {
   //   </View>
   // )
 
-function getLocationDetails(id) {
-    fetch(`http://localhost:3000/api/v1/locations/${id}`)
-  .then(r => r.json())
-  .then(restData => {setCurrentLocation(restData)})
-  .catch((error) => console.log(error))
-}
+// function getLocationDetails(id) {
+//     fetch(`http://localhost:3000/api/v1/locations/${id}`)
+//   .then(r => r.json())
+//   .then(restData => {setCurrentLocation(restData)})
+//   .catch((error) => console.log(error))
+// }
 
-  const Screen3 = ({ navigation, route}) => (
-    <View>
-      <Text style={styles.title}>{currentLocation.name}</Text>
-      <Text>{currentLocation.restOrBar}</Text>
-      <Text>{currentLocation.restType}</Text>
-      <Text>{currentLocation.address}</Text>
-      <Text>{currentLocation.rating}</Text>
-      <Text>Picture...</Text>
-      <Text>Website...</Text>
-      <Text>Opening Hours...</Text>
-      <Text>Menu Link or picture...</Text>
-    </View>
+  // const Screen3 = ({ navigation, route}) => (
+  //   <View>
+  //     <Text style={styles.title}>{currentLocation.name}</Text>
+  //     <Text>{currentLocation.restOrBar}</Text>
+  //     <Text>{currentLocation.restType}</Text>
+  //     <Text>{currentLocation.address}</Text>
+  //     <Text>{currentLocation.rating}</Text>
+  //     <Text>Picture...</Text>
+  //     <Text>Website...</Text>
+  //     <Text>Opening Hours...</Text>
+  //     <Text>Menu Link or picture...</Text>
+  //   </View>
 
-  )
+  // )
 
 
   return (
+<Provider store={store}>
 <NavigationContainer>
       <Stack.Navigator
       screenOptions={{
@@ -151,11 +150,12 @@ function getLocationDetails(id) {
             fontWeight: 'bold',
           },
           }}>
-        <Stack.Screen name="Screen1" component={Screen1} options={{title: 'hEat'}} />
+        <Stack.Screen name="Screen1" component={Screen1()} options={{title: 'hEat'}} />
         <Stack.Screen name="Screen2" component={Screen2} />
         <Stack.Screen name="Screen3" component={Screen3} />
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
 
