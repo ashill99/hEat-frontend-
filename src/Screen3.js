@@ -1,19 +1,21 @@
+import { getPathFromState } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Button, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
 import 'react-native-gesture-handler';
 
 
 
-  const Screen3 = ({ navigation, route, id}) => (
+  const Screen3 = ({ navigation, route}) => (
+
 
     <View>
-    {console.log(id)}
-      {/* <Text style={styles.title}>{location.name}</Text>
-      <Text>{location.restOrBar}</Text>
-      <Text>{location.restType}</Text>
-      <Text>{location.address}</Text>
-      <Text>{location.rating}</Text> */}
-      {/* <Text>{location.name}</Text> */}
+    {console.log(route.params.location)}
+      <Text style={styles.title}>{route.params.location.name}</Text>
+      <Text>{route.params.location.restOrBar}</Text>
+      <Text>{route.params.location.restType}</Text>
+      <Text>{route.params.location.address}</Text>
+      <Text>{route.params.location.rating}</Text>
+      <Text>{route.params.location.name}</Text>
       <Text>Picture...</Text>
       <Text>Website...</Text>
       <Text>Opening Hours...</Text>

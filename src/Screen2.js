@@ -16,7 +16,6 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
 
     const dispatch = useDispatch()
 
-
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/locations")
     .then(res => res.json())
@@ -69,8 +68,7 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
             onPress={() => {
               // {getLocationDetails(location.id)}
               // console.log(location.id)
-              let id = location.id
-                navigation.push('Screen3', id={id} )
+                navigation.push('Screen3', {location: location} )
             // logLocation(location.id)
             }}> 
               <View styles={styles.marker}>
