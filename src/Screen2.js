@@ -8,6 +8,7 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
  import {useSelector} from 'react-redux'
  import {useDispatch} from 'react-redux'
  import { addItems } from "./redux/location";
+ import { addLocation } from './redux/currentLocation'
 //  import Screen3 from './Screen3'
 
 
@@ -66,10 +67,9 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
             coordinate={{ latitude: location.latitude, longitude: location.longitude }}
             key={index}
             onPress={() => {
-              // {getLocationDetails(location.id)}
-              // console.log(location.id)
-                navigation.push('Screen3', {location: location} )
-            // logLocation(location.id)
+              const action2 = addLocation(location)
+              dispatch(action2)
+              navigation.push('Screen3')
             }}> 
               <View styles={styles.marker}>
                 <Text styles={styles.text}>{location.name}🔥</Text>
@@ -81,7 +81,6 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
     </View>
   )
 }
-
 
 export default Screen2
 

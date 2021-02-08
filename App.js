@@ -12,130 +12,13 @@ import Screen2 from './src/Screen2'
 import Screen3 from './src/Screen3'
 import { Provider } from 'react-redux'
 import store from './src/redux/store'
+import AddCommentForm from './src/AddCommentForm'
 
-// import './assets/fireMarker'
 
-// import HomeMainScreen from './src/HomeMainScreen'
-
-// import RestaurantList from './src/RestaurantList'
-
-// const Stack = createStackNavigator();
-
-// function HomeScreen( ) {
-//   return (
-//       <HomeMainScreen />
-//   );
-// }
 
 export default function App() {
 
   const Stack = createStackNavigator();
-
-  // const firstScreen = Screen1
-  // const [allLocations, setAllLocations] = useState([])
-  // const [currentLocation, setCurrentLocation] = useState([])
-
-
-// const [region, setRegion] = useState({
-//   latitude: 40.6942696,
-//   longitude: -73.9187482,
-//   latitudeDelta: 0.06,
-//   longitudeDelta: 0.06
-// })
-
-// const customMarker = () {
-// }
-// // function logLocation(location) {
-//   console.log(location)
-// }
-
-
-// const allMarkers = allLocations.map((location, index) => {
-//   return (
-//     <Marker 
-//       coordinate={{ latitude: location.latitude, longitude: location.longitude }}
-//       key={index}
-//       onPress={() => {
-//           navigation.push('Screen3', { locationId: location.id })
-//         }}>
-//       <View styles={styles.marker}>
-//         <Text styles={styles.text}>{location.name}🔥</Text>
-//       </View>
-//     </Marker>
-//   )
-// })
-
-  // const Screen1 = ({ navigation, route }) => (
-  //   <View style={styles.screen}>
-  //     <Text style={styles.title}>Screen 1</Text>
-  //     <Text style={styles.title}>Welcome to hEat NY</Text>
-  //     <Text style={styles.text}>Only New York's hottest bars and restaurants. Literally.</Text>
-  //     <Button
-  //       title="Go to Screen 2 (Map)"
-  //       onPress={() => {
-  //         navigation.push('Screen2', {params: {allLocations: allLocations}})
-  //       }}
-  //     />
-  //   </View>
-  // )
-
-  // const Screen2 = ({ navigation, route }) => (
-  //   <View style={styles.screen}>
-  //     <Text style={styles.title}>Screen 2</Text>
-  //     <Button
-  //       title="Go back"
-  //       onPress={() => {
-  //         navigation.pop()
-  //       }}
-  //     />
-  //     <MapView 
-  //       style={styles.map}
-  //       provider={PROVIDER_GOOGLE} 
-  //       region={region}
-  //       navigation={navigation}
-  //     >
-  //     {allLocations.map((location, index) => {
-  //       return (
-  //         <Marker 
-  //           coordinate={{ latitude: location.latitude, longitude: location.longitude }}
-  //           key={index}
-  //           onPress={() => {
-  //             {getLocationDetails(location.id)}
-  //               navigation.push('Screen3', { id: location.id })
-  //           logLocation(location.id)
-  //           }}> 
-  //             <View styles={styles.marker}>
-  //               <Text styles={styles.text}>{location.name}🔥</Text>
-  //             </View>
-  //         </Marker>
-  //       )
-  //     })}
-  //       </MapView>
-  //   </View>
-  // )
-
-// function getLocationDetails(id) {
-//     fetch(`http://localhost:3000/api/v1/locations/${id}`)
-//   .then(r => r.json())
-//   .then(restData => {setCurrentLocation(restData)})
-//   .catch((error) => console.log(error))
-// }
-
-  // const Screen3 = ({ navigation, route}) => (
-  //   <View>
-  //     <Text style={styles.title}>{currentLocation.name}</Text>
-  //     <Text>{currentLocation.restOrBar}</Text>
-  //     <Text>{currentLocation.restType}</Text>
-  //     <Text>{currentLocation.address}</Text>
-  //     <Text>{currentLocation.rating}</Text>
-  //     <Text>Picture...</Text>
-  //     <Text>Website...</Text>
-  //     <Text>Opening Hours...</Text>
-  //     <Text>Menu Link or picture...</Text>
-  //   </View>
-
-  // )
-
 
   return (
 <Provider store={store}>
