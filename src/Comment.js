@@ -49,7 +49,7 @@ const Comment = () => {
       const eachComment = currentComments.map((comment, index) => {
           console.log(comment)
               return (
-                <Text key={comment.index}>{index +1}. {comment.content} {'\n'}{'\n'} says {comment.userId}{'\n'} </Text>
+                <Text key={comment.id}>{index +1}. {comment.content} {'\n'}{'\n'} says {comment.userId}{'\n'} </Text>
               )
           }
     )

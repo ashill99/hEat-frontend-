@@ -4,10 +4,14 @@ import { StyleSheet, Button, Text, View, Dimensions, Callout, TouchableOpacity, 
 import 'react-native-gesture-handler';
 import {useSelector} from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native';
+import { updateComments } from './redux/comments'
+import { useDispatch } from 'react-redux'
 
 
 
 const AddCommentForm = () => {
+    
+    const dispatch = useDispatch()
 
     const [text, setText] = useState('')
 
@@ -39,7 +43,10 @@ const AddCommentForm = () => {
         })
     })
     .then((response) => response.json())
-    .then(console.log)
+    .then(newComment => {
+        const action2 = updateComments(newComment)
+        dispatch(action2)
+    })
     .catch((error) => {
       console.error(error);
     });
