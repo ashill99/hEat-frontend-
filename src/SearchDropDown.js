@@ -12,25 +12,29 @@ export default function SearchDropDown(props) {
     const [location, setLocation] = useState([])
     console.log(location, "line 8")
 
-
     function goToSearch(e) {
         console.log('testing search bar')
         // console.log(item)
-        console.log(location, "line12")
-
+        // console.log(location, "line12")
+        const currentLocation = locations.filter(location2 => location2.name.toLowerCase() === location)
+        console.log(currentLocation, "line 20")
+        console.log(currentLocation, "line 21")
+        const newLat = currentLocation.map(c => c.latitude)
+        const newLon = currentLocation.map(c => c.longitude)
+        
         props.mapRef.current.animateToRegion(
             {
-              latitude: 40.7026,
-              longitude: -73.9172,
+              latitude: newLat[0],
+              longitude: newLon[0],
               latitudeDelta: 0.02,
               longitudeDelta: 0.02
-            }, 1000)  
-            const currentLocation = locations.filter(location => location.name.toLowerCase() === location)
+            }, 2000)  
+            // console.log(locations, "line 27")
 
-            console.log(currentLocation, "line 14")
+            // console.log(currentLocation, "line 14")
     }
     const { dataSource } = props
-    console.log(dataSource, "line 7")
+    console.log(dataSource, "line 32")
 
     return (
         <TouchableOpacity
@@ -42,7 +46,7 @@ export default function SearchDropDown(props) {
                     dataSource.length ?
                         dataSource.map(item => {
                             return (
-                                <TouchableOpacity onPress={() => {goToSearch(); setLocation(item)}} latitude={item.latitude} longitude={item.longitude} style={styles.itemView}>
+                                <TouchableOpacity onPress={() => {setLocation(item); goToSearch()}} latitude={item.latitude} longitude={item.longitude} style={styles.itemView}>
                                     <Text style={styles.itemText}>{item}</Text>
                                 </TouchableOpacity>                            
                                 )

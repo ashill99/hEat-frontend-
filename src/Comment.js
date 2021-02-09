@@ -50,8 +50,8 @@ const Comment = () => {
           console.log(comment.likes, "line 47")
 
               return (
-                <View> 
-                  <Text key={comment.id}>{index +1}. {comment.content} {'\n'}{'\n'} says {comment.userId}{'\n'} </Text>
+                <View key={comment.id}> 
+                  <Text>{index +1}. {comment.content} {'\n'}{'\n'} says {comment.userId}{'\n'} </Text>
                   <Text> Likes: {comment.likes}</Text>
                 </View>
               )
