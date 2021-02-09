@@ -35,14 +35,13 @@ const FilterContainer = ({mapRef}) => {
           return state.restType.restType
       })
       
-    //   const searchAction = dispatch(updateSearch(search))
+      const searchAction = dispatch(updateSearch(search))
+
       const eachLocation = locations.map(location => 
-          location.name)
-
-      console.log(search), "line 37"
-        console.log(locations, "all locations")
-        console.log(eachLocation, "each location")
-
+          location)
+    //   console.log(search), "line 37"
+    //     console.log(locations, "all locations")
+    //     console.log(eachLocation, "each location")
       const [dataSource] = useState(eachLocation)
 
       const [filtered, setFiltered] = useState(dataSource)
@@ -52,7 +51,7 @@ const FilterContainer = ({mapRef}) => {
         if (text) {
           setSearching(true)
           const temp = text.toLowerCase()
-            const dataLowerCase = dataSource.map(item => item.toLowerCase())
+            const dataLowerCase = dataSource.map(item => item.name.toLowerCase())
           const tempList = dataLowerCase.filter(item => {
             if (item.match(temp))
               return item
@@ -70,51 +69,37 @@ const FilterContainer = ({mapRef}) => {
 
     return (
         <>
-        {/* <TextInput
-        placeholder="Search..."
-        onChangeText={() => {dispatch(updateSearch(value))}}
-        // value={search}
-      /> */}
-      {/* <TextInput
+        <View style={styles.container}>
+            <DropDownPicker
+            items={[
+                {label: 'All', value: 'All', icon: () => <Icon name="whatshot" size={18} color="#900" />,},
+                {label: 'Bar', value: 'Bar', icon: () => <Icon name="nightlife" size={18} color="#900" />},
+                {label: 'Restaurant', value: 'Restaurant', icon: () => <Icon name="fastfood" size={18} color="#900" />},
+            ]}
+            defaultValue="All"
+            containerStyle={{height: 40}}
+            style={{backgroundColor: '#fafafa'}}
+            itemStyle={{
+                justifyContent: 'flex-start'
+            }}
+            labelStyle={{
+        fontSize: 16,
+        textAlign: 'left',
+        color: '#000'
+    }}
+    containerStyle={{width: 100, height: 30}}
+
+            dropDownStyle={{backgroundColor: '#fafafa'}}
+            onChangeItem={item => dispatch(updateRestBar(item.value))}
+        />
+
+<TextInput
 style={styles.textInput}
 placeholder="Search"
 placeholderTextColor='grey'
 onChangeText={onSearch}
 />
-{
-searching &&
-<SearchDropDown
-onPress={() => setSearching(false)}
-dataSource={filtered} 
-    mapRef={mapRef}
-/>
-} */}
-
-        <View style={styles.container}>
-        {/* <View> */}
-    <DropDownPicker
-        items={[
-            {label: 'All', value: 'All', icon: () => <Icon name="whatshot" size={18} color="#900" />,},
-            {label: 'Bar', value: 'Bar', icon: () => <Icon name="nightlife" size={18} color="#900" />},
-            {label: 'Restaurant', value: 'Restaurant', icon: () => <Icon name="fastfood" size={18} color="#900" />},
-        ]}
-        defaultValue="All"
-        containerStyle={{height: 40}}
-        style={{backgroundColor: '#fafafa'}}
-        itemStyle={{
-            justifyContent: 'flex-start'
-        }}
-        labelStyle={{
-    fontSize: 16,
-    textAlign: 'left',
-    color: '#000'
-}}
-containerStyle={{width: 100, height: 30}}
-
-        dropDownStyle={{backgroundColor: '#fafafa'}}
-        onChangeItem={item => dispatch(updateRestBar(item.value))}
-    />
-    <DropDownPicker
+    {/* <DropDownPicker
         items={[
             {label: 'All', value: 'All', icon: () => <Icon name="whatshot" size={18} color="#900" />,},
             {label: 'Pizza', value: 'Pizza', icon: () => <Icon name="nightlife" size={18} color="#900" />},
@@ -137,7 +122,7 @@ containerStyle={{width: 100, height: 30}}
         containerStyle={{width: 100, height: 30}}
         dropDownStyle={{backgroundColor: '#fafafa'}}
         onChangeItem={item => dispatch(updateRestType(item.value))}
-    />
+    /> */}
 
       {/* <Switch
         backgroundActive={'green'}
@@ -149,12 +134,12 @@ containerStyle={{width: 100, height: 30}}
         activeText={'Restaurant'}
         inActiveText={'Bar'}
       /> */}
-
       {
 searching &&
 <SearchDropDown
 onPress={() => setSearching(false)}
-dataSource={filtered} />
+dataSource={filtered}
+mapRef={mapRef} />
 }
         </View>
         </>

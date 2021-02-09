@@ -105,13 +105,7 @@ import * as Location from 'expo-location';
 
     return(
       <View style={styles.screen}>
-      {/* <Button
-        title="Go back"
-        onPress={() => {
-          navigation.pop()
-        }}
-      /> */}
-      
+
       <Text style={styles.title}>hEat</Text>
 
       <FilterContainer mapRef={mapRef}/>
@@ -125,7 +119,7 @@ import * as Location from 'expo-location';
         showsUserLocation={true}
       >
 
-      {(restOrBar === "All" ? locations : typeFilteredLocations).map((location, index) => {
+      {(restOrBar === "All" ? locations : filteredLocations).map((location, index) => {
         return (
           <Marker 
             coordinate={{ latitude: location.latitude, longitude: location.longitude }}
