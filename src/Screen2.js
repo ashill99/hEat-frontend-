@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, Button, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
+import { StyleSheet, SearchBar, TextInput, Button, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { PROVIDER_GOOGLE } from 'react-native-maps' 
  import {useSelector} from 'react-redux'
@@ -10,12 +10,16 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
  import { addItems } from "./redux/location";
  import { addLocation } from './redux/currentLocation'
 //  import Screen3 from './Screen3'
-
+import FilterContainer from './FilterContainer'
 
 
   const Screen2 = ({ navigation, route }) => {
 
     const dispatch = useDispatch()
+
+    const restOrBar = useSelector(state => {
+      return state.restBar.restBar
+    })
 
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/locations")
@@ -37,7 +41,22 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
       return state.location.items
     })
 
+    const restType = useSelector(state => {
+      return state.restType.restType
+  })
+
     console.log(locations)
+    console.log(restType, "line 48 resttype")
+
+    const filteredLocations = locations
+    .filter(location => location.restOrBar === restOrBar)
+
+    console.log(restOrBar, "line 54 restbar")
+
+    console.log(filteredLocations, "line 49")
+
+    const typeFilteredLocations = locations
+    .filter(location => location.restType === restType)
 
     const [region, setRegion] = useState({
       latitude: 40.6942696,
@@ -48,20 +67,25 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
 
     return(
       <View style={styles.screen}>
-      <Text style={styles.title}>Screen 2</Text>
-      <Button
+      {/* <Button
         title="Go back"
         onPress={() => {
           navigation.pop()
         }}
-      />
+      /> */}
+ 
+      <Text style={styles.title}>hEat</Text>
+
+      <FilterContainer/>
+
       <MapView 
         style={styles.map}
         provider={PROVIDER_GOOGLE} 
         region={region}
         navigation={navigation}
       >
-      {locations.map((location, index) => {
+
+      {(restOrBar === "All" ? locations : filteredLocations).map((location, index) => {
         return (
           <Marker 
             coordinate={{ latitude: location.latitude, longitude: location.longitude }}
@@ -74,8 +98,7 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
               <View styles={styles.marker}>
                 <Text styles={styles.text}>{location.name}🔥</Text>
               </View>
-          </Marker>
-        )
+          </Marker> ) 
       })}
         </MapView>
     </View>
@@ -96,13 +119,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    padding: 20,
+    // padding: 20,
+    // marginTop: 20,
     fontSize: 42,
   },
   map: {
     width: Dimensions.get('window').width,
     height: 550,
     // Dimensions.get('window').height,
+    marginTop: 150,
   },
   marker: {
     backgroundColor: "#fff",

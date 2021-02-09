@@ -1,22 +1,50 @@
 import { getPathFromState } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Button, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
+import { StyleSheet, Button, TouchableOpacity, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
 import 'react-native-gesture-handler';
 import CommentsContainer from './CommentsContainer'
-import {useSelector} from 'react-redux'
-
+import {useSelector, useDispatch} from 'react-redux'
+import { addFaves } from './redux/fave'
 
   const Screen3 = ({ navigation, route}) => {
+
+    const [faved, setFaved] = useState(false) 
 
     const location = useSelector(state => {
       return state.currentLocation
     })
 
+    const faves = useSelector(state => {
+      return state.fave.items
+    })
+  
+    console.log(location.id, "line 21")
+
+    const currentFave = faves.map(fave => fave.id === location.id)
+console.log(faves, "all faves")
+console.log(currentFave, "d")
+
+
+
+// currentFave ? setFaved(true) : null
+
+      // setFaved(true)
+
+
+    const dispatch = useDispatch()
+
+    const faveAction = addFaves(location)
+    
+    console.log(faves, "line 23")
+
     return (
     <View>
-      <Text style={styles.title}>{location.name}</Text>
+      <Text style={styles.title}>{location.name} 
+      {faved ? <Text>⭐</Text> : <Button title="☆" onPress={() => {dispatch(faveAction)}} />}
+      </Text>
       <Text>{location.restOrBar}</Text>
-      <Text>{location.restType}</Text>
+      {location.restType.length > 0 ? 
+        <Text>{location.restType}</Text> : null}
       <Text>{location.address}</Text>
       <Text>{location.rating}</Text>
       <Text>{location.name}</Text>
