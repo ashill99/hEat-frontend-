@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const restTypeSlice = createSlice({
     name: "restType",
     initialState: {
-        restType: "All",
+        restType: "All"
     },
     reducers: {
         updateRestType: (state, action) => {

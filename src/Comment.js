@@ -45,11 +45,15 @@ const Comment = () => {
     console.log(typeof(comments))
     console.log(comments.comments)
 
-
       const eachComment = currentComments.map((comment, index) => {
           console.log(comment)
+          console.log(comment.likes, "line 47")
+
               return (
-                <Text key={comment.id}>{index +1}. {comment.content} {'\n'}{'\n'} says {comment.userId}{'\n'} </Text>
+                <View> 
+                  <Text key={comment.id}>{index +1}. {comment.content} {'\n'}{'\n'} says {comment.userId}{'\n'} </Text>
+                  <Text> Likes: {comment.likes}</Text>
+                </View>
               )
           }
     )

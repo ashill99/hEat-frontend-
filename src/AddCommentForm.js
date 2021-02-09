@@ -39,7 +39,8 @@ const AddCommentForm = () => {
         body: JSON.stringify({
             content: text, 
             user_id: 1, 
-            location_id: location.id
+            location_id: location.id,
+            likes: 0
         })
     })
     .then((response) => response.json())

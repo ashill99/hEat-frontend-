@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, SearchBar, TextInput, Button, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
+import { StyleSheet, SearchBar, PermissionsAndroid, TextInput, Button, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { PROVIDER_GOOGLE } from 'react-native-maps' 
  import {useSelector} from 'react-redux'
@@ -11,10 +11,46 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
  import { addLocation } from './redux/currentLocation'
 //  import Screen3 from './Screen3'
 import FilterContainer from './FilterContainer'
+// import Geolocation from '@react-native-community/geolocation';
+import * as Location from 'expo-location';
+
 
 
   const Screen2 = ({ navigation, route }) => {
 
+    // state for user location 
+
+    // const [userLocation, setUserLocation] = useState(null);
+    // const [errorMsg, setErrorMsg] = useState(null);
+
+    // location fetch below 
+
+    // useEffect(() => {
+    //   (async () => {
+    //     let { status } = await Location.requestPermissionsAsync();
+    //     if (status !== 'granted') {
+    //       setErrorMsg('Permission to access location was denied');
+    //       return;
+    //     }
+  
+    //     let userLocation = await Location.getCurrentPositionAsync({});
+    //     setUserLocation(userLocation);
+    //   })();
+    // }, []);
+  
+    // let text = 'Waiting..';
+    // if (errorMsg) {
+    //   text = errorMsg;
+    // } else if (userLocation) {
+    //   text = JSON.stringify(userLocation);
+    // }
+
+    // console.log(text, "line 48")
+    // console.log(text.latitude)
+    // console.log(userLocation, "line 50")
+    // console.log(userLocation.coords.latitude, "line 51")
+
+    
     const dispatch = useDispatch()
 
     const restOrBar = useSelector(state => {
@@ -55,10 +91,12 @@ import FilterContainer from './FilterContainer'
 
     console.log(filteredLocations, "line 49")
 
-    const typeFilteredLocations = locations
+    const typeFilteredLocations = filteredLocations
     .filter(location => location.restType === restType)
 
-    const [region, setRegion] = useState({
+    const mapRef = React.createRef();
+
+    const [initialRegion, setInitialRegion] = useState({
       latitude: 40.6942696,
       longitude: -73.9187482,
       latitudeDelta: 0.06,
@@ -73,19 +111,21 @@ import FilterContainer from './FilterContainer'
           navigation.pop()
         }}
       /> */}
- 
+      
       <Text style={styles.title}>hEat</Text>
 
-      <FilterContainer/>
+      <FilterContainer mapRef={mapRef}/>
 
       <MapView 
+       ref={mapRef}
         style={styles.map}
         provider={PROVIDER_GOOGLE} 
-        region={region}
+        region={initialRegion}
         navigation={navigation}
+        showsUserLocation={true}
       >
 
-      {(restOrBar === "All" ? locations : filteredLocations).map((location, index) => {
+      {(restOrBar === "All" ? locations : typeFilteredLocations).map((location, index) => {
         return (
           <Marker 
             coordinate={{ latitude: location.latitude, longitude: location.longitude }}

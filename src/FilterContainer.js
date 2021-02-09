@@ -2,19 +2,20 @@ import { useRoute } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Button, SearchBar, Text, View, Dimensions, Callout, TouchableOpacity, TouchableHighlight, TextInput, Keyboard } from 'react-native';
 import 'react-native-gesture-handler';
-import {useSelector} from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native';
 import { updateComments } from './redux/comments'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector, useRef } from 'react-redux'
 import { Switch } from 'react-native-switch';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { updateRestBar } from './redux/restBar'
 import { updateRestType } from './redux/restType'
 import {updateSearch} from './redux/search'
+import SearchDropDown from './SearchDropDown'
 
 
-const FilterContainer = () => {
+
+const FilterContainer = ({mapRef}) => {
 
     const dispatch = useDispatch()
 
@@ -26,22 +27,69 @@ const FilterContainer = () => {
         return state.search.search
       })
 
+      const locations = useSelector(state => {
+        return state.location.items
+      })
+
       const restType = useSelector(state => {
           return state.restType.restType
       })
-
-      console.log(restOrBar, "line 31")
-      console.log(restType, "line 32")
       
-      const searchAction = dispatch(updateSearch(search))
+    //   const searchAction = dispatch(updateSearch(search))
+      const eachLocation = locations.map(location => 
+          location.name)
+
+      console.log(search), "line 37"
+        console.log(locations, "all locations")
+        console.log(eachLocation, "each location")
+
+      const [dataSource] = useState(eachLocation)
+
+      const [filtered, setFiltered] = useState(dataSource)
+      const [searching, setSearching] = useState(false)
+      
+      const onSearch = (text) => {
+        if (text) {
+          setSearching(true)
+          const temp = text.toLowerCase()
+            const dataLowerCase = dataSource.map(item => item.toLowerCase())
+          const tempList = dataLowerCase.filter(item => {
+            if (item.match(temp))
+              return item
+          })
+          setFiltered(tempList)
+        }
+        else {
+          setSearching(false)
+          setFiltered(dataSource)
+        }
+    
+      }
+
+  
 
     return (
         <>
-        <TextInput
+        {/* <TextInput
         placeholder="Search..."
-        onChangeText={(e) => {dispatch(updateSearch(e.target.value))}}
-        value={search}
-      />
+        onChangeText={() => {dispatch(updateSearch(value))}}
+        // value={search}
+      /> */}
+      {/* <TextInput
+style={styles.textInput}
+placeholder="Search"
+placeholderTextColor='grey'
+onChangeText={onSearch}
+/>
+{
+searching &&
+<SearchDropDown
+onPress={() => setSearching(false)}
+dataSource={filtered} 
+    mapRef={mapRef}
+/>
+} */}
+
         <View style={styles.container}>
         {/* <View> */}
     <DropDownPicker
@@ -102,6 +150,12 @@ containerStyle={{width: 100, height: 30}}
         inActiveText={'Bar'}
       /> */}
 
+      {
+searching &&
+<SearchDropDown
+onPress={() => setSearching(false)}
+dataSource={filtered} />
+}
         </View>
         </>
     )

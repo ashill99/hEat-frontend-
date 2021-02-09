@@ -1,8 +1,52 @@
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Button, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
 import 'react-native-gesture-handler';
+// import {useDispatch, useSelector} from 'react-redux'
+// import { addRegion } from './redux/region'
 
 const Screen1 = () => {
+
+  // const [userLocation, setUserLocation] = useState(null);
+  // const [errorMsg, setErrorMsg] = useState(null);
+
+  // location fetch below 
+
+  // useEffect(() => {
+  //   (async () => {
+  //     let { status } = await Location.requestPermissionsAsync();
+  //     if (status !== 'granted') {
+  //       setErrorMsg('Permission to access location was denied');
+  //       return;
+  //     }
+
+  //     let userLocation = await Location.getCurrentPositionAsync({});
+  //     setUserLocation(userLocation);
+  //   })();
+  // }, []);
+
+  // let text = 'Waiting..';
+  // if (errorMsg) {
+  //   text = errorMsg;
+  // } else if (userLocation) {
+  //   text = JSON.stringify(userLocation)
+  // const action = addRegion(userLocation.coords.latitude, userLocation.coords.longitude)
+  // dispatch(action)
+  // }
+
+  // const dispatch = useDispatch()
+
+  // const action = addRegion(userLocation.coords.latitude, userLocation.coords.longitude)
+  // dispatch(action)
+
+// region = useSelector(state => {
+//     return state.region
+//   })
+
+  // console.log(text, "line 48")
+  // console.log(text.latitude)
+  // console.log(userLocation, "line 50")
+  // console.log(userLocation.coords.latitude, "line 51")
+// console.log(region, "region")
 
     return( ({ navigation, route }) => (
         <View style={styles.screen}>
@@ -15,6 +59,7 @@ const Screen1 = () => {
               navigation.push('Screen2')
             }}
           />
+          {/* <Text>{region}</Text> */}
         </View>
       )
   )
