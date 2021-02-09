@@ -12,16 +12,15 @@ export default function SearchDropDown(props) {
     const [location, setLocation] = useState([])
     console.log(location, "line 8")
 
-    function goToSearch(e) {
+    function goToSearch() {
+    
         console.log('testing search bar')
-        // console.log(item)
-        // console.log(location, "line12")
+
+
         const currentLocation = locations.filter(location2 => location2.name.toLowerCase() === location)
-        console.log(currentLocation, "line 20")
-        console.log(currentLocation, "line 21")
         const newLat = currentLocation.map(c => c.latitude)
         const newLon = currentLocation.map(c => c.longitude)
-        
+
         props.mapRef.current.animateToRegion(
             {
               latitude: newLat[0],
@@ -34,9 +33,9 @@ export default function SearchDropDown(props) {
             // console.log(currentLocation, "line 14")
     }
     const { dataSource } = props
-    console.log(dataSource, "line 32")
 
     return (
+
         <TouchableOpacity
             OnPress={props.onSearch}
             style={styles.container}>
@@ -73,19 +72,19 @@ const styles = StyleSheet.create({
         left: 0, right: 0, bottom: 0,
 
     },
-    // subContainer: {
+    subContainer: {
 
-    //     backgroundColor: '#FED8B1',
-    //     paddingTop: 10,
-    //     marginHorizontal: 20,
-    //     borderTopLeftRadius: 4,
-    //     borderTopRightRadius: 4,
-    //     flexWrap: 'wrap',
+        backgroundColor: '#FED8B1',
+        paddingTop: 10,
+        marginHorizontal: 20,
+        borderTopLeftRadius: 4,
+        borderTopRightRadius: 4,
+        flexWrap: 'wrap',
 
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     alignContent: 'center'
-    // },
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignContent: 'center'
+    },
     itemView: {
         // marginHorizontal: '10%',
         backgroundColor: 'white',
