@@ -14,6 +14,7 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
 import FilterContainer from './FilterContainer'
 // import Geolocation from '@react-native-community/geolocation';
 import * as Location from 'expo-location';
+// import MapContainer from './MapContainer'
 
   const Screen2 = ({ navigation, route }) => {
 
@@ -95,22 +96,15 @@ import * as Location from 'expo-location';
       return state.restBar.restBar
     })
 
-    console.log(locations, "locations 91")
+    // console.log(locations, "locations 91")
 
 
     const restType = useSelector(state => {
       return state.restType.restType
   })
 
-    // console.log(locations)
-    // console.log(restType, "line 48 resttype")
-
     const filteredLocations = locations
     .filter(location => location.restOrBar === restOrBar)
-
-    // console.log(restOrBar, "line 54 restbar")
-
-    // console.log(filteredLocations, "line 49")
 
     // const typeFilteredLocations = filteredLocations
     // .filter(location => location.restType === restType)
@@ -128,10 +122,9 @@ import * as Location from 'expo-location';
       <View style={styles.screen}>
 
       {/* <Text style={styles.title}>hEat Map</Text> */}
-
       <FilterContainer mapRef={mapRef}/>
-
-      { <MapView 
+{/* <MapContainer mapRef={mapRef} navigation={navigation} />  */}
+       <MapView 
        ref={mapRef}
         style={styles.map}
         provider={PROVIDER_GOOGLE} 
@@ -155,7 +148,7 @@ import * as Location from 'expo-location';
               </View>
           </Marker> ) 
       })}
-        </MapView> }  
+        </MapView> 
     </View>
   )
 }

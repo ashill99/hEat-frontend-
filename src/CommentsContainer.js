@@ -18,7 +18,7 @@ const CommentsContainer = ({ navigation, route }) => {
 
     return (
         <View>
-        <Text>Hello from the CommentsContainer</Text>
+        {/* <Text>Hello from the CommentsContainer</Text> */}
         <Comment />
         <AddCommentForm />
 </View>

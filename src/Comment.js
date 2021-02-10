@@ -10,6 +10,7 @@ const Comment = () => {
 
     const dispatch = useDispatch()
   const [currentComment, setCurrentComment] = useState([])
+  const [likesNum, setLikesNum] = useState(0)
 
   useEffect(() => {
     fetch("http://localhost:3000/api/v1/comments")
@@ -30,6 +31,10 @@ const Comment = () => {
         return state.comments
     })
 
+    function updateCommentLikes(newComment) {
+
+    }
+
     // const commentsArray = Object.values( comments );
 
     // console.log(commentsArray)
@@ -37,36 +42,41 @@ const Comment = () => {
         return state.currentLocation
       })
 
-      function handleLikePress(id, likes) {
-        const newLikes = parseInt(likes + 1)
-        fetch(`http://localhost:3000/api/v1/comments/${id}`,  {
-          method: 'PATCH',
-          headers: {
-              Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-              likes: newLikes
-          })
-      })
-      .then((response) => response.json())
-      .then(newComment => 
           // const action2 = updateComments(newComment)
           // dispatch(action2)
-          console.log(newComment, "57 new like")
-      )
-      .catch((error) => {
-        console.error(error);
-      });
-      }
-      const currentComments = comments.comments.filter(comment => comment.locationId === location.id)
 
-    //   console.log(currentComments)
+      function handleLikePress(id, likes) {
+          const newLikes = {
+            likes: parseInt(likes + 1)
+          }
+          setLikesNum(newLikes)
+          fetch(`http://localhost:3000/api/v1/comments/${id}`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newLikes),
+        })
+        updateLikesNum(newLikes)
+        // setLikesNum(newLikes)
+        // .then(response => response.json())
+        // .then(data => {console.log('success:', data)})
+        // .catch((error) => {
+        //   console.error('Error:', error);
+        // });
+      }
+
+      function updateLikesNum(newLikes) {
+        setLikesNum(newLikes)
+      }
+
+      const currentComments = comments.comments.filter(comment => comment.locationId === location.id)
 
       const eachComment = currentComments.map((comment, index) => {
               return (
                 <View key={comment.id}> 
-                <Text>{index +1}. {comment.content} {'\n'}{'\n'} </Text>
+               {/* {setLikesNum(comment.likes)} */}
+                <Text>{comment.content} {'\n'}{'\n'} </Text>
                   {/* <Text>{index +1}. {comment.content} {'\n'}{'\n'} says {comment.userId}{'\n'} </Text> */}
                   <Button onPress={() => handleLikePress(comment.id, comment.likes)} title={`Likes: ${comment.likes}`} id={comment.id}/>
                   {/* <Text>Likes: {comment.likes}</Text> */}
@@ -74,13 +84,6 @@ const Comment = () => {
               )
           }
     )
-    // console.log(eachComment)
-      
-    //   location.comments.map((comment, index) => {
-    //       return (
-    //       <Text key={comment.index}>{index +1}. {comment.content} {'\n'}{'\n'} says {comment.userId}{'\n'} </Text>
-    //       )
-    //   })
 
     return (
         <View>

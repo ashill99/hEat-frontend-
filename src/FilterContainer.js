@@ -102,8 +102,7 @@ mapRef={mapRef} />
         textAlign: 'left',
         color: '#000'
     }}
-    containerStyle={{width: 100, height: 30}}
-
+    containerStyle={{width: 100, height: 30, position: 'abolute'}}
             dropDownStyle={{backgroundColor: '#fafafa'}}
             onChangeItem={item => dispatch(updateRestBar(item.value))}
         />

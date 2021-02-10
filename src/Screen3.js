@@ -66,7 +66,6 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
         const action2 = updateFaves(newFave)
         dispatch(action2)
         setCurrentFave(newFave)
-        forceUpdate()
           })
     .catch((error) => {
       console.error(error);
@@ -75,7 +74,7 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
 
     function handleUnfave() {
       // console.log(currentFave[0].id, "line 67")
-      fetch(`http://localhost:3000/api/v1/favourites/${currentFave[0].id}`,  {
+      fetch(`http://localhost:3000/api/v1/favourites/${currentFave.id}`,  {
       method: 'DELETE',
       headers: {
         'Content-type': 'application/json' // Indicates the content 
@@ -95,12 +94,14 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
   });
   }
 
+  const faveStar = currentFave.locationId === location.id ? <Button title="⭐" onPress={handleUnfave} /> : <Button title="☆" onPress={handleFavePress} />
+
+
     return (
       <ScrollView>
     <View>
-      <Text style={styles.title}>{location.name} 
-      {currentFave.length ? <Button title="⭐" onPress={handleUnfave} /> : <Button title="☆" onPress={handleFavePress} />}
-      </Text>
+      <Text style={styles.title}>{location.name}       </Text>
+      {faveStar}
       <Text>{location.restOrBar}</Text>
       {location.restType.length > 0 ? 
         <Text>{location.restType}</Text> : null}

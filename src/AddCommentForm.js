@@ -56,7 +56,7 @@ const AddCommentForm = () => {
 
     return (
         <View>
-            <Text>Post Comment</Text>
+            {/* <Text>Post Comment</Text> */}
             <TextInput
       style={styles.textInput}
       placeholder="Your Comment"
