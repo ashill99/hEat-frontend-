@@ -7,7 +7,7 @@ const faveSlice = createSlice({
     },
     reducers: {
         addFaves: (state, action) => {
-            state.items = [...state, action.payload]
+            state.items = action.payload
         },
         updateFaves: (state, action) => {
             state.items = [...state.items, action.payload ]

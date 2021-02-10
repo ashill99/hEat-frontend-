@@ -70,7 +70,22 @@ const FilterContainer = ({mapRef}) => {
     return (
         <>
         <View style={styles.container}>
-            <DropDownPicker
+
+            <TextInput
+style={styles.textInput}
+placeholder="Search"
+placeholderTextColor='grey'
+onChangeText={onSearch}
+/>
+{
+searching &&
+<SearchDropDown
+onPress={() => setSearching(false)}
+dataSource={filtered}
+mapRef={mapRef} />
+}
+
+<DropDownPicker
             items={[
                 {label: 'All', value: 'All', icon: () => <Icon name="whatshot" size={18} color="#900" />,},
                 {label: 'Bar', value: 'Bar', icon: () => <Icon name="nightlife" size={18} color="#900" />},
@@ -93,12 +108,7 @@ const FilterContainer = ({mapRef}) => {
             onChangeItem={item => dispatch(updateRestBar(item.value))}
         />
 
-<TextInput
-style={styles.textInput}
-placeholder="Search"
-placeholderTextColor='grey'
-onChangeText={onSearch}
-/>
+
     {/* <DropDownPicker
         items={[
             {label: 'All', value: 'All', icon: () => <Icon name="whatshot" size={18} color="#900" />,},
@@ -134,13 +144,6 @@ onChangeText={onSearch}
         activeText={'Restaurant'}
         inActiveText={'Bar'}
       /> */}
-      {
-searching &&
-<SearchDropDown
-onPress={() => setSearching(false)}
-dataSource={filtered}
-mapRef={mapRef} />
-}
         </View>
         </>
     )
@@ -156,7 +159,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
         flexDirection: "row",
         alignSelf: "flex-start",
-
+        position: 'absolute',
+        // marginTop: 30,
         
     },
       textInput: {
@@ -165,7 +169,11 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         height: 40,
         fontSize: 18,
-        paddingLeft: 10,
-        paddingRight: 10
+        marginLeft: 50,
+        // marginTop: 30,
+        paddingLeft: 500,
+        paddingRight: 200,
+        position: 'absolute'
+
       },
 })

@@ -1,6 +1,6 @@
 import { getPathFromState } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Linking, Button, Image, TouchableOpacity, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
+import { StyleSheet, FlatList, Linking, ScrollView, Button, Image, TouchableOpacity, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
 import 'react-native-gesture-handler';
 import CommentsContainer from './CommentsContainer'
 import {useSelector, useDispatch} from 'react-redux'
@@ -66,6 +66,7 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
         const action2 = updateFaves(newFave)
         dispatch(action2)
         setCurrentFave(newFave)
+        forceUpdate()
           })
     .catch((error) => {
       console.error(error);
@@ -87,6 +88,7 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
     setFaves(faves.filter(fave => fave.id !== newFave.id))
     // const action3 = deleteFace(newFave)
     // dispatch(action3)  
+    forceUpdate()
   })
   .catch((error) => {
     console.error(error);
@@ -94,9 +96,10 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
   }
 
     return (
+      <ScrollView>
     <View>
       <Text style={styles.title}>{location.name} 
-      {currentFave ? <Button title="⭐" onPress={handleUnfave} /> : <Button title="☆" onPress={handleFavePress} />}
+      {currentFave.length ? <Button title="⭐" onPress={handleUnfave} /> : <Button title="☆" onPress={handleFavePress} />}
       </Text>
       <Text>{location.restOrBar}</Text>
       {location.restType.length > 0 ? 
@@ -105,15 +108,25 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
       <Text>{location.hours}</Text>
       {/* <Text>{location.rating}</Text>
       <Text>{location.name}</Text> */}
-      <Image source={{uri: location.imgUrl}} style={{width: 400, height: 400}}/>
+      <Image source={{uri: location.imgUrl}} style={{width: "100%", height: "45%"}}/>
       <Text style={{color: 'blue'}}
       onPress={() => Linking.openURL(location.website)}>
   Website</Text>      
 <Text style={{color: 'blue'}}
       onPress={() => Linking.openURL(location.menu)}>
   Menu{'\n'}</Text> 
+
+  {/* <Button
+            style={styles.button}
+            title="Faveourites"
+            onPress={() => {
+              navigation.push('Screen4')
+            }}
+          /> */}
+
           <CommentsContainer />
     </View>
+    </ScrollView>
     )
     }
 

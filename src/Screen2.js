@@ -31,6 +31,9 @@ import * as Location from 'expo-location';
         const action = addItems(locationArray)
         dispatch(action)
       })
+      .catch((error) => {
+        console.error(error);
+      })
       // the dispatch won't effect the useeffect but will stop console warning
     },[dispatch])
   
@@ -49,6 +52,9 @@ import * as Location from 'expo-location';
         // })
         const faveAction = addFaves(faveArray)
         dispatch(faveAction)
+      })
+      .catch((error) => {
+        console.error(error);
       })
       // the dispatch won't effect the useeffect but will stop console warning
     },[dispatch])  
@@ -121,7 +127,7 @@ import * as Location from 'expo-location';
     return(
       <View style={styles.screen}>
 
-      <Text style={styles.title}>hEat</Text>
+      {/* <Text style={styles.title}>hEat Map</Text> */}
 
       <FilterContainer mapRef={mapRef}/>
 
@@ -173,8 +179,8 @@ const styles = StyleSheet.create({
     fontSize: 42,
   },
   map: {
-    width: Dimensions.get('window').width,
-    height: 550,
+    width: 650,
+    height: 670,
     // Dimensions.get('window').height,
     marginTop: 150,
   },

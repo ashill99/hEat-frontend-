@@ -27,7 +27,7 @@ export default function SearchDropDown(props) {
               longitude: newLon[0],
               latitudeDelta: 0.02,
               longitudeDelta: 0.02
-            }, 2000)  
+            }, 1000)  
             // console.log(locations, "line 27")
 
             // console.log(currentLocation, "line 14")
@@ -70,33 +70,42 @@ const styles = StyleSheet.create({
         // position: 'absolute',
         top: '6.2%',
         left: 0, right: 0, bottom: 0,
+        position: 'absolute'
 
     },
     subContainer: {
 
         backgroundColor: '#FED8B1',
         paddingTop: 10,
-        marginHorizontal: 20,
+        // marginLeft: 100,
+        marginTop: 30,
+        width: 120,
         borderTopLeftRadius: 4,
         borderTopRightRadius: 4,
         flexWrap: 'wrap',
-
+        position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center',
-        alignContent: 'center'
+        alignContent: 'center',
+        position: 'absolute'
+
     },
     itemView: {
         // marginHorizontal: '10%',
         backgroundColor: 'white',
         height: 30,
-        width: '90%',
+        width: '100%',
         marginBottom: 10,
         justifyContent: 'center',
         borderRadius: 4,
+        // position: 'absolute'
+
     },
     itemText: {
         color: 'black',
         paddingHorizontal: 10,
+        // position: 'absolute'
+
     },
     noResultView: {
         alignSelf: 'center',
@@ -105,12 +114,16 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        alignContent: 'center'
+        alignContent: 'center',
+        // position: 'absolute'
+
     },
     noResultText: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: 'white'
+        color: 'white',
+        // position: 'absolute'
+
     },
 
 });
