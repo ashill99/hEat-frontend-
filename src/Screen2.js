@@ -18,6 +18,21 @@ import * as Location from 'expo-location';
 
   const Screen2 = ({ navigation, route }) => {
 
+    useEffect(() => {
+      fetch("http://localhost:3000/api/v1/favourites")
+      .then(res => res.json())
+      .then(faveArray => {
+        // const mappedLocation = locationArray.map((location) => {
+        //   return {
+        //     ...location, 
+        //   }
+        // })
+        const faveAction = addFaves(faveArray)
+        dispatch(faveAction)
+      })
+      // the dispatch won't effect the useeffect but will stop console warning
+    },[dispatch])  
+    
     // state for user location 
 
     // const [userLocation, setUserLocation] = useState(null);

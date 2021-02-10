@@ -10,6 +10,8 @@ import { useNavigation } from '@react-navigation/native';
 import Screen1 from './src/Screen1'
 import Screen2 from './src/Screen2'
 import Screen3 from './src/Screen3'
+import Screen4 from './src/Screen4'
+
 import { Provider } from 'react-redux'
 import store from './src/redux/store'
 import AddCommentForm from './src/AddCommentForm'
@@ -36,6 +38,8 @@ export default function App() {
         <Stack.Screen name="Screen1" component={Screen1()} options={{title: 'hEat'}} />
         <Stack.Screen name="Screen2" component={Screen2} />
         <Stack.Screen name="Screen3" component={Screen3} />
+        <Stack.Screen name="Screen4" component={Screen4} />
+
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>
