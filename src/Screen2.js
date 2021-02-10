@@ -9,14 +9,34 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
  import {useDispatch} from 'react-redux'
  import { addItems } from "./redux/location";
  import { addLocation } from './redux/currentLocation'
+ import { addFaves } from './redux/fave'
 //  import Screen3 from './Screen3'
 import FilterContainer from './FilterContainer'
 // import Geolocation from '@react-native-community/geolocation';
 import * as Location from 'expo-location';
 
-
-
   const Screen2 = ({ navigation, route }) => {
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+      fetch("http://localhost:3000/api/v1/locations")
+      .then(res => res.json())
+      .then(locationArray => {
+        // const mappedLocation = locationArray.map((location) => {
+        //   return {
+        //     ...location, 
+        //   }
+        // })
+        const action = addItems(locationArray)
+        dispatch(action)
+      })
+      // the dispatch won't effect the useeffect but will stop console warning
+    },[dispatch])
+  
+      const locations = useSelector(state => {
+        return state.location.items
+      })
 
     useEffect(() => {
       fetch("http://localhost:3000/api/v1/favourites")
@@ -32,7 +52,7 @@ import * as Location from 'expo-location';
       })
       // the dispatch won't effect the useeffect but will stop console warning
     },[dispatch])  
-    
+
     // state for user location 
 
     // const [userLocation, setUserLocation] = useState(null);
@@ -65,49 +85,29 @@ import * as Location from 'expo-location';
     // console.log(userLocation, "line 50")
     // console.log(userLocation.coords.latitude, "line 51")
 
-    
-    const dispatch = useDispatch()
-
     const restOrBar = useSelector(state => {
       return state.restBar.restBar
     })
 
-  useEffect(() => {
-    fetch("http://localhost:3000/api/v1/locations")
-    .then(res => res.json())
-    .then(locationArray => {
-      // const mappedLocation = locationArray.map((location) => {
-      //   return {
-      //     ...location, 
-      //   }
-      // })
-      const action = addItems(locationArray)
-      dispatch(action)
-    })
-    // the dispatch won't effect the useeffect but will stop console warning
-  },[dispatch])
+    console.log(locations, "locations 91")
 
-
-    const locations = useSelector(state => {
-      return state.location.items
-    })
 
     const restType = useSelector(state => {
       return state.restType.restType
   })
 
-    console.log(locations)
-    console.log(restType, "line 48 resttype")
+    // console.log(locations)
+    // console.log(restType, "line 48 resttype")
 
     const filteredLocations = locations
     .filter(location => location.restOrBar === restOrBar)
 
-    console.log(restOrBar, "line 54 restbar")
+    // console.log(restOrBar, "line 54 restbar")
 
-    console.log(filteredLocations, "line 49")
+    // console.log(filteredLocations, "line 49")
 
-    const typeFilteredLocations = filteredLocations
-    .filter(location => location.restType === restType)
+    // const typeFilteredLocations = filteredLocations
+    // .filter(location => location.restType === restType)
 
     const mapRef = React.createRef();
 
@@ -125,7 +125,7 @@ import * as Location from 'expo-location';
 
       <FilterContainer mapRef={mapRef}/>
 
-      <MapView 
+      { <MapView 
        ref={mapRef}
         style={styles.map}
         provider={PROVIDER_GOOGLE} 
@@ -149,7 +149,7 @@ import * as Location from 'expo-location';
               </View>
           </Marker> ) 
       })}
-        </MapView>
+        </MapView> }  
     </View>
   )
 }

@@ -1,6 +1,6 @@
 import { getPathFromState } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Button, TouchableOpacity, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
+import { StyleSheet, Linking, Button, Image, TouchableOpacity, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
 import 'react-native-gesture-handler';
 import CommentsContainer from './CommentsContainer'
 import {useSelector, useDispatch} from 'react-redux'
@@ -102,13 +102,17 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
       {location.restType.length > 0 ? 
         <Text>{location.restType}</Text> : null}
       <Text>{location.address}</Text>
-      <Text>{location.rating}</Text>
-      <Text>{location.name}</Text>
-      <Text>Picture...</Text>
-      <Text>Website...</Text>
-      <Text>Opening Hours...</Text>
-      <Text>Menu Link or picture...{'\n'}</Text>
-        <CommentsContainer />
+      <Text>{location.hours}</Text>
+      {/* <Text>{location.rating}</Text>
+      <Text>{location.name}</Text> */}
+      <Image source={{uri: location.imgUrl}} style={{width: 400, height: 400}}/>
+      <Text style={{color: 'blue'}}
+      onPress={() => Linking.openURL(location.website)}>
+  Website</Text>      
+<Text style={{color: 'blue'}}
+      onPress={() => Linking.openURL(location.menu)}>
+  Menu{'\n'}</Text> 
+          <CommentsContainer />
     </View>
     )
     }
@@ -127,6 +131,11 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
     title: {
       padding: 20,
       fontSize: 42,
+    },
+    stretch: {
+      width: 50,
+      height: 200,
+      resizeMode: 'stretch',
     },
     map: {
       width: Dimensions.get('window').width,

@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Button, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
+import { StyleSheet, Button, Image, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
 import 'react-native-gesture-handler';
 // import {useDispatch, useSelector} from 'react-redux'
 // import { addRegion } from './redux/region'
+
+
 
 const Screen1 = () => {
 
@@ -59,6 +61,7 @@ const Screen1 = () => {
               navigation.push('Screen2')
             }}
           />
+          <Image source={{uri: "https://media.timeout.com/images/105711851/1372/772/image.jpg"}} style={{width: 400, height: 400}} />
           {/* <Text>{region}</Text> */}
         </View>
       )

@@ -10,6 +10,10 @@ const currentLocationSlice = createSlice({
         rating: 0,
         longitude: 0,
         latitude: 0,
+        imgUrl: "",
+        menu: "",
+        hours: "",
+        website: "",
         id: 0,
         comments: [],
     },
@@ -24,7 +28,11 @@ const currentLocationSlice = createSlice({
         state.longitude = action.payload.longitude,
         state.latitude = action.payload.latitude,
         state.id = action.payload.id,
-        state.comments = action.payload.comments
+        state.comments = action.payload.comments,
+        state.menu = action.payload.menu,
+        state.hours = action.payload.hours,
+        state.website = action.payload.website,
+        state.imgUrl = action.payload.imgUrl
 
         },
     },
