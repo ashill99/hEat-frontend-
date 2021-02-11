@@ -1,8 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, SearchBar, PermissionsAndroid, TextInput, Button, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { PROVIDER_GOOGLE } from 'react-native-maps' 
  import {useSelector} from 'react-redux'
@@ -21,18 +19,12 @@ import Screen3 from './Screen3'
         fetch("http://localhost:3000/api/v1/locations")
         .then(res => res.json())
         .then(locationArray => {
-          // const mappedLocation = locationArray.map((location) => {
-          //   return {
-          //     ...location, 
-          //   }
-          // })
           const action = addItems(locationArray)
           dispatch(action)
         })
         .catch((error) => {
           console.error(error);
         })
-        // the dispatch won't effect the useeffect but will stop console warning
       },[dispatch])
     
         const locations = useSelector(state => {
@@ -44,7 +36,6 @@ import Screen3 from './Screen3'
           })
       
           console.log(locations, "locations 91")
-      
       
           const restType = useSelector(state => {
             return state.restType.restType
@@ -62,39 +53,37 @@ import Screen3 from './Screen3'
             longitudeDelta: 0.06
           })
 
-return (
-<View>
-     <MapView 
-        ref={mapRef}
-         style={styles.map}
-         provider={PROVIDER_GOOGLE} 
-         region={initialRegion}
-         navigation={navigation}
-         showsUserLocation={true}
-       >
- 
-       {(restOrBar === "All" ? locations : filteredLocations).map((location, index) => {
-         return (
-           <Marker 
-             coordinate={{ latitude: location.latitude, longitude: location.longitude }}
-             key={index}
-             onPress={() => {
-               const action2 = addLocation(location)
-               dispatch(action2)
-               navigation.push('Screen3')
-             }}> 
-               <View styles={styles.marker}>
-                 <Text styles={styles.text}>{location.name}🔥</Text>
-               </View>
-           </Marker> ) 
-       })}
-         </MapView> 
-</View>
-
-)
+    return (
+      <View>
+        <MapView 
+          ref={mapRef}
+          style={styles.map}
+          provider={PROVIDER_GOOGLE} 
+          region={initialRegion}
+          navigation={navigation}
+          showsUserLocation={true}
+        >
+          {(restOrBar === "All" ? locations : filteredLocations).map((location, index) => {
+            return (
+              <Marker 
+                coordinate={{ latitude: location.latitude, longitude: location.longitude }}
+                key={location.id}
+                onPress={() => {
+                  const action2 = addLocation(location)
+                  dispatch(action2)
+                  navigation.push('Screen3')
+                }}> 
+                <View styles={styles.marker}>
+                  <Text styles={styles.text}>{location.name}🔥</Text>
+                </View>
+              </Marker> ) 
+            })
+          }
+        </MapView> 
+      </View>
+) 
   }
   export default MapContainer
-
 
   const styles = StyleSheet.create({
     container: {
@@ -108,14 +97,11 @@ return (
       alignItems: 'center',
     },
     title: {
-      // padding: 20,
-      // marginTop: 20,
       fontSize: 42,
     },
     map: {
       width: 650,
       height: 670,
-      // Dimensions.get('window').height,
       marginTop: 150,
     },
     marker: {

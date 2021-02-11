@@ -1,6 +1,5 @@
-import { getPathFromState } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, FlatList, Linking, ScrollView, Button, Image, TouchableOpacity, Text, View, Dimensions, Callout, TouchableHighlight } from 'react-native';
+import { StyleSheet, Linking, ScrollView, Button, Image, Text, View, Dimensions } from 'react-native';
 import 'react-native-gesture-handler';
 import CommentsContainer from './CommentsContainer'
 import {useSelector, useDispatch} from 'react-redux'
@@ -99,37 +98,45 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
 
     return (
       <ScrollView>
-    <View>
-      <Text style={styles.title}>{location.name}       </Text>
-      {faveStar}
-      <Text>{location.restOrBar}</Text>
-      {location.restType.length > 0 ? 
-        <Text>{location.restType}</Text> : null}
-      <Text>{location.address}</Text>
-      <Text>{location.hours}</Text>
-      {/* <Text>{location.rating}</Text>
-      <Text>{location.name}</Text> */}
-      <Image source={{uri: location.imgUrl}} style={{width: "100%", height: "45%"}}/>
-      <Text style={{color: 'blue'}}
-      onPress={() => Linking.openURL(location.website)}>
-  Website</Text>      
-<Text style={{color: 'blue'}}
-      onPress={() => Linking.openURL(location.menu)}>
-  Menu{'\n'}</Text> 
-
-  {/* <Button
-            style={styles.button}
-            title="Faveourites"
-            onPress={() => {
-              navigation.push('Screen4')
-            }}
-          /> */}
+        <View>
+          <Text style={styles.title}>
+            {location.name}
+          </Text>
+          {faveStar}
+          <Text>
+            {location.restOrBar}
+          </Text>
+          {location.restType.length > 0 ? 
+            <Text>
+              {location.restType}
+            </Text> : null}
+          <Text>
+            {location.address}
+          </Text>
+          <Text>
+            {location.hours}
+          </Text>
+          <Image 
+            source={{uri: location.imgUrl}} 
+            style={{width: "100%", height: "45%"}}
+          />
+          <Text 
+            style={{color: 'blue'}}
+            onPress={() => Linking.openURL(location.website)}>
+            Website
+          </Text>      
+          <Text 
+            style={{color: 'blue'}}
+            onPress={() => Linking.openURL(location.menu)}>
+            Menu{'\n'}
+          </Text> 
 
           <CommentsContainer />
-    </View>
-    </ScrollView>
+
+        </View>
+      </ScrollView>
     )
-    }
+  }
 
   const styles = StyleSheet.create({
     container: {
@@ -154,7 +161,6 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
     map: {
       width: Dimensions.get('window').width,
       height: 550,
-      // Dimensions.get('window').height,
     },
     marker: {
       backgroundColor: "#fff",

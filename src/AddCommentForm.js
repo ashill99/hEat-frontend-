@@ -1,9 +1,8 @@
 import { useRoute } from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
-import { StyleSheet, Button, Text, View, Dimensions, Callout, TouchableOpacity, TouchableHighlight, TextInput, Keyboard } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Button, Text, View, TouchableOpacity, TextInput, Keyboard } from 'react-native';
 import 'react-native-gesture-handler';
 import {useSelector} from 'react-redux'
-import { NavigationContainer } from '@react-navigation/native';
 import { updateComments } from './redux/comments'
 import { useDispatch } from 'react-redux'
 
@@ -21,15 +20,8 @@ const AddCommentForm = () => {
 
     function handleSubmitClick(e) {
 
-        // e.preventDefault()
         const newUserId = 1
 
-        // const commentObj = {
-        //     content: text, 
-        //     userId: 1, 
-        //     locationId: location.id 
-        // }
-        // console.log(commentObj)
         fetch("http://localhost:3000/api/v1/comments",  {
         method: 'POST',
         headers: {
@@ -56,26 +48,20 @@ const AddCommentForm = () => {
 
     return (
         <View>
-            {/* <Text>Post Comment</Text> */}
-            <TextInput
-      style={styles.textInput}
-      placeholder="Your Comment"
-      maxLength={20}
-      onBlur={Keyboard.dismiss}
-      value={text}
-      onChangeText={setText}
-
-    />
-  <TouchableOpacity
-    style={styles.saveButton}
-    onPress={handleSubmitClick}
-  >
-    <Text style={styles.saveButtonText}>Post Comment</Text>
-  </TouchableOpacity>
-            {/* <Button 
-        title="Add a Comment"   
-        onPress={() => {navigation.push('AddCommentForm')}}
-/> */}
+          <TextInput
+            style={styles.textInput}
+            placeholder="Your Comment"
+            maxLength={20}
+            onBlur={Keyboard.dismiss}
+            value={text}
+            onChangeText={setText}
+          />
+          <TouchableOpacity
+            style={styles.saveButton}
+            onPress={handleSubmitClick}
+          >
+            <Text style={styles.saveButtonText}>Post Comment</Text>
+          </TouchableOpacity>
         </View>
     )
 }

@@ -1,5 +1,5 @@
-import React, {useRef, useEffect, useState} from 'react';
-import {TouchableOpacity, StyleSheet, ScrollView, View, Text, TextInput,} from 'react-native';
+import React, { useState} from 'react';
+import {TouchableOpacity, StyleSheet, View, Text,} from 'react-native';
 import {useSelector} from 'react-redux'
 
 
@@ -13,13 +13,14 @@ export default function SearchDropDown(props) {
     console.log(location, "line 8")
 
     function goToSearch() {
-    
-        console.log('testing search bar')
 
+        console.log('testing search bar')
 
         const currentLocation = locations.filter(location2 => location2.name.toLowerCase() === location)
         const newLat = currentLocation.map(c => c.latitude)
         const newLon = currentLocation.map(c => c.longitude)
+
+        console.log(newLat, "newlat ")
 
         props.mapRef.current.animateToRegion(
             {
@@ -28,9 +29,6 @@ export default function SearchDropDown(props) {
               latitudeDelta: 0.02,
               longitudeDelta: 0.02
             }, 1000)  
-            // console.log(locations, "line 27")
-
-            // console.log(currentLocation, "line 14")
     }
     const { dataSource } = props
 
@@ -45,16 +43,15 @@ export default function SearchDropDown(props) {
                     dataSource.length ?
                         dataSource.map(item => {
                             return (
-                                <TouchableOpacity onPress={() => {setLocation(item); goToSearch()}} latitude={item.latitude} longitude={item.longitude} style={styles.itemView}>
+                                <TouchableOpacity key={item.id} onPress={() => {setLocation(item); goToSearch()}} latitude={item.latitude} longitude={item.longitude} style={styles.itemView}>
                                     <Text style={styles.itemText}>{item}</Text>
                                 </TouchableOpacity>                            
                                 )
                         })
-                        
-
                         :
                         <View
-                            style={styles.noResultView}>
+                            style={styles.noResultView}
+                        >
                             <Text style={styles.noResultText}>No search items matched</Text>
                         </View>
                 }

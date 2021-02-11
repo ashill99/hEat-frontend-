@@ -1,12 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import { StyleSheet, Button, Image, View, Dimensions, Callout, TouchableHighlight, ImageBackground } from 'react-native';
+import React from 'react';
+import { StyleSheet, Button, Image, View, ImageBackground } from 'react-native';
 import 'react-native-gesture-handler';
-// import {useDispatch, useSelector} from 'react-redux'
-// import { addRegion } from './redux/region'
 import Svg, { Text } from "react-native-svg";
-
-
-
 
 const Screen1 = () => {
 
@@ -54,41 +49,43 @@ const Screen1 = () => {
 
     return( ({ navigation, route }) => (
         <View style={styles.container}>
-        <ImageBackground source={{uri: "https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm21-marble-sasi-117.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=571bf921d1424d22a2004bcce5f94bc1"}} style={{width: '100%', height: '100%'}}>
-          {/* <Text style={styles.title}>Screen 1</Text> */}
-          <Svg height="100" width="100%">
-<Text     fill="orange"
-    stroke="blue"
-    fontSize="60"
-    fontWeight="bold"
-    x="220"
-    y="80"
-    textAnchor="middle"
-    >hEat NYC</Text>
-    </Svg>
-          
-    <Svg height="40" width="100%">
-<Text     fill="orange"
-    stroke="blue"
-    fontSize="16"
-    fontWeight="bold"
-    x="200"
-    y="20"
-    textAnchor="middle"
-    >Only New York's hottest bars and restaurants.
-    </Text>
-    </Svg>
-    <Svg height="40" width="100%">
-<Text     fill="orange"
-    stroke="blue"
-    fontSize="16"
-    fontWeight="bold"
-    x="200"
-    y="40"
-    textAnchor="middle"
-    >Literally.
-    </Text>
-        </Svg>
+          <ImageBackground source={{uri: "https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm21-marble-sasi-117.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=571bf921d1424d22a2004bcce5f94bc1"}} style={{width: '100%', height: '100%'}}>
+            <Svg height="100" width="100%">
+              <Text     
+                fill="orange"
+                stroke="blue"
+                fontSize="60"
+                fontWeight="bold"
+                x="220"
+                y="80"
+                textAnchor="middle"
+                >hEat NYC
+              </Text>
+            </Svg>
+            <Svg height="40" width="100%">
+              <Text     
+                fill="orange"
+                stroke="blue"
+                fontSize="16"
+                fontWeight="bold"
+                x="200"
+                y="20"
+                textAnchor="middle"
+                >Only New York's hottest bars and restaurants.
+              </Text>
+            </Svg>
+            <Svg height="40" width="100%">
+            <Text     
+              fill="orange"
+              stroke="blue"
+              fontSize="16"
+              fontWeight="bold"
+              x="200"
+              y="40"
+              textAnchor="middle"
+              >Literally.
+            </Text>
+          </Svg>
           <Button
             style={styles.button}
             title="Warm Up"
@@ -97,8 +94,6 @@ const Screen1 = () => {
             }}
           />
           <Image source={{uri: "https://media.timeout.com/images/105711851/1372/772/image.jpg"}} style={{width: '100%', height: '50%'}} />
-          {/* <Text>{region}</Text> */}
-          {/* <Text>A Mobile App by Adam Shilling</Text> */}
           <Text>2021</Text>
           </ImageBackground>
         </View>
