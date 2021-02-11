@@ -3,7 +3,7 @@ import { Button, Text, View } from 'react-native';
 import 'react-native-gesture-handler';
 import {useSelector} from 'react-redux'
 import { useDispatch } from 'react-redux'
-import {addComments} from './redux/comments'
+import {addComments, updateCommentLikes } from './redux/comments'
 
 const Comment = () => {
 
@@ -41,12 +41,12 @@ const Comment = () => {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(newLikes),
+            body: JSON.stringify(newLikes)
         })
-        updateLikesNum(newLikes)
+        // updateLikesNum(newLikes)
         // setLikesNum(newLikes)
-        // .then(response => response.json())
-        // .then(data => {console.log('success:', data)})
+        .then(response => response.json())
+        .then(data => dispatch(updateCommentLikes(data)))
         // .catch((error) => {
         //   console.error('Error:', error);
         // });

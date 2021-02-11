@@ -3,7 +3,6 @@ import 'react-native-gesture-handler';
 import { StyleSheet, View } from 'react-native';
  import {useSelector} from 'react-redux'
  import {useDispatch} from 'react-redux'
- import { addItems } from "./redux/location";
  import { addFaves } from './redux/fave'
 import FilterContainer from './FilterContainer'
 // import Geolocation from '@react-native-community/geolocation';
@@ -13,18 +12,6 @@ import MapContainer from './MapContainer'
   const Screen2 = ({ navigation, route }) => {
 
     const dispatch = useDispatch()
-
-    useEffect(() => {
-      fetch("http://localhost:3000/api/v1/locations")
-      .then(res => res.json())
-      .then(locationArray => {
-        const action = addItems(locationArray)
-        dispatch(action)
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-    },[dispatch])
 
     useEffect(() => {
       fetch("http://localhost:3000/api/v1/favourites")

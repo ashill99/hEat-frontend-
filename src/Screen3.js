@@ -31,6 +31,7 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
     // console.log(location.id, "line 21")
 
     useEffect(() => {
+      // make this a function 
       const thisFave = faves.filter(fave => 
       fave.locationId === location.id )
       thisFave ? setCurrentFave(thisFave) : setCurrentFave([])
@@ -38,6 +39,18 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
     [setCurrentFave]
     )
 
+    function faveStar() {
+      if (currentFave.locationId === location.id) {
+        return (
+        <Button title="⭐" onPress={handleUnfave} />
+        )
+      }
+        else { 
+          return (
+            <Button title="☆" onPress={handleFavePress} />
+          )
+        }
+      }
       // console.log(fave.id, "current fave in ternary") : setCurrentFave([]) 
     
     // currentFave ? setFaved(true) : null 
@@ -93,22 +106,26 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
   });
   }
 
-  const faveStar = currentFave.locationId === location.id ? <Button title="⭐" onPress={handleUnfave} /> : <Button title="☆" onPress={handleFavePress} />
+function restTypeDisplay() {
+  if (location.restType.length > 0) {
+    return ( 
+    <Text>
+      {location.restType}
+    </Text>)} 
+    else { return null }
+  }
 
     return (
       <ScrollView>
-        <View>
+        <View> 
+          {faveStar()}
           <Text style={styles.title}>
             {location.name}
           </Text>
-          {faveStar}
           <Text>
             {location.restOrBar}
           </Text>
-          {location.restType.length > 0 ? 
-            <Text>
-              {location.restType}
-            </Text> : null}
+          {restTypeDisplay()}
           <Text>
             {location.address}
           </Text>

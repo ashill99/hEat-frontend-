@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Button, Image, View, ImageBackground } from 'react-native';
 import 'react-native-gesture-handler';
 import Svg, { Text } from "react-native-svg";
+import LocationLoad from './LocationLoad'
 
 const Screen1 = () => {
 
@@ -94,8 +95,9 @@ const Screen1 = () => {
             }}
           />
           <Image source={{uri: "https://media.timeout.com/images/105711851/1372/772/image.jpg"}} style={{width: '100%', height: '50%'}} />
-          <Text>2021</Text>
+          <Text style={styles.bigblue}>2021</Text>
           </ImageBackground>
+          <LocationLoad/>
         </View>
       )
   )

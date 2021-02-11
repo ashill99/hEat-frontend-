@@ -89,7 +89,7 @@ const FilterContainer = ({mapRef}) => {
               textAlign: 'left',
               color: '#000'
             }}
-            containerStyle={{width: 100, height: 30, position: 'abolute'}}
+            containerStyle={{width: 100, height: 30}}
               dropDownStyle={{backgroundColor: '#fafafa'}}
               onChangeItem={item => dispatch(updateRestBar(item.value))}
             />
