@@ -1,32 +1,18 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { PROVIDER_GOOGLE } from 'react-native-maps' 
  import {useSelector} from 'react-redux'
  import {useDispatch} from 'react-redux'
- import { addItems } from "./redux/location";
+//  import { addItems } from "./redux/location";
  import { addLocation } from './redux/currentLocation'
- import { addFaves } from './redux/fave'
-import * as Location from 'expo-location';
-import Screen3 from './Screen3'
+// import * as Location from 'expo-location';
 
-  const MapContainer = ({ navigation, route }) => {
+  const MapContainer = ({ navigation, route, mapRef }) => {
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        fetch("http://localhost:3000/api/v1/locations")
-        .then(res => res.json())
-        .then(locationArray => {
-          const action = addItems(locationArray)
-          dispatch(action)
-        })
-        .catch((error) => {
-          console.error(error);
-        })
-      },[dispatch])
-    
         const locations = useSelector(state => {
           return state.location.items
         })
@@ -34,18 +20,10 @@ import Screen3 from './Screen3'
         const restOrBar = useSelector(state => {
             return state.restBar.restBar
           })
-      
-          console.log(locations, "locations 91")
-      
-          const restType = useSelector(state => {
-            return state.restType.restType
-        })
-      
-          const filteredLocations = locations
-          .filter(location => location.restOrBar === restOrBar)
 
-          const mapRef = React.createRef();
-
+        const filteredLocations = locations
+        .filter(location => location.restOrBar === restOrBar)
+  
           const [initialRegion, setInitialRegion] = useState({
             latitude: 40.6942696,
             longitude: -73.9187482,

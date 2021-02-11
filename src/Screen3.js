@@ -95,7 +95,6 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
 
   const faveStar = currentFave.locationId === location.id ? <Button title="⭐" onPress={handleUnfave} /> : <Button title="☆" onPress={handleFavePress} />
 
-
     return (
       <ScrollView>
         <View>

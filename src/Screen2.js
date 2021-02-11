@@ -1,12 +1,10 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useRef, useEffect} from 'react';
 import 'react-native-gesture-handler';
 import { StyleSheet, View } from 'react-native';
  import {useSelector} from 'react-redux'
  import {useDispatch} from 'react-redux'
  import { addItems } from "./redux/location";
- import { addLocation } from './redux/currentLocation'
  import { addFaves } from './redux/fave'
-//  import Screen3 from './Screen3'
 import FilterContainer from './FilterContainer'
 // import Geolocation from '@react-native-community/geolocation';
 import * as Location from 'expo-location';
@@ -72,20 +70,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    // padding: 20,
-    // marginTop: 20,
     fontSize: 42,
-  },
-  map: {
-    width: 650,
-    height: 670,
-    // Dimensions.get('window').height,
-    marginTop: 150,
-  },
-  marker: {
-    backgroundColor: "#fff",
-    padding: 5, 
-    borderRadius: 5
   },
   text: {
     color: "#000000"

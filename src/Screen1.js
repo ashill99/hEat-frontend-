@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Button, Image, View, ImageBackground } from 'react-native';
 import 'react-native-gesture-handler';
 import Svg, { Text } from "react-native-svg";
