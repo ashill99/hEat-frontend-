@@ -3,22 +3,14 @@ import { Button, Text, View } from 'react-native';
 import 'react-native-gesture-handler';
 import {useSelector} from 'react-redux'
 import { useDispatch } from 'react-redux'
-import {addComments, updateCommentLikes } from './redux/comments'
+import { updateCommentLikes } from './redux/comments'
 
 const Comment = () => {
 
   const dispatch = useDispatch()
+
   const [currentComment, setCurrentComment] = useState([])
   const [likesNum, setLikesNum] = useState(0)
-
-  useEffect(() => {
-    fetch("http://localhost:3000/api/v1/comments")
-    .then(res => res.json())
-    .then(commentsArray => {
-      const action = addComments(commentsArray)
-      dispatch(action)
-    })
-  },[dispatch])
 
     const comments = useSelector(state => {
         return state.comments
@@ -36,7 +28,7 @@ const Comment = () => {
             likes: parseInt(likes + 1)
           }
           setLikesNum(newLikes)
-          fetch(`http://localhost:3000/api/v1/comments/${id}`, {
+          fetch(`https://553d0820e8de.ngrok.io/api/v1/comments/${id}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',

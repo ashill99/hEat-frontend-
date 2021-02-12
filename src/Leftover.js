@@ -1,34 +1,35 @@
     // state for user location
 
-    const [userLocation, setUserLocation] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
+    // const [userLocation, setUserLocation] = useState(null);
+    // const [errorMsg, setErrorMsg] = useState(null);
 
-    location fetch below 
+    // location fetch below 
 
-    useEffect(() => {
-      (async () => {
-        let { status } = await Location.requestPermissionsAsync();
-        if (status !== 'granted') {
-          setErrorMsg('Permission to access location was denied');
-          return;
-        }
+    // useEffect(() => {
+    //   (async () => {
+    //     let { status } = await Location.requestPermissionsAsync();
+    //     if (status !== 'granted') {
+    //       setErrorMsg('Permission to access location was denied');
+    //       return;
+    //     }
   
-        let userLocation = await Location.getCurrentPositionAsync({});
-        setUserLocation(userLocation);
-      })();
-    }, []);
+    //     let userLocation = await Location.getCurrentPositionAsync({});
+    //     setUserLocation(userLocation);
+    //   })();
+    // }, []);
   
-    let text = 'Waiting..';
-    if (errorMsg) {
-      text = errorMsg;
-    } else if (userLocation) {
-      text = JSON.stringify(userLocation);
-    }
+    // let text = 'Waiting..';
+    // if (errorMsg) {
+    //   text = errorMsg;
+    // } else if (userLocation) {
+    //   text = JSON.stringify(userLocation);
+    // }
 
-    console.log(text, "line 48")
-    console.log(text.latitude)
-    console.log(userLocation, "line 50")
-    console.log(userLocation.coords.latitude, "line 51")
+    // console.log(text, "line 48")
+    // console.log(text.latitude)
+    // console.log(userLocation, "line 50")
+    // console.log(userLocation.coords.latitude, "line 51")
+// console.log(region, "region")
 
 
     // Code for restaurant type filter and a switch button toggle 

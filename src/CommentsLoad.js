@@ -1,17 +1,17 @@
 import React, {useEffect} from 'react';
 import 'react-native-gesture-handler';
  import {useDispatch} from 'react-redux'
- import { addItems } from "./redux/location";
+ import { addComments } from "./redux/comments";
 
-  const LocationLoad = () => {
+  const CommentLoad = () => {
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-      fetch("https://553d0820e8de.ngrok.io/api/v1/locations")
+      fetch("https://553d0820e8de.ngrok.io/api/v1/comments")
       .then(res => res.json())
-      .then(locationArray => {
-        const action = addItems(locationArray)
+      .then(commentsArray => {
+        const action = addComments(commentsArray)
         dispatch(action)
       })
       .catch((error) => {
@@ -25,4 +25,4 @@ import 'react-native-gesture-handler';
       )
   }
   
-  export default LocationLoad
+  export default CommentLoad

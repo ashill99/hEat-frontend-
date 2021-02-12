@@ -9,21 +9,21 @@ import FilterContainer from './FilterContainer'
 import * as Location from 'expo-location';
 import MapContainer from './MapContainer'
 
-  const Screen2 = ({ navigation, route }) => {
+  const Screen2 = ({ navigation, route, locations }) => {
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
-      fetch("http://localhost:3000/api/v1/favourites")
-      .then(res => res.json())
-      .then(faveArray => {
-        const faveAction = addFaves(faveArray)
-        dispatch(faveAction)
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-    },[dispatch])  
+    // useEffect(() => {
+    //   fetch("http://localhost:3000/api/v1/favourites")
+    //   .then(res => res.json())
+    //   .then(faveArray => {
+    //     const faveAction = addFaves(faveArray)
+    //     dispatch(faveAction)
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   })
+    // },[dispatch])  
 
     const restOrBar = useSelector(state => {
       return state.restBar.restBar
@@ -37,7 +37,7 @@ import MapContainer from './MapContainer'
 
     return(
       <View style={styles.screen}>
-        <MapContainer mapRef={mapRef} navigation={navigation} />
+        <MapContainer mapRef={mapRef} navigation={navigation}/>
         <FilterContainer mapRef={mapRef}/>
       </View>
     )
