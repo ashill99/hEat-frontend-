@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { StyleSheet, Text, View} from 'react-native';
 import 'react-native-gesture-handler';
 import NavBar from './NavBar'
+import {URL} from '@env'
 
 const Screen4 = ({ navigation, route}) => {
     
   const dispatch = useDispatch();
 
   // useEffect(() => {
-  //   fetch("http://localhost:3000/api/v1/favourites")
+  //   fetch(`${URL}`/api/v1/favourites`)
   //   .then(res => res.json())
   //   .then(faveArray => {
   //     const faveAction = addFaves(faveArray)

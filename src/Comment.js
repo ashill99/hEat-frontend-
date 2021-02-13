@@ -4,6 +4,7 @@ import 'react-native-gesture-handler';
 import {useSelector} from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { updateCommentLikes } from './redux/comments'
+import {URL} from '@env'
 
 
 const Comment = ({location}) => {
@@ -20,7 +21,7 @@ const Comment = ({location}) => {
           const newLikes = {
             likes: parseInt(comment.likes + 1),
           }
-          fetch(`http://57bd7380644f.ngrok.io/api/v1/comments/${comment.id}`, {
+          fetch(`${URL}/api/v1/comments/${comment.id}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',

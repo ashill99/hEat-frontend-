@@ -39,8 +39,8 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
           {
             latitude: latitude,
             longitude: longitude,
-            latitudeDelta: 0.003,
-            longitudeDelta: 0.003
+            latitudeDelta: 0.02,
+            longitudeDelta: 0.02
           }
 
     return (

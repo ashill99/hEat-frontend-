@@ -8,7 +8,7 @@ import styled from 'styled-components'
 
 
 
-export default function RestaurantList({navigation, routes}) {  
+export default function RestaurantList({navigation, route}) {  
     
   const [search, setSearch ] = useState("")
 
@@ -17,8 +17,6 @@ export default function RestaurantList({navigation, routes}) {
   })
 
   function handleNewSearch(search) {
-    // searchForTrack(e.target.value)
-    // setSearch("")
     setSearch(search)
     setSearch(search)
     console.log(search)
@@ -26,50 +24,46 @@ export default function RestaurantList({navigation, routes}) {
 
 const restaurants = locations.filter((item) => item.restOrBar === "Restaurant")
 const filteredRestaurants = restaurants.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
-const sortedRestaurants = filteredRestaurants.sort((a, b) => a.name.localeCompare(b.name));
+const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(b.name));
 
-
-// mapRef.current.animateToRegion(
-//   {
-//     latitude: newLat[0],
-//     longitude: newLon[0],
-//     latitudeDelta: 0.02,
-//     longitudeDelta: 0.02
-//   }, 1000)  
-// }
-
-
-  const eachRestaurant = sortedRestaurants.map(item => {
+  const eachLocation = sortedLocations.map(item => {
     return (
-    <>
+    <View
+      key={item.id}
+    >
       <RestaurantTitle
         onPress={() => navigation.push('Screen3', {
         location: item
         })}
-        key={item.id}
-      >{item.name}</RestaurantTitle>
+      >
+        {item.name}
+      </RestaurantTitle>
       <RestaurantText 
         style={{color: 'blue'}}
-        onPress={() => Linking.openURL(item.menu)}>
+        onPress={() => Linking.openURL(item.menu)}
+      >
         Menu{'\n'}
       </RestaurantText> 
 
       <RestaurantText 
         style={{color: 'blue'}}
-        onPress={() => Linking.openURL(location.website)}>
+        onPress={() => Linking.openURL(location.website)}
+      >
         Website
       </RestaurantText> 
 
       <RestaurantText
-              onPress={() => navigation.push('Screen2', {
-        latitude: item.latitude,
-        longitude: item.longitude
-        })}>Map</RestaurantText>
+          onPress={() => navigation.push('Screen2', {
+          latitude: item.latitude,
+          longitude: item.longitude
+          })}
+        >
+          Map
+        </RestaurantText>
 
-
-    </>
+    </View>
 )
-  })
+  }) 
     
     return (
       <Scroll>
@@ -83,7 +77,7 @@ const sortedRestaurants = filteredRestaurants.sort((a, b) => a.name.localeCompar
             />
         </Form>
           <RestaurantItem>
-          {eachRestaurant}
+          {eachLocation}
           </RestaurantItem>
         </Wrapper>
       </Scroll>

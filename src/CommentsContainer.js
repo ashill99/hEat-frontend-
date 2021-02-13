@@ -5,6 +5,7 @@ import Comment from './Comment'
 import AddCommentForm from './AddCommentForm'
 import { addComments } from "./redux/comments";
 import {useDispatch} from 'react-redux'
+import {URL} from '@env'
 
 
 const CommentsContainer = ({ navigation, route, location }) => {
@@ -14,7 +15,7 @@ const CommentsContainer = ({ navigation, route, location }) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-      fetch("http://57bd7380644f.ngrok.io/api/v1/comments")
+      fetch(`${URL}/api/v1/comments`)
       .then(res => res.json())
       .then(commentsArray => {
         const action = addComments(commentsArray)

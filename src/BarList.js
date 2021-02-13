@@ -14,7 +14,9 @@ export default function BarList({navigation, routes}) {
     return state.location.items
   })
 
-  const bars = locations.filter((item) => item.restOrBar === "Bar")
+const bars = locations.filter((item) => item.restOrBar === "Bar")
+// const filteredBars = bars.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
+// const sortedBars = filteredBars.sort((a, b) => a.name.localeCompare(b.name));
 
   const eachBar = bars.map(item => {
     return (<BarText>{item.name}</BarText>)

@@ -2,13 +2,14 @@ import React, {useEffect} from 'react';
 import 'react-native-gesture-handler';
  import {useDispatch} from 'react-redux'
  import { addComments } from "./redux/comments";
+ import {URL} from '@env'
 
   const CommentLoad = () => {
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-      fetch("http://57bd7380644f.ngrok.io/api/v1/comments")
+      fetch(`${URL}/api/v1/comments`)
       .then(res => res.json())
       .then(commentsArray => {
         const action = addComments(commentsArray)

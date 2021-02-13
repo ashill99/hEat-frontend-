@@ -4,6 +4,7 @@ import 'react-native-gesture-handler';
 import CommentsContainer from './CommentsContainer'
 import {useSelector, useDispatch} from 'react-redux'
 import { addFaves, updateFaves, deleteFave } from './redux/fave'
+import {URL} from '@env'
 
 const FaveContainer = () => {
 
@@ -23,7 +24,7 @@ const FaveContainer = () => {
 // })
 
 useEffect(() => {
-  fetch("http://http://c7d8b7116cd6.ngrok.io/api/v1/favourites")
+  fetch(`${URL}/api/v1/favourites`)
   .then(res => res.json())
   .then(faveArray => {
     // const faveAction = addFaves(faveArray)
@@ -72,7 +73,7 @@ function faveStar() {
 
 function handleFavePress() {
 
-    fetch("http://57bd7380644f.ngrok.io/api/v1/favourites",  {
+    fetch(`${URL}/api/v1/favourites`,  {
     method: 'POST',
     headers: {
         Accept: 'application/json',
@@ -96,7 +97,7 @@ function handleFavePress() {
 
 function handleUnfave() {
   // console.log(currentFave[0].id, "line 67")
-  fetch(`http://57bd7380644f.ngrok.io/api/v1/favourites/${currentFave.id}`,  {
+  fetch(`${URL}/api/v1/favourites/${currentFave.id}`,  {
   method: 'DELETE',
   headers: {
     'Content-type': 'application/json' // Indicates the content 

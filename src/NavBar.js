@@ -7,15 +7,15 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
-const NavBar = ({navigation, routes}) => {
+const NavBar = ({navigation, route}) => {
 
     return (
         <Wrapper>
             <Container>
                 <MaterialCommunityIcons
                 name="home" 
-                color={'blue'} 
-                size={'40'} 
+                color='blue' 
+                size="40" 
                 onPress={() => {navigation.navigate('Screen1')}}
                 />
             </Container>
@@ -25,16 +25,19 @@ const NavBar = ({navigation, routes}) => {
             <Container>
                 <Icon 
                 name="restaurant" 
-                size={40} 
-                color={'blue'}
-                onPress={() => {navigation.navigate('RestaurantList')}}
+                size="40" 
+                color='blue'
+                onPress={() => {navigation.navigate('RestaurantList', {
+                    type: "Restaurant"
+                })
+                }}
                 />
             </Container>
             <Container>
                 <Icon 
                 name="map" 
-                size={40} 
-                color={'blue'} 
+                size="40" 
+                color='blue' 
                 onPress={() => {
               navigation.navigate('Screen2', {
                 latitude: 40.6942696,
@@ -46,16 +49,19 @@ const NavBar = ({navigation, routes}) => {
             <Container>
                 <Icon 
                 name="nightlife" 
-                size={40} 
-                color={'blue'} 
-                onPress={() => {navigation.navigate('BarList')}}
+                size="40" 
+                color='blue'
+                onPress={() => {navigation.navigate('BarList', {
+                    type: "Bar"
+                })
+                }}
                 />
             </Container>
             <Container>
                 <Icon 
                 name="stars" 
-                size={40} 
-                color={'blue'} 
+                size="40" 
+                color='blue'
                 onPress={() => {navigation.navigate('Screen4')}}
                 />
             </Container>

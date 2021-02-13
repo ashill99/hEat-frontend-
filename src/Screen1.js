@@ -6,8 +6,8 @@ import Title from './Title'
 import NavBar from './NavBar'
 import styled from 'styled-components'
 
-const Screen1 = ({ navigation, route }) => {
 
+const Screen1 = ({ navigation, route }) => {
     return( 
       <>
       <NavBar navigation={navigation}/>
@@ -24,7 +24,6 @@ const Screen1 = ({ navigation, route }) => {
             }}
           />
           <Image source={{uri: "https://media.timeout.com/images/105711851/1372/772/image.jpg"}} style={{width: '100%', height: '50%'}} />
-          <Text style={styles.bigblue}>2021</Text>
         </Container>
         </>
   )
@@ -62,23 +61,6 @@ const styles = StyleSheet.create({
   },
   button: {
     fontSize: 50
-  },
-  bigblue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 15,
-    borderColor: '#d6ffff',
-    borderWidth: 1
-},
-  textshadow: {
-    fontSize:18,
-    color:'#d6ffff',
-    fontFamily:'Times New Roman',
-    paddingLeft:30,
-    paddingRight:30,
-    textShadowColor:'#585858',
-    textShadowOffset:{width: 5, height: 5},
-    textShadowRadius:10,
   },
 });
 

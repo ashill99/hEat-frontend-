@@ -15,6 +15,7 @@ import RestaurantList from './src/RestaurantList'
 import BarList from './src/BarList'
 import { Provider } from 'react-redux'
 import store from './src/redux/store'
+import { PlayWithFire } from 'expo'
 
 export default function App() {
 

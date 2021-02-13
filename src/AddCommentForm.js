@@ -4,6 +4,7 @@ import { StyleSheet, Button, Text, View, TouchableOpacity, TextInput, Keyboard }
 import 'react-native-gesture-handler';
 import { updateComments } from './redux/comments'
 import { useDispatch } from 'react-redux'
+import {URL} from '@env'
 
 const AddCommentForm = ({location}) => {
     
@@ -14,7 +15,7 @@ const AddCommentForm = ({location}) => {
     function handleSubmitClick(e) {
         const newUserId = 1
 
-        fetch("http://57bd7380644f.ngrok.io/api/v1/comments",  {
+        fetch(`${URL}/api/v1/comments`,  {
         method: 'POST',
         headers: {
             Accept: 'application/json',

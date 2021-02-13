@@ -11,11 +11,12 @@ import MapContainer from './MapContainer'
 import { addItems } from "./redux/location";
 import styled from 'styled-components'
 import NavBar from './NavBar'
+import {URL} from '@env'
 
   const Screen2 = ({ navigation, route, locations }) => {
 
-    const [isLoaded, setIsLoaded] = useState(false)
-
+const [isLoaded, setIsLoaded] = useState(false)
+console.log(URL)
 const {latitude, longitude } = route.params
 
 console.log(latitude, "latitude")
@@ -24,7 +25,7 @@ console.log(longitude, "longitude")
     const dispatch = useDispatch()
 
     useEffect(() => {
-      fetch("http://57bd7380644f.ngrok.io/api/v1/locations")
+      fetch(`${URL}/api/v1/locations`)
       .then(res => res.json())
       .then(locationArray => {
         const action = addItems(locationArray)
