@@ -8,7 +8,7 @@ import 'react-native-gesture-handler';
     const dispatch = useDispatch()
 
     useEffect(() => {
-      fetch("https://553d0820e8de.ngrok.io/api/v1/comments")
+      fetch("http://c7d8b7116cd6.ngrok.io/api/v1/comments")
       .then(res => res.json())
       .then(commentsArray => {
         const action = addComments(commentsArray)

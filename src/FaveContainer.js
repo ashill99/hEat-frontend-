@@ -5,9 +5,11 @@ import CommentsContainer from './CommentsContainer'
 import {useSelector, useDispatch} from 'react-redux'
 import { addFaves, updateFaves, deleteFave } from './redux/fave'
 
-const FaveContainer = ({faves}) => {
+const FaveContainer = () => {
 
     const [currentFave, setCurrentFave] = useState(faves)
+    const [favesLoaded, setFavesLoaded] = useState(false)
+    const [faves, setFaves] = useState([])
 
     console.log(faves, "first faves")
     const dispatch = useDispatch()
@@ -20,13 +22,29 @@ const FaveContainer = ({faves}) => {
 //             return state.faves
 // })
 
+useEffect(() => {
+  fetch("http://http://c7d8b7116cd6.ngrok.io/api/v1/favourites")
+  .then(res => res.json())
+  .then(faveArray => {
+    // const faveAction = addFaves(faveArray)
+    // dispatch(faveAction)
+    setFaves(faveArray)
+    setFavesLoaded(true)
+  })
+  .catch((error) => {
+    console.error(error);
+  })
+},[dispatch])
+
 function thisFave() {
     useEffect(() => {  
         const thisFave = faves.filter(fave => fave.locationId === location.id)
         console.log(thisFave, "thisFave")
+        if (thisFave) {
         if (thisFave.length > 0) {
             setCurrentFave(thisFave) }
             else { setCurrentFave([]) }
+        }
         }
         , [])
         console.log(currentFave, "currentFave")
@@ -36,12 +54,14 @@ console.log(location.id, "location favecontainer")
 
 function faveStar() {
     thisFave()
+    if (currentFave) {
     if (currentFave.length > 0) {
   if (currentFave[0].locationId === location.id) {
     return (
     <Button title="⭐" onPress={handleUnfave} />
     )
   }
+}
 }
     else { 
       return (

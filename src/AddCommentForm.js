@@ -22,7 +22,7 @@ const AddCommentForm = () => {
 
         const newUserId = 1
 
-        fetch("https://553d0820e8de.ngrok.io/api/v1/comments",  {
+        fetch("http://c7d8b7116cd6.ngrok.io/api/v1/comments",  {
         method: 'POST',
         headers: {
             Accept: 'application/json',

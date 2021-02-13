@@ -14,9 +14,9 @@ const commentsSlice = createSlice({
         },
         updateCommentLikes: (state, action) => {
             const foundComment = state.comments.find(comment => comment.id === action.payload.id)
-            console.log(foundComment)
-            foundComment.likes = action.payload.likes 
-            console.log(foundComment)
+            console.log(foundComment, 'foundcomment')
+            foundComment = action.payload
+            console.log(foundComment, 'foundcomment 2')
         }
     },
 })

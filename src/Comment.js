@@ -5,30 +5,35 @@ import {useSelector} from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { updateCommentLikes } from './redux/comments'
 
+
 const Comment = () => {
 
   const dispatch = useDispatch()
 
   const [currentComment, setCurrentComment] = useState([])
   const [likesNum, setLikesNum] = useState(0)
+  // const [comments, setComment] = useState([])
 
     const comments = useSelector(state => {
         return state.comments
     })
 
-    function updateCommentLikes(newComment) {
-    }
+    // function updateCommentLikes(newComment) {
+    // }
 
     const location = useSelector(state => {
         return state.currentLocation
       })
 
-      function handleLikePress(id, likes) {
+      function handleLikePress(comment) {
           const newLikes = {
-            likes: parseInt(likes + 1)
+            content: comment.content,
+            likes: parseInt(comment.likes + 1),
+            userId: 1, 
+            LocationId: comment.locationId
           }
           setLikesNum(newLikes)
-          fetch(`https://553d0820e8de.ngrok.io/api/v1/comments/${id}`, {
+          fetch(`https://c7d8b7116cd6.ngrok.io/api/v1/comments/${comment.id}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
@@ -38,7 +43,10 @@ const Comment = () => {
         // updateLikesNum(newLikes)
         // setLikesNum(newLikes)
         .then(response => response.json())
-        .then(data => dispatch(updateCommentLikes(data)))
+        .then(newComment => {
+          const action2 = updateCommentLikes(newComment)
+          dispatch(action2)
+      })
         // .catch((error) => {
         //   console.error('Error:', error);
         // });
@@ -54,7 +62,7 @@ const Comment = () => {
         return (
           <View key={comment.id}> 
             <Text>{comment.content} {'\n'}{'\n'} </Text>
-            <Button onPress={() => handleLikePress(comment.id, comment.likes)} title={`👍 ${comment.likes}`} id={comment.id}/>
+            <Button onPress={() => handleLikePress(comment)} title={`👍 ${comment.likes}`} id={comment.id}/>
           </View>
         )
       }

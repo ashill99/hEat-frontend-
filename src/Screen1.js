@@ -1,39 +1,50 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Button, Image, View, ImageBackground } from 'react-native';
 import 'react-native-gesture-handler';
-import Svg, { Text } from "react-native-svg";
-import LocationLoad from './LocationLoad'
-import {useSelector} from 'react-redux'
+import { Text } from "react-native-svg";
 import Title from './Title'
+import NavBar from './NavBar'
+import styled from 'styled-components'
 
 
-const Screen1 = () => {
+
+const Screen1 = ({ navigation, route }) => {
 
 
-    return( ({ navigation, route }) => (
-        <View style={styles.container}>
-          <ImageBackground source={{uri: "https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm21-marble-sasi-117.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=571bf921d1424d22a2004bcce5f94bc1"}} style={{width: '100%', height: '100%'}}>
+    return( 
+      <>
+      <NavBar navigation={navigation}/>
+        <Container>
+          {/* <ImageBackground source={{uri: "https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm21-marble-sasi-117.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=571bf921d1424d22a2004bcce5f94bc1"}} style={{width: '100%', height: '100%'}}> */}
           <Title />
           <Button
             style={styles.button}
             title="Warm Up"
             onPress={() => {
-              navigation.push('Screen2')
+              navigation.navigate('Screen2')
             }}
           />
           <Image source={{uri: "https://media.timeout.com/images/105711851/1372/772/image.jpg"}} style={{width: '100%', height: '50%'}} />
           <Text style={styles.bigblue}>2021</Text>
-          </ImageBackground>
-          <LocationLoad/>
-        </View>
-      )
+          {/* </ImageBackground> */}
+          {/* <LocationLoad/> */}
+        </Container>
+        </>
   )
 }
+
+const Container = styled.View`
+flex: 1;
+width: 100%;
+height: 95%;
+display: flex;
+backgroundColor: #F4C430;
+`
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#F4C430',
+    backgroundColor: '#F4C430',
     alignItems: 'center',
     justifyContent: 'center',
   },

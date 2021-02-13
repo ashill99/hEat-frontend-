@@ -12,6 +12,8 @@ const FilterContainer = ({mapRef}) => {
 
     const dispatch = useDispatch()
 
+    const [isLoaded, setIsLoaded] = useState(false)
+
     // useSelectors 
 
     const search = useSelector(state => {
@@ -21,6 +23,11 @@ const FilterContainer = ({mapRef}) => {
     const locations = useSelector(state => {
       return state.location.items
     })
+
+    function loadFilter() {
+      locations ? 
+      setIsLoaded(true) : null
+    }
 
     const eachLocation = locations
     .map(location => location)
@@ -55,7 +62,8 @@ const FilterContainer = ({mapRef}) => {
     }
 
     return (
-      <>
+<>
+      {isLoaded ? 
         <View style={styles.container}>
 
           <TextInput
@@ -94,6 +102,7 @@ const FilterContainer = ({mapRef}) => {
               onChangeItem={item => dispatch(updateRestBar(item.value))}
             />
         </View>
+      : loadFilter()}
       </>
     )
 }

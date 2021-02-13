@@ -5,7 +5,7 @@ import CommentsContainer from './CommentsContainer'
 import {useSelector, useDispatch} from 'react-redux'
 import FaveContainer from './FaveContainer'
 import { addFaves, updateFaves, deleteFave } from './redux/fave'
-
+import NavBar from './NavBar'
 
   const Screen3 = ({ navigation, route}) => {
     
@@ -19,19 +19,6 @@ import { addFaves, updateFaves, deleteFave } from './redux/fave'
 
     console.log(faves, "faves screen3")
 
-    useEffect(() => {
-      fetch("http://localhost:3000/api/v1/favourites")
-      .then(res => res.json())
-      .then(faveArray => {
-        const faveAction = addFaves(faveArray)
-        dispatch(faveAction)
-        setFaves(faveArray)
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-    },[dispatch])
-
 function restTypeDisplay() {
   if (location.restType.length > 0) {
     return ( 
@@ -42,8 +29,9 @@ function restTypeDisplay() {
   }
 
     return (
-      // <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.container}>
+      <>
+                <NavBar navigation={navigation}/>
+<ScrollView style={styles.container}>
 
         <View style={{height: "60%"}}> 
 
@@ -81,7 +69,7 @@ function restTypeDisplay() {
 
         </View>
         </ScrollView>
-    // </SafeAreaView>
+    </>
     )
   }
 

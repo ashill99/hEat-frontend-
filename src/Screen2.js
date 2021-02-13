@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
 import { StyleSheet, View } from 'react-native';
  import {useSelector} from 'react-redux'
@@ -7,23 +7,29 @@ import { StyleSheet, View } from 'react-native';
 import FilterContainer from './FilterContainer'
 // import Geolocation from '@react-native-community/geolocation';
 import * as Location from 'expo-location';
-import MapContainer from './MapContainer'
+import MapContainer from './MapContainer' 
+import { addItems } from "./redux/location";
+import styled from 'styled-components'
+import NavBar from './NavBar'
 
   const Screen2 = ({ navigation, route, locations }) => {
 
+    const [isLoaded, setIsLoaded] = useState(false)
+
     const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //   fetch("http://localhost:3000/api/v1/favourites")
-    //   .then(res => res.json())
-    //   .then(faveArray => {
-    //     const faveAction = addFaves(faveArray)
-    //     dispatch(faveAction)
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   })
-    // },[dispatch])  
+    useEffect(() => {
+      fetch("http://c7d8b7116cd6.ngrok.io/api/v1/locations")
+      .then(res => res.json())
+      .then(locationArray => {
+        const action = addItems(locationArray)
+        dispatch(action)
+        setIsLoaded(true)
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+    },[dispatch])
 
     const restOrBar = useSelector(state => {
       return state.restBar.restBar
@@ -36,22 +42,36 @@ import MapContainer from './MapContainer'
     const mapRef = React.createRef();
 
     return(
-      <View style={styles.screen}>
-        <MapContainer mapRef={mapRef} navigation={navigation}/>
-        <FilterContainer mapRef={mapRef}/>
-      </View>
+      <>
+      <NavBar navigation={navigation}/>
+      <Container>
+      {isLoaded ? 
+        <>
+          <MapContainer mapRef={mapRef} navigation={navigation}/>
+          <FilterContainer mapRef={mapRef}/>
+        </>
+      : null }
+      </Container>
+      </>
     )
 }
 
 export default Screen2
 
+const Container = styled.View`
+width: 100%;
+height: 95%;
+display: flex;
+`
+
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  // container: {
+  //   flex: 1,
+  //   backgroundColor: '#fff',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
   screen: {
     marginTop: 40,
     alignItems: 'center',
