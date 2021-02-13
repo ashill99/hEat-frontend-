@@ -11,6 +11,8 @@ import Screen1 from './src/Screen1'
 import Screen2 from './src/Screen2'
 import Screen3 from './src/Screen3'
 import Screen4 from './src/Screen4'
+import RestaurantList from './src/RestaurantList'
+import BarList from './src/BarList'
 import { Provider } from 'react-redux'
 import store from './src/redux/store'
 
@@ -24,18 +26,20 @@ export default function App() {
       <Stack.Navigator
       screenOptions={{
         headerStyle: {
-            backgroundColor: '#F4C430',
+            backgroundColor: '#FFEFD5',
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
             fontWeight: 'bold',
+            color: 'blue',
           },
           }}>
         <Stack.Screen name="Screen1" component={Screen1} options={{title: 'hEat'}} />
-        <Stack.Screen name="Screen2" component={Screen2} options={{title: 'hEat'}}/>
+        <Stack.Screen name="Screen2" component={Screen2} options={{title: 'hEat Map'}}/>
         <Stack.Screen name="Screen3" component={Screen3} options={{title: 'hEat'}}/>
         <Stack.Screen name="Screen4" component={Screen4} options={{title: 'hEat'}}/>
-
+        <Stack.Screen name="RestaurantList" component={RestaurantList} options={{title: 'Restaurants'}}/>
+        <Stack.Screen name="BarList" component={BarList} options={{title: 'Bars'}}/>
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>

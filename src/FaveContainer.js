@@ -72,7 +72,7 @@ function faveStar() {
 
 function handleFavePress() {
 
-    fetch("http://localhost:3000/api/v1/favourites",  {
+    fetch("http://57bd7380644f.ngrok.io/api/v1/favourites",  {
     method: 'POST',
     headers: {
         Accept: 'application/json',
@@ -96,7 +96,7 @@ function handleFavePress() {
 
 function handleUnfave() {
   // console.log(currentFave[0].id, "line 67")
-  fetch(`http://localhost:3000/api/v1/favourites/${currentFave.id}`,  {
+  fetch(`http://57bd7380644f.ngrok.io/api/v1/favourites/${currentFave.id}`,  {
   method: 'DELETE',
   headers: {
     'Content-type': 'application/json' // Indicates the content 

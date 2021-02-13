@@ -2,27 +2,19 @@ import { useRoute } from '@react-navigation/native';
 import React, {useState} from 'react';
 import { StyleSheet, Button, Text, View, TouchableOpacity, TextInput, Keyboard } from 'react-native';
 import 'react-native-gesture-handler';
-import {useSelector} from 'react-redux'
 import { updateComments } from './redux/comments'
 import { useDispatch } from 'react-redux'
 
-
-
-const AddCommentForm = () => {
+const AddCommentForm = ({location}) => {
     
     const dispatch = useDispatch()
 
     const [text, setText] = useState('')
 
-    const location = useSelector(state => {
-        return state.currentLocation
-      })
-
     function handleSubmitClick(e) {
-
         const newUserId = 1
 
-        fetch("http://c7d8b7116cd6.ngrok.io/api/v1/comments",  {
+        fetch("http://57bd7380644f.ngrok.io/api/v1/comments",  {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -39,6 +31,7 @@ const AddCommentForm = () => {
     .then(newComment => {
         const action2 = updateComments(newComment)
         dispatch(action2)
+        setText("")
     })
     .catch((error) => {
       console.error(error);
@@ -51,7 +44,6 @@ const AddCommentForm = () => {
           <TextInput
             style={styles.textInput}
             placeholder="Your Comment"
-            maxLength={20}
             onBlur={Keyboard.dismiss}
             value={text}
             onChangeText={setText}

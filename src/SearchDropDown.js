@@ -3,39 +3,37 @@ import {TouchableOpacity, StyleSheet, View, Text,} from 'react-native';
 import {useSelector} from 'react-redux'
 
 
-export default function SearchDropDown(props) {
+export default function SearchDropDown({dataSource, mapRef, onSearch}) {
 
     const locations = useSelector(state => {
         return state.location.items
       })
 
     const [location, setLocation] = useState([])
-    console.log(location, "line 8")
 
-    function goToSearch() {
-
+    function goToSearch(item) {
+        console.log(item, 'item search bar')
         console.log('testing search bar')
 
         const currentLocation = locations.filter(location2 => location2.name.toLowerCase() === location)
-        const newLat = currentLocation.map(c => c.latitude)
-        const newLon = currentLocation.map(c => c.longitude)
+        const newLat = parseFloat(currentLocation.map(c => c.latitude))
+        const newLon = parseFloat(currentLocation.map(c => c.longitude))
 
-        console.log(newLat, "newlat ")
-
-        props.mapRef.current.animateToRegion(
+        newLat ? 
+        mapRef.current.animateToRegion(
             {
-              latitude: newLat[0],
-              longitude: newLon[0],
-              latitudeDelta: 0.02,
-              longitudeDelta: 0.02
+              latitude: newLat,
+              longitude: newLon,
+              latitudeDelta: 0.004,
+              longitudeDelta: 0.004
             }, 1000)  
+            : null
     }
-    const { dataSource } = props
 
     return (
 
         <TouchableOpacity
-            OnPress={props.onSearch}
+            OnPress={onSearch}
             style={styles.container}>
 
             <View style={styles.subContainer}>
@@ -43,7 +41,7 @@ export default function SearchDropDown(props) {
                     dataSource.length ?
                         dataSource.map(item => {
                             return (
-                                <TouchableOpacity key={item.id} onPress={() => {setLocation(item); goToSearch()}} latitude={item.latitude} longitude={item.longitude} style={styles.itemView}>
+                                <TouchableOpacity key={item.id} onPress={() => {setLocation(item); setLocation(item); goToSearch(item)}} style={styles.itemView}>
                                     <Text style={styles.itemText}>{item}</Text>
                                 </TouchableOpacity>                            
                                 )

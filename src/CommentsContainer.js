@@ -7,14 +7,14 @@ import { addComments } from "./redux/comments";
 import {useDispatch} from 'react-redux'
 
 
-const CommentsContainer = ({ navigation, route }) => {
+const CommentsContainer = ({ navigation, route, location }) => {
 
     const [isLoaded, setIsLoaded] = useState(false) 
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-      fetch("http://c7d8b7116cd6.ngrok.io/api/v1/comments")
+      fetch("http://57bd7380644f.ngrok.io/api/v1/comments")
       .then(res => res.json())
       .then(commentsArray => {
         const action = addComments(commentsArray)
@@ -30,8 +30,8 @@ const CommentsContainer = ({ navigation, route }) => {
         <View>
             {isLoaded ? 
             <>
-                <Comment />
-                <AddCommentForm />
+                <Comment location={location}/>
+                <AddCommentForm location={location}/>
             </>
             : null }
         </View>

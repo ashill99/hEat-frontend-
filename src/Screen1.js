@@ -6,28 +6,25 @@ import Title from './Title'
 import NavBar from './NavBar'
 import styled from 'styled-components'
 
-
-
 const Screen1 = ({ navigation, route }) => {
-
 
     return( 
       <>
       <NavBar navigation={navigation}/>
         <Container>
-          {/* <ImageBackground source={{uri: "https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm21-marble-sasi-117.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=571bf921d1424d22a2004bcce5f94bc1"}} style={{width: '100%', height: '100%'}}> */}
           <Title />
           <Button
             style={styles.button}
             title="Warm Up"
             onPress={() => {
-              navigation.navigate('Screen2')
+              navigation.navigate('Screen2', {
+                latitude: 40.6942696,
+            longitude: -73.9187482
+              })
             }}
           />
           <Image source={{uri: "https://media.timeout.com/images/105711851/1372/772/image.jpg"}} style={{width: '100%', height: '50%'}} />
           <Text style={styles.bigblue}>2021</Text>
-          {/* </ImageBackground> */}
-          {/* <LocationLoad/> */}
         </Container>
         </>
   )
@@ -38,7 +35,7 @@ flex: 1;
 width: 100%;
 height: 95%;
 display: flex;
-backgroundColor: #F4C430;
+backgroundColor: 	#FFEFD5;
 `
 
 const styles = StyleSheet.create({

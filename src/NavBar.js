@@ -23,10 +23,34 @@ const NavBar = ({navigation, routes}) => {
                 <MaterialCommunityIcons name="account" color={'blue'} size={'40'} />
             </Container>
             <Container>
-                <Icon name="restaurant" size={40} color={'blue'} />
+                <Icon 
+                name="restaurant" 
+                size={40} 
+                color={'blue'}
+                onPress={() => {navigation.navigate('RestaurantList')}}
+                />
             </Container>
             <Container>
-                <Icon name="nightlife" size={40} color={'blue'} /></Container>
+                <Icon 
+                name="map" 
+                size={40} 
+                color={'blue'} 
+                onPress={() => {
+              navigation.navigate('Screen2', {
+                latitude: 40.6942696,
+            longitude: -73.9187482
+              })
+            }}
+                />
+            </Container>
+            <Container>
+                <Icon 
+                name="nightlife" 
+                size={40} 
+                color={'blue'} 
+                onPress={() => {navigation.navigate('BarList')}}
+                />
+            </Container>
             <Container>
                 <Icon 
                 name="stars" 
@@ -45,12 +69,12 @@ const Wrapper = styled.View`
     height: 5%;
     display: flex;
     flex-wrap: wrap;
-    background-color: #F4C430;
+    background-color: #FFEFD5;
 `
 
 const Container = styled.View`
       display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-left: 40;
+    margin-left: 25px;
 `

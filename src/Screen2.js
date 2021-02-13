@@ -16,10 +16,15 @@ import NavBar from './NavBar'
 
     const [isLoaded, setIsLoaded] = useState(false)
 
+const {latitude, longitude } = route.params
+
+console.log(latitude, "latitude")
+console.log(longitude, "longitude")
+
     const dispatch = useDispatch()
 
     useEffect(() => {
-      fetch("http://c7d8b7116cd6.ngrok.io/api/v1/locations")
+      fetch("http://57bd7380644f.ngrok.io/api/v1/locations")
       .then(res => res.json())
       .then(locationArray => {
         const action = addItems(locationArray)
@@ -43,15 +48,15 @@ import NavBar from './NavBar'
 
     return(
       <>
-      <NavBar navigation={navigation}/>
-      <Container>
-      {isLoaded ? 
+        {isLoaded ? 
         <>
-          <MapContainer mapRef={mapRef} navigation={navigation}/>
-          <FilterContainer mapRef={mapRef}/>
+          <NavBar navigation={navigation}/>
+          <Container>
+              <MapContainer mapRef={mapRef} navigation={navigation} latitude={latitude} longitude={longitude}/>
+              <FilterContainer mapRef={mapRef}/>
+          </Container>
         </>
       : null }
-      </Container>
       </>
     )
 }
@@ -60,7 +65,7 @@ export default Screen2
 
 const Container = styled.View`
 width: 100%;
-height: 95%;
+height: 100%;
 display: flex;
 `
 

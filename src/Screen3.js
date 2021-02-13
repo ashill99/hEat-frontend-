@@ -11,11 +11,9 @@ import NavBar from './NavBar'
     
     const [faves, setFaves] = useState([])
 
-  const dispatch = useDispatch()
+    const { location } = route.params;
 
-    const location = useSelector(state => {
-      return state.currentLocation
-    })
+  const dispatch = useDispatch()
 
     console.log(faves, "faves screen3")
 
@@ -65,7 +63,7 @@ function restTypeDisplay() {
             Menu{'\n'}
           </Text> 
 
-          <CommentsContainer />
+          <CommentsContainer location={location}/>
 
         </View>
         </ScrollView>

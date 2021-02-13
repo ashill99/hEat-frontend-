@@ -6,55 +6,38 @@ import { useDispatch } from 'react-redux'
 import { updateCommentLikes } from './redux/comments'
 
 
-const Comment = () => {
+const Comment = ({location}) => {
 
   const dispatch = useDispatch()
 
   const [currentComment, setCurrentComment] = useState([])
-  const [likesNum, setLikesNum] = useState(0)
-  // const [comments, setComment] = useState([])
 
     const comments = useSelector(state => {
         return state.comments
     })
 
-    // function updateCommentLikes(newComment) {
-    // }
-
-    const location = useSelector(state => {
-        return state.currentLocation
-      })
-
       function handleLikePress(comment) {
           const newLikes = {
-            content: comment.content,
             likes: parseInt(comment.likes + 1),
-            userId: 1, 
-            LocationId: comment.locationId
           }
-          setLikesNum(newLikes)
-          fetch(`https://c7d8b7116cd6.ngrok.io/api/v1/comments/${comment.id}`, {
+          fetch(`http://57bd7380644f.ngrok.io/api/v1/comments/${comment.id}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(newLikes)
         })
-        // updateLikesNum(newLikes)
-        // setLikesNum(newLikes)
+
         .then(response => response.json())
         .then(newComment => {
           const action2 = updateCommentLikes(newComment)
           dispatch(action2)
       })
-        // .catch((error) => {
-        //   console.error('Error:', error);
-        // });
       }
 
-      function updateLikesNum(newLikes) {
-        setLikesNum(newLikes)
-      }
+      // function updateLikesNum(newLikes) {
+      //   setLikesNum(newLikes)
+      // }
 
       const currentComments = comments.comments.filter(comment => comment.locationId === location.id)
 
