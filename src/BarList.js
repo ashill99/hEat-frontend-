@@ -7,7 +7,6 @@ import 'react-native-gesture-handler';
 import styled from 'styled-components'
 
 
-
 export default function BarList({navigation, routes}) {  
     
   const locations = useSelector(state => {
@@ -37,31 +36,30 @@ const bars = locations.filter((item) => item.restOrBar === "Bar")
   //   )})
     
     return (
-      <Wrapper>
-      <NavBar navigation={navigation}/>
+    <Wrapper>
+        <NavBar navigation={navigation}/>
         <BarItem>
-        {eachBar}
+            {eachBar}
         </BarItem>
-      </Wrapper>
+    </Wrapper>
     );
-  }
-  
-  const Wrapper = styled.View`
-flex: 1;
-width: 100%;
-height: 95%;
-display: flex;
-backgroundColor: 	#FFEFD5;  `
+}
 
-  const BarText = styled.Text`
+const Wrapper = styled.View`
+    flex: 1;
+    width: 100%;
+    height: 95%;
+    display: flex;
+    backgroundColor: #FFEFD5; 
+`
+
+const BarText = styled.Text`
     font-size: 15px;
     color: #777;
-    padding-bottom: 10;
-    padding-top: 10;
-
-
-  `
-  const BarItem = styled.View`
-          alignItems: center;
-      justifyContent: center;
-        `
+    padding-bottom: 10px;
+    padding-top: 10px;
+`
+const BarItem = styled.View`
+    alignItems: center;
+    justifyContent: center;
+`

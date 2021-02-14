@@ -65,7 +65,7 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
 
       <RestaurantText 
         style={{color: 'blue'}}
-        onPress={() => Linking.openURL(location.website)}
+        onPress={() => Linking.openURL(item.website)}
       >
         Website
       </RestaurantText> 

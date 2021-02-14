@@ -33,7 +33,6 @@ function restTypeDisplay() {
 
         <View style={{height: "60%"}}> 
 
-          <FaveContainer faves={faves} />
           <Text style={styles.title}>
             {location.name}
           </Text>
@@ -61,6 +60,7 @@ function restTypeDisplay() {
             onPress={() => Linking.openURL(location.menu)}>
             Menu{'\n'}
           </Text> 
+          <FaveContainer faves={faves} location={location}/>
 
           <CommentsContainer location={location}/>
 
