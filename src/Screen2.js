@@ -16,6 +16,7 @@ import {URL} from '@env'
   const Screen2 = ({ navigation, route, locations }) => {
 
 const [isLoaded, setIsLoaded] = useState(false)
+
 console.log(URL)
 const {latitude, longitude } = route.params
 

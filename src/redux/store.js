@@ -7,6 +7,7 @@ import restTypeReducer from './restType'
 import searchReducer from './search'
 import faveReducer from './fave'
 import regionReducer from './region'
+import currentUserReducer from './currentUser'
 
 const store = configureStore({
     reducer: {
@@ -17,7 +18,8 @@ const store = configureStore({
         restType: restTypeReducer,
         search: searchReducer,
         fave: faveReducer,
-        region: regionReducer
+        region: regionReducer,
+        currentUser: currentUserReducer
     },
 })
 

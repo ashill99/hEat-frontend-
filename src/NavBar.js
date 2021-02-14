@@ -73,7 +73,7 @@ const NavBar = ({navigation, route}) => {
 export default NavBar 
 
 const Wrapper = styled.View`
-    height: 5%;
+    height: 6%;
     display: flex;
     flex-wrap: wrap;
     background-color: #FFEFD5;
