@@ -5,11 +5,20 @@ import {useSelector} from 'react-redux'
 import NavBar from './NavBar'
 import 'react-native-gesture-handler';
 import styled from 'styled-components'
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
+
 
 
 
 export default function RestaurantList({navigation, route}) {  
     
+  let [fontsLoaded] = useFonts({
+    'PlayWithFire': require('../assets/fonts/PlayWithFire.ttf'),
+  });
+
+
   const [search, setSearch ] = useState("")
 
   const locations = useSelector(state => {
@@ -28,6 +37,7 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
 
   const eachLocation = sortedLocations.map(item => {
     return (
+
     <View
       key={item.id}
     >
@@ -38,7 +48,15 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
       >
         {item.name}
       </RestaurantTitle>
-      <RestaurantText 
+            <RestaurantText
+          onPress={() => navigation.push('Screen2', {
+          latitude: item.latitude,
+          longitude: item.longitude
+          })}
+        >
+          Map
+        </RestaurantText>
+        <RestaurantText 
         style={{color: 'blue'}}
         onPress={() => Linking.openURL(item.menu)}
       >
@@ -52,14 +70,7 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
         Website
       </RestaurantText> 
 
-      <RestaurantText
-          onPress={() => navigation.push('Screen2', {
-          latitude: item.latitude,
-          longitude: item.longitude
-          })}
-        >
-          Map
-        </RestaurantText>
+
 
     </View>
 )
@@ -89,7 +100,7 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
   `
   
   const SearchBar = styled.TextInput`
-  background: #F3F5F6;
+  background: #eefbfb;
   width: 100%;
   border-radius: 30px;
   padding-left: 24px;
@@ -112,6 +123,7 @@ backgroundColor: 	#FFEFD5;
 `
 
 const RestaurantTitle = styled.Text`
+font-family: "PlayWithFire";
   font-size: 25px;
   color: #103;
   padding-top: 10px;

@@ -34,7 +34,6 @@ function restTypeDisplay() {
         <View style={{height: "60%"}}> 
 
           <FaveContainer faves={faves} />
-
           <Text style={styles.title}>
             {location.name}
           </Text>

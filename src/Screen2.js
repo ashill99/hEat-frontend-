@@ -35,7 +35,7 @@ console.log(longitude, "longitude")
       .catch((error) => {
         console.error(error);
       })
-    },[dispatch])
+    },[])
 
     const restOrBar = useSelector(state => {
       return state.restBar.restBar

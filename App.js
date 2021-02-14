@@ -15,11 +15,15 @@ import RestaurantList from './src/RestaurantList'
 import BarList from './src/BarList'
 import { Provider } from 'react-redux'
 import store from './src/redux/store'
-import { PlayWithFire } from 'expo'
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
 export default function App() {
 
   const Stack = createStackNavigator();
+  let [fontsLoaded] = useFonts({
+    'PlayWithFire': require('./assets/fonts/PlayWithFire.ttf'),
+  });
 
   return (
 <Provider store={store}>
@@ -33,12 +37,13 @@ export default function App() {
           headerTitleStyle: {
             fontWeight: 'bold',
             color: 'blue',
+            fontFamily: 'PlayWithFire'
           },
           }}>
         <Stack.Screen name="Screen1" component={Screen1} options={{title: 'hEat'}} />
         <Stack.Screen name="Screen2" component={Screen2} options={{title: 'hEat Map'}}/>
         <Stack.Screen name="Screen3" component={Screen3} options={{title: 'hEat'}}/>
-        <Stack.Screen name="Screen4" component={Screen4} options={{title: 'hEat'}}/>
+        <Stack.Screen name="Screen4" component={Screen4} options={{title: 'Favorites'}}/>
         <Stack.Screen name="RestaurantList" component={RestaurantList} options={{title: 'Restaurants'}}/>
         <Stack.Screen name="BarList" component={BarList} options={{title: 'Bars'}}/>
       </Stack.Navigator>

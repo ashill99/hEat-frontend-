@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import MyTabs from './MyTabs'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { color } from 'react-native-reanimated';
 
 
 const NavBar = ({navigation, route}) => {
@@ -76,6 +77,7 @@ const Wrapper = styled.View`
     display: flex;
     flex-wrap: wrap;
     background-color: #FFEFD5;
+    ${'' /* border: 1px solid orange; */}
 `
 
 const Container = styled.View`
@@ -83,4 +85,5 @@ const Container = styled.View`
     flex-wrap: wrap;
     justify-content: space-between;
     margin-left: 25px;
+    padding-top: 4px;
 `

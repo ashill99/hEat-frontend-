@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import {URL} from '@env'
 
 const AddCommentForm = ({location}) => {
-    
+  
     const dispatch = useDispatch()
 
     const [text, setText] = useState('')

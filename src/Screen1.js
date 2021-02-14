@@ -5,9 +5,15 @@ import { Text } from "react-native-svg";
 import Title from './Title'
 import NavBar from './NavBar'
 import styled from 'styled-components'
-
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
 const Screen1 = ({ navigation, route }) => {
+
+  let [fontsLoaded] = useFonts({
+    'PlayWithFire': require('../assets/fonts/PlayWithFire.ttf'),
+  });
+
     return( 
       <>
       <NavBar navigation={navigation}/>
@@ -37,6 +43,11 @@ display: flex;
 backgroundColor: 	#FFEFD5;
 `
 
+const HeatTitle = styled.Text`
+font-family: "PlayWithFire";
+font-size: 66px;
+color: orange;
+`
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -60,7 +71,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   button: {
-    fontSize: 50
+    fontSize: 100
   },
 });
 
