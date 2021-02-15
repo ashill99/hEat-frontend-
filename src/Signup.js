@@ -12,57 +12,37 @@ import {URL} from '@env'
 import { useDispatch } from 'react-redux'
 import {addCurrentUser} from './redux/currentUser'
 
-export default function Login({navigation, route}) {  
+
+export default function Signup({navigation, route, currentUser, setCurrentUser}) {  
     
-    const dispatch = useDispatch()
-
-    const { currentUser, setCurrentUser } = route.params;
-
-    const [users, setUsers] = useState([])
     const [email, setEmail] = useState("")
-    const [loaded, setLoaded] = useState(false)
+    const [userName, setUserName] = useState("")
 
-console.log(currentUser, "currentUser")
+    const dispatch = useDispatch()
 
   let [fontsLoaded] = useFonts({
     'PlayWithFire': require('../assets/fonts/PlayWithFire.ttf'),
   });
 
-  useEffect(() => {
-    fetch(`${URL}/api/v1/users`)
-    .then(r => r.json())
-    .then(usersArray => {
-        setUsers(usersArray)
-    })
-  }, [])
-  
   function handleSubmit() {
-    const thisUser = users.filter(user => user.email.toLowerCase() === email.toLowerCase())
-    // dispatchCurrentUser(thisUser)
-    setCurrentUser(thisUser) 
-    console.log(thisUser)
+
     setEmail("")
-    navigation.navigate("Screen1")
 }
-
-// function dispatchCurrentUser(user) {
-//     const action = addCurrentUser(user)
-//     dispatch(action)
-//     console.log (action.payload, "state and action payload")
-
-// }
-
-// console.log(currentUser, 'currentUser')
 
     return (
         <>
         <Wrapper>
         <NavBar navigation={navigation}/>
-        <Title>Login</Title>
+        <Title>Signup</Title>
             <Input 
                 placeholder="example@hEat.com"
                 value={email}
                 onChangeText={setEmail}
+            />
+            <Input 
+                placeholder="Username"
+                value={userName}
+                onChangeText={setUserName}
             />
 
             <LoginButton onPress={handleSubmit}> 
@@ -75,9 +55,7 @@ console.log(currentUser, "currentUser")
         </Wrapper>
       </>
     );
-
 }
-
 
 const Title = styled.Text`
 font-size: 24px;
@@ -86,6 +64,7 @@ const LoginButton = styled.TouchableOpacity`
         background: orange;
         width: 140px;
         margin-bottom: 20px;
+        margin-top: 20px;
         border-radius:20px;
         align-self: center
 `
@@ -98,7 +77,6 @@ padding-left: 12px;
 height: 50px;
 margin-top: 20px;
 border-radius: 20px;
-margin-bottom: 20px;
 align-self: center;
 `
 const HeatImage = styled.Image`

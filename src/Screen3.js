@@ -6,6 +6,9 @@ import {useSelector, useDispatch} from 'react-redux'
 import FaveContainer from './FaveContainer'
 import { addFaves, updateFaves, deleteFave } from './redux/fave'
 import NavBar from './NavBar'
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
 
   const Screen3 = ({ navigation, route}) => {
     
@@ -15,7 +18,9 @@ import NavBar from './NavBar'
 
   const dispatch = useDispatch()
 
-    console.log(faves, "faves screen3")
+  // let [fontsLoaded] = useFonts({
+  //   'PlayWithFire': require('./assets/fonts/PlayWithFire.ttf'),
+  // });
 
 function restTypeDisplay() {
   if (location.restType.length > 0) {

@@ -27,10 +27,10 @@ const Title = () => {
 export default Title 
 
 const HeatTitle = styled.Text`
-padding-top: 20px;
-padding-right: 10px;
+padding-top: 40px;
+padding-right: 35px;
 font-family: "PlayWithFire";
-font-size: 100px;
+font-size: 115px;
 color: orange;
 text-align: center;
 `

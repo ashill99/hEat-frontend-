@@ -8,10 +8,6 @@ import styled from 'styled-components'
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
-
-
-
-
 export default function RestaurantList({navigation, route}) {  
     
   let [fontsLoaded] = useFonts({

@@ -11,6 +11,7 @@ const AddCommentForm = ({location}) => {
     const dispatch = useDispatch()
 
     const [text, setText] = useState('')
+    const [rating, setRating] = useState(0)
 
     function handleSubmitClick(e) {
         const newUserId = 1
@@ -25,7 +26,8 @@ const AddCommentForm = ({location}) => {
             content: text, 
             user_id: 1, 
             location_id: location.id,
-            likes: 0
+            likes: 0,
+            rating: rating
         })
     })
     .then((response) => response.json())
@@ -44,10 +46,17 @@ const AddCommentForm = ({location}) => {
         <View>
           <TextInput
             style={styles.textInput}
-            placeholder="Your Comment"
+            placeholder="What's good here?"
             onBlur={Keyboard.dismiss}
             value={text}
             onChangeText={setText}
+          />
+          <TextInput
+            style={styles.textInput}
+            placeholder="Rating Placeholder"
+            onBlur={Keyboard.dismiss}
+            value={rating}
+            onChangeText={setRating}
           />
           <TouchableOpacity
             style={styles.saveButton}

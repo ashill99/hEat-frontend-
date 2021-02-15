@@ -45,7 +45,7 @@ const Comment = ({location}) => {
       const eachComment = currentComments.map((comment, index) => {
         return (
           <View key={comment.id}> 
-            <Text>{comment.content} {'\n'}{'\n'} </Text>
+            <Text>{comment.content} {'\n'}{comment.rating}{'\n'} </Text>
             <Button onPress={() => handleLikePress(comment)} title={`👍 ${comment.likes}`} id={comment.id}/>
           </View>
         )

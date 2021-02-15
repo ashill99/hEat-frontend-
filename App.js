@@ -14,6 +14,7 @@ import Screen4 from './src/Screen4'
 import RestaurantList from './src/RestaurantList'
 import BarList from './src/BarList'
 import Login from './src/Login'
+import Signup from './src/Signup'
 import { Provider } from 'react-redux'
 import store from './src/redux/store'
 import { useFonts } from 'expo-font';
@@ -37,7 +38,7 @@ export default function App() {
           headerTintColor: '#fff',
           headerTitleStyle: {
             fontWeight: 'bold',
-            color: 'blue',
+            color: 'black',
             fontFamily: 'PlayWithFire'
           },
           }}>
@@ -48,6 +49,7 @@ export default function App() {
         <Stack.Screen name="RestaurantList" component={RestaurantList} options={{title: 'Restaurants'}}/>
         <Stack.Screen name="BarList" component={BarList} options={{title: 'Bars'}}/>
         <Stack.Screen name="Login" component={Login} options={{title: 'Login'}}/>
+        <Stack.Screen name="Signup" component={Signup} options={{title: 'Signup'}}/>
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>

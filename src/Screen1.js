@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, ScrollView, Button, Image, View, ImageBackground } from 'react-native';
+import { StyleSheet, ScrollView, Button, Text, Image, View, ImageBackground } from 'react-native';
 import 'react-native-gesture-handler';
-import { Text } from "react-native-svg";
 import Title from './Title'
 import NavBar from './NavBar'
 import styled from 'styled-components'
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import Login from './Login'
+import Signup from './Signup'
 import {useSelector} from 'react-redux'
 
 
 const Screen1 = ({ navigation, route }) => {
 
   const [loggedIn, setLoggedIn] = useState(false)
+  const [currentUser, setCurrentUser] = useState([])
 
   let [fontsLoaded] = useFonts({
     'PlayWithFire': require('../assets/fonts/PlayWithFire.ttf'),
   });
 
-  const currentUser = useSelector(state => {
-    return state.currentUser
-  })
-
-  console.log(currentUser, "screen1")
+  console.log(currentUser, "screen1 ")
 
     return( 
       <>
@@ -31,22 +28,37 @@ const Screen1 = ({ navigation, route }) => {
       <Scroll>
         <Container>
           <Title />
+          {loggedIn ? 
+                   <>
+            <WarmUpButton
+              title="Warm Up"
+              onPress={() => {
+                navigation.navigate('Screen2', {
+                  latitude: 40.6942696,
+              longitude: -73.9187482
+                })
+              }}
+            >
+              <Span>Warm Up</Span>
+            </WarmUpButton>
+          </> :
+          <>
           <LoginButton
           onPress={() => {
-              navigation.navigate('Login')}}
+              navigation.navigate('Login', {
+                setCurrentUser: setCurrentUser,
+                currentUser: currentUser
+              })}}
           >
             <Span>Login</Span>
           </LoginButton>
-          <SignUpButton><Span>Sign Up</Span></SignUpButton>
-          <WarmUpButton
-            title="Warm Up"
-            onPress={() => {
-              navigation.navigate('Screen2', {
-                latitude: 40.6942696,
-            longitude: -73.9187482
-              })
-            }}
-          ><Span>Warm Up</Span></WarmUpButton>
+          <SignUpButton
+                    onPress={() => {
+              navigation.navigate('Signup')}}
+          >
+            <Span>Sign Up</Span></SignUpButton>
+          </> 
+          }
           <Image source={{uri: "https://media.timeout.com/images/105711851/1372/772/image.jpg"}} style={{width: '100%', height: '50%'}} />
         </Container>
         </Scroll>
@@ -70,11 +82,12 @@ align-self: center;
 
 const LoginButton = styled.TouchableOpacity`
 background: orange;
-width: 100px;
+width: 120px;
 border-radius:20px;
 align-self: center;
 margin-top:10px;
 margin-bottom:10px;
+padding: 5px;
 
 `
 
