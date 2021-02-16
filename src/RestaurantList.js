@@ -52,7 +52,7 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
 
     return (
 
-    <View
+    <ItemView
       key={item.id}
     >
       <RestaurantTitle
@@ -94,7 +94,7 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
 
 
 
-    </View>
+    </ItemView>
 )
   }) 
     
@@ -119,6 +119,12 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
   
   const Form = styled.View`
     padding:20px;
+  `
+
+  const ItemView = styled.View`
+      border-bottom-color: black;
+  border-bottom-width: 2px;
+  margin-bottom: 10px;
   `
   
   const SearchBar = styled.TextInput`
@@ -147,7 +153,7 @@ backgroundColor: 	#FFEFD5;
 const RestaurantTitle = styled.Text`
 font-family: "PlayWithFire";
   font-size: 25px;
-  color: #103;
+  color: orange;
   padding-top: 15px;
   padding-bottom: 5px;
   align-self: center;
@@ -167,7 +173,6 @@ font-family: "PlayWithFire";
   padding-bottom: 20px;
     padding-left: 10px;
     align-self: center;
-
         `
 const NoStars = styled.Text`
     font-size: 10px;    

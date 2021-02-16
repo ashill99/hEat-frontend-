@@ -27,6 +27,14 @@ export default function App() {
     'PlayWithFire': require('./assets/fonts/PlayWithFire.ttf'),
   });
 
+  function Header({children}) {
+    return (
+        <View>
+            <Text>{children}</Text>
+        </View>
+    );
+}
+
   return (
 <Provider store={store}>
 <NavigationContainer>

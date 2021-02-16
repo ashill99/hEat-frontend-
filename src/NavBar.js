@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import { View, Text } from 'react-native';
 import 'react-native-gesture-handler';
 import styled from 'styled-components'
 import MyTabs from './MyTabs'
@@ -9,6 +8,7 @@ import { color } from 'react-native-reanimated';
 
 
 const NavBar = ({navigation, route}) => {
+
 
     return (
         <Wrapper>
@@ -29,7 +29,7 @@ const NavBar = ({navigation, route}) => {
                 size="40" 
                 color='blue'
                 onPress={() => {navigation.navigate('RestaurantList', {
-                    type: "Restaurant"
+                    type: "Restaurant",
                 })
                 }}
                 />

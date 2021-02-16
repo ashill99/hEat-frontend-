@@ -41,13 +41,21 @@ const Screen1 = ({ navigation, route }) => {
             >
               <Span>Warm Up</Span>
             </WarmUpButton>
+            <WarmUpButton
+              title="Sign Out"
+              onPress={() => {setCurrentUser([]), setLoggedIn(false)}}
+            >
+              <Span>Sign Out</Span>
+            </WarmUpButton>
           </> :
           <>
           <LoginButton
           onPress={() => {
               navigation.navigate('Login', {
                 setCurrentUser: setCurrentUser,
-                currentUser: currentUser
+                currentUser: currentUser,
+                loggedIn: loggedIn,
+                setLoggedIn: setLoggedIn,
               })}}
           >
             <Span>Login</Span>

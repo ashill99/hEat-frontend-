@@ -16,7 +16,7 @@ export default function Login({navigation, route}) {
     
     const dispatch = useDispatch()
 
-    const { currentUser, setCurrentUser } = route.params;
+    const { currentUser, setCurrentUser, loggedIn, setLoggedIn } = route.params;
 
     const [users, setUsers] = useState([])
     const [email, setEmail] = useState("")
@@ -40,7 +40,8 @@ console.log(currentUser, "currentUser")
     const thisUser = users.filter(user => user.email.toLowerCase() === email.toLowerCase())
     // dispatchCurrentUser(thisUser)
     setCurrentUser(thisUser) 
-    console.log(thisUser)
+    console.log(currentUser)
+    setLoggedIn(true)
     setEmail("")
     navigation.navigate("Screen1")
 }
@@ -58,7 +59,7 @@ console.log(currentUser, "currentUser")
         <>
         <Wrapper>
         <NavBar navigation={navigation}/>
-        <Title>Login</Title>
+        {/* <Title>Login</Title> */}
             <Input 
                 placeholder="example@hEat.com"
                 value={email}
@@ -96,7 +97,7 @@ width: 80%;
 border-radius:20px;
 padding-left: 12px;
 height: 50px;
-margin-top: 20px;
+margin-top: 50px;
 border-radius: 20px;
 margin-bottom: 20px;
 align-self: center;

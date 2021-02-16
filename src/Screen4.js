@@ -9,12 +9,11 @@ import styled from 'styled-components'
 import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
-
 const Screen4 = ({ navigation, route}) => {
 
 const dispatch = useDispatch();
 
+const [search, setSearch] = useState("")
 const [faves, setFaves] = useState([])
 const [currentFaves, setCurrentFaves] = useState([])
 const [ratAv, setRatAv] = useState(0)
@@ -37,11 +36,21 @@ const [ratAv, setRatAv] = useState(0)
     return state.location.items
   })
 
+  function handleNewSearch(search) {
+    setSearch(search)
+    setSearch(search)
+    console.log(search)
+}
+
 const faveArrays = faves.map(fave => fave.locationId)
 
 const newLocations = locations.filter(item => { return faveArrays.includes(item.id)})
 
-const eachLocation = newLocations.map(item => {
+const filteredlocations = newLocations.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
+const sortedLocations = filteredlocations.sort((a, b) => a.name.localeCompare(b.name));
+
+console.log(newLocations, 'newlocations')
+const eachLocation = sortedLocations.map(item => {
 
   const ratings = item.comments.map((comment => comment.rating))
 
@@ -55,7 +64,7 @@ const eachLocation = newLocations.map(item => {
 
   return (
 
-  <RestaurantItem
+  <ItemView
     key={item.id}
   >
     <RestaurantTitle
@@ -97,7 +106,7 @@ const eachLocation = newLocations.map(item => {
 
 
 
-    </RestaurantItem>
+    </ItemView>
 )
   }) 
 
@@ -111,9 +120,16 @@ console.log(eachLocation)
       <>
         <NavBar navigation={navigation}/>
         <Wrapper >
-            <Title>
+            {/* <Title>
               ⭐ Favorites ⭐
-            </Title>
+            </Title> */}
+            <Form>
+            <SearchBar
+            placeholder="Search..." 
+            value={search}
+              onChangeText={handleNewSearch}
+            />
+        </Form>
             {eachLocation}
         </Wrapper>
         </>
@@ -172,6 +188,13 @@ color: #777;
 align-self: center;
 
 `
+
+const ItemView = styled.View`
+border-bottom-color: black;
+border-bottom-width: 2px;
+margin-bottom: 10px;
+`
+
 const RestaurantItem = styled.View`
 padding-top: 10px;
 display: flex;
