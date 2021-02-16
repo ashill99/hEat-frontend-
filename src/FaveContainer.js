@@ -6,60 +6,58 @@ import {useSelector, useDispatch} from 'react-redux'
 import { addFaves, updateFaves, deleteFave } from './redux/fave'
 import {URL} from '@env'
 
-const FaveContainer = ({faves, location}) => {
+const FaveContainer = ({location}) => {
 
     const [currentFave, setCurrentFave] = useState(false)
     const [favesLoaded, setFavesLoaded] = useState(false)
-    const [allFaves, setAllFaves] = useState(faves)
+    const [allFaves, setAllFaves] = useState([])
 
     console.log(allFaves, "first faves")
-    const dispatch = useDispatch()
+
+    // const dispatch = useDispatch()
 
     console.log(location, "location line 18")
-
-    // const location = useSelector(state => {
-    //     return state.currentLocation
-    //   })
-
-// const faves = useSelector(state => {
-//             return state.faves
-// })
 
 useEffect(() => {
   fetch(`${URL}/api/v1/favourites`)
   .then(res => res.json())
   .then(faveArray => {
     const faveAction = addFaves(faveArray)
-    dispatch(faveAction)
+    // dispatch(faveAction)
     setAllFaves(faveArray)
     setFavesLoaded(true)
     console.log(faveArray, "faves line 34")
+      const thisFave = faveArray.filter(fave => fave.locationId === location.id)
+      console.log(thisFave, "thisFave")
+      if (thisFave.length > 0) {
+          setCurrentFave(true) }
+
   })
   .catch((error) => {
     console.error(error);
   })
-},[dispatch])
+},[])
+
+
 
 console.log(allFaves, 'second faves')
 
 // function thisFave() {
-//     useEffect(() => {  
-//         const thisFave = faves.filter(fave => fave.locationId === location.id)
-//         console.log(thisFave, "thisFave")
-//         if (thisFave) {
-//         if (thisFave.length > 0) {
-//             setCurrentFave(thisFave) }
-//             else { setCurrentFave([]) }
-//         }
-//         }
-//         , [])
+//         const thisFave = allFaves.filter(fave => fave.locationId === location.id)
+//         // console.log(thisFave, "thisFave")
+//         if (thisFave.length > 0) {return}
+//             // setCurrentFave(true)
 //         console.log(currentFave, "currentFave")
 //     }
 
-const faveIdArrays = allFaves.map(fave => fave.locationId)
-
 function isCurrentFave() {
-  faveIdArrays.includes(location.id) ? setCurrentFave(true) : null
+  
+  const faveIdArrays = allFaves.map(fave => fave.locationId)
+  const aFave = faveIdArrays.map(id => id === location.id)
+  if (aFave.length > 0 ) {
+    // setCurrentFave(true)
+  }
+  // { setCurrentFave(true) }
 }
 
 console.log(location.id, "location favecontainer") 
@@ -67,19 +65,18 @@ console.log(currentFave, 'currentfave')
 
 function faveStar() {
     // thisFave()
-    isCurrentFave()
+    // isCurrentFave()
+    return (
     currentFave ? 
-    <Button title="⭐" onPress={handleUnfave} />
-    : <Button title="☆" onPress={handleFavePress} />
+    <>
+      <Button title="⭐" onPress={handleUnfave} />
+    </>
+    : 
+    <>
+      <Button title="☆" onPress={handleFavePress} />
+    </>
+    )
 }
-
-// }
-//     else { 
-//       return (
-//         <Button title="☆" onPress={handleFavePress} />
-//       )
-//     }
-//   }
 
 function handleFavePress() {
 
@@ -91,14 +88,15 @@ function handleFavePress() {
     },
     body: JSON.stringify({
         user_id: 1, 
-        location_id: location.id,
+        location_id: location.id
     })
 })
 .then((response) => response.json())
 .then(newFave => {
-    const action2 = updateFaves(newFave)
-    dispatch(action2)
-    setCurrentFave(newFave)
+    // const action2 = updateFaves(newFave)
+    // dispatch(action2)
+    setCurrentFave(true)
+    setAllFaves([...allFaves, newFave])
       })
 .catch((error) => {
   console.error(error);
@@ -116,8 +114,8 @@ function handleUnfave() {
 .then((response) => response.json())
 .then((newFave) => {
 // console.log('removed')
-setCurrentFave([])
-setFaves(faves.filter(fave => fave.id !== newFave.id))
+setCurrentFave(false)
+setAllFaves(allFaves.filter(fave => fave.id !== newFave.id))
 // const action3 = deleteFace(newFave)
 // dispatch(action3)  
 })
@@ -127,11 +125,11 @@ console.error(error);
 }
 
 return (
-<>
-{favesLoaded ? 
-faveStar()
-: null }
-</>
+  <>
+    {favesLoaded ? 
+      faveStar()
+    : null }
+  </>
 
 
 )

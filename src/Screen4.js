@@ -6,6 +6,10 @@ import NavBar from './NavBar'
 import {URL} from '@env'
 import { addFaves } from './redux/fave'
 import styled from 'styled-components'
+import Stars from 'react-native-stars';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+
 
 const Screen4 = ({ navigation, route}) => {
 
@@ -13,6 +17,7 @@ const dispatch = useDispatch();
 
 const [faves, setFaves] = useState([])
 const [currentFaves, setCurrentFaves] = useState([])
+const [ratAv, setRatAv] = useState(0)
 
   useEffect(() => {
     fetch(`${URL}/api/v1/favourites`)
@@ -38,9 +43,19 @@ const newLocations = locations.filter(item => { return faveArrays.includes(item.
 
 const eachLocation = newLocations.map(item => {
 
+  const ratings = item.comments.map((comment => comment.rating))
+
+  function getAvg(ratings) {
+    const total = ratings.reduce((acc, c) => acc + c, 0);
+    return total / ratings.length;
+  }
+  
+  const average = getAvg(ratings);
+  const ratAv = Math.round(average)
+
   return (
 
-  <View
+  <RestaurantItem
     key={item.id}
   >
     <RestaurantTitle
@@ -50,28 +65,39 @@ const eachLocation = newLocations.map(item => {
     >
       {item.name}
     </RestaurantTitle>
-          <RestaurantText
-        onPress={() => navigation.push('Screen2', {
-        latitude: item.latitude,
-        longitude: item.longitude
-        })}
+    <RestaurantText
+          onPress={() => navigation.push('Screen2', {
+          latitude: item.latitude,
+          longitude: item.longitude
+          })}
+        >
+          Map
+        </RestaurantText>
+        <RestaurantText 
+        style={{color: 'blue'}}
+        onPress={() => Linking.openURL(item.menu)}
       >
-        Map
-      </RestaurantText>
-      <RestaurantText 
-      style={{color: 'blue'}}
-      onPress={() => Linking.openURL(item.menu)}
-    >
-      Menu{'\n'}
-    </RestaurantText> 
+        Menu{'\n'}
+      </RestaurantText> 
 
-    <RestaurantText 
-      style={{color: 'blue'}}
-      onPress={() => Linking.openURL(item.website)}
-    >
-      Website
-    </RestaurantText> 
-    </View>
+      <RestaurantText 
+        style={{color: 'blue'}}
+        onPress={() => Linking.openURL(item.website)}
+      >
+        Website
+      </RestaurantText> 
+      {ratAv > 0 ? <Stars
+            default={ratAv}
+            count={5}
+            fullStar={<Icon name={'fire'} style={[styles.myStarStyle]}/>}
+            emptyStar={<Icon name={'bandcamp'} style={[styles.myStarStyle, styles.myEmptyStarStyle]}/>}
+          /> 
+          :
+          <NoStars>Not Enough Reviews</NoStars>  }
+
+
+
+    </RestaurantItem>
 )
   }) 
 
@@ -84,12 +110,12 @@ console.log(eachLocation)
     return (
       <>
         <NavBar navigation={navigation}/>
-        <View style={styles.title}>
-            <Text>
-              ⭐Favourites⭐
-            </Text>
+        <Wrapper >
+            <Title>
+              ⭐ Favorites ⭐
+            </Title>
             {eachLocation}
-        </View>
+        </Wrapper>
         </>
       )
 }
@@ -122,34 +148,62 @@ display: flex;
 backgroundColor: 	#FFEFD5;  
 `
 
-const RestaurantTitle = styled.Text`
+const Title = styled.Text`
 font-family: "PlayWithFire";
-font-size: 25px;
-color: #103;
+font-size: 35px;
+color: black;
 padding-top: 10px;
 padding-bottom: 10px;
+align-self: center;
+`
+
+const RestaurantTitle = styled.Text`
+font-family: "PlayWithFire";
+font-size: 24px;
+color: orange;
+padding-top: 10px;
+padding-bottom: 10px;
+align-self: center;
 `
 
 const RestaurantText = styled.Text`
 font-size: 15px;
 color: #777;
-${'' /* padding-bottom: 10; */}
-${'' /* padding-top: 10; */}
+align-self: center;
+
 `
 const RestaurantItem = styled.View`
 padding-top: 10px;
 display: flex;
 padding-bottom: 10px;
 padding-left: 10px;
+align-self: center;
+
 
     `
 
+    const NoStars = styled.Text`
+    font-size: 10px;    
+    align-self: center;
+    color: gray;
 
+`
 const styles = StyleSheet.create({
   title: {
     padding: 20,
     fontSize: 42,
   },
+  myStarStyle: {
+    color: 'orange',
+    backgroundColor: 'transparent',
+    textShadowColor: 'black',
+    textShadowOffset: {width: 1, height: 1},
+    textShadowRadius: 1,
+    fontSize: 30,
+  },
+  myEmptyStarStyle: {
+    color: 'lightgray',
+  }
 });
 
 export default Screen4

@@ -46,7 +46,7 @@ const Comment = ({location}) => {
 
       const eachComment = currentComments.map((comment, index) => {
         return (
-          <View key={comment.id}> 
+          <View key={comment.id} style={{borderBottomWidth: 0.2, borderColor: 'orange'}}> 
               <View style={{alignItems:'center', marginTop: 10, marginBottom: 20}}>
               <Text>{comment.content} {'\n'} </Text>
                 <Stars
@@ -79,9 +79,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     textShadowColor: 'black',
     textShadowOffset: {width: 1, height: 1},
-    textShadowRadius: 2,
+    textShadowRadius: 1,
     fontSize: 30,
-    fontFamily: 'San Francisco'
   },
   myEmptyStarStyle: {
     color: 'lightgray',

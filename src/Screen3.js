@@ -15,33 +15,29 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
   const Screen3 = ({ navigation, route}) => {
     
-    const [faves, setFaves] = useState([])
     const [ratAv, setRatAv] = useState(0)
     // const [average, setAverage] = useState(0)
 
     const { location } = route.params;
 
-    console.log(location.comments)
-
     useEffect(() => {
 
-    if (location.comments) { 
-    const ratings = location.comments.map((comment => comment.rating))
+      if (location.comments.length > 0) { 
+        console.log(location.comments)
+      const ratings = location.comments.map((comment => comment.rating))
 
-    function getAvg(ratings) {
-      const total = ratings.reduce((acc, c) => acc + c, 0);
-      return total / ratings.length;
+      function getAvg(ratings) {
+        const total = ratings.reduce((acc, c) => acc + c, 0);
+        return total / ratings.length;
 
+      }
+      
+      const average = getAvg(ratings);
+      setRatAv(Math.round(average))
     }
-    
-    const average = getAvg(ratings);
-    setRatAv(average)
-  }
 
-    },[])
+    },[ratAv])
 
-
-    // const avRating = (avCommentRating.sum / avCommentRating.length)
 
   const dispatch = useDispatch()
 
@@ -60,14 +56,18 @@ function restTypeDisplay() {
 
     return (
       <Wrapper>
-      <ScrollView contentContainerStyle={{paddingBottom: 300}} >
-                <NavBar navigation={navigation}/>
+          <NavBar navigation={navigation}/>
+
+      <ScrollView contentContainerStyle={{paddingBottom: 500}} >
 
         <View style={{height: "60%"}}> 
 
           <RestaurantTitle>
             {location.name}
           </RestaurantTitle>
+
+          <FaveContainer location={location}/>
+
           <Info>
             {location.restOrBar}
           </Info>
@@ -90,18 +90,19 @@ function restTypeDisplay() {
             Menu{'\n'}
           </Links> 
           <Info>Average User Rating:{'\n'} {'\n'}  
-          <Stars
-            default={Math.round(ratAv)}
+          {ratAv > 0 ? <Stars
+            default={ratAv}
             count={5}
             fullStar={<Icon name={'fire'} style={[styles.myStarStyle]}/>}
             emptyStar={<Icon name={'bandcamp'} style={[styles.myStarStyle, styles.myEmptyStarStyle]}/>}
-          />
+          /> 
+          :
+          <NoStars>Not Enough Reviews</NoStars>  }
                 </Info>
                     <Image 
             source={{uri: location.imgUrl}} 
             style={{width: "100%", height: "45%"}}
           />
-          {/* <FaveContainer faves={faves} location={location}/> */}
 
           <CommentsContainer location={location}/>
 
@@ -129,15 +130,15 @@ function restTypeDisplay() {
       color: "#000000"
     },
     myStarStyle: {
-      color: 'yellow',
+      color: 'orange',
       backgroundColor: 'transparent',
       textShadowColor: 'black',
       textShadowOffset: {width: 1, height: 1},
-      textShadowRadius: 2,
+      textShadowRadius: 1,
       fontSize: 30,
     },
     myEmptyStarStyle: {
-      color: 'white',
+      color: 'lightgray',
     }
   });
 
@@ -150,7 +151,12 @@ height: 100%;
 display: flex;
 backgroundColor: 	#FFEFD5;  
 `
+const NoStars = styled.Text`
+font-size: 10px;    
+align-self: center;
+color: gray;
 
+`
   const RestaurantTitle = styled.Text`
   font-family: "PlayWithFire";
     font-size: 50px;

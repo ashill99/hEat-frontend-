@@ -13,7 +13,7 @@ const FilterContainer = ({mapRef}) => {
     const dispatch = useDispatch()
 
     const [isLoaded, setIsLoaded] = useState(false)
-
+    // const [text, setText] = useState("")
     // useSelectors 
 
     const search = useSelector(state => {
@@ -29,8 +29,8 @@ const FilterContainer = ({mapRef}) => {
       setIsLoaded(true) : null
     }
 
-    const eachLocation = locations
-    .map(location => location)
+    const eachLocation = locations ? locations
+    .map(location => location) : null
 
           // States 
 
@@ -53,6 +53,7 @@ const FilterContainer = ({mapRef}) => {
         })
         console.log(tempList, "templist 54")
         setFiltered(tempList)
+        // setText("")
       }
       else {
         setSearching(false)

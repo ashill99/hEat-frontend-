@@ -7,6 +7,9 @@ import 'react-native-gesture-handler';
 import styled from 'styled-components'
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import Stars from 'react-native-stars';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 export default function RestaurantList({navigation, route}) {  
     
@@ -32,6 +35,21 @@ const filteredRestaurants = restaurants.filter((item) => item.name.toLowerCase()
 const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(b.name));
 
   const eachLocation = sortedLocations.map(item => {
+
+      const ratings = item.comments.map((comment => comment.rating))
+
+      function getAvg(ratings) {
+        const total = ratings.reduce((acc, c) => acc + c, 0);
+        return total / ratings.length;
+
+      }
+      
+      const average = getAvg(ratings);
+      // setRatAv(Math.round(average))
+      const ratAv = Math.round(average)
+    // } 
+
+
     return (
 
     <View
@@ -65,6 +83,14 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
       >
         Website
       </RestaurantText> 
+      {ratAv > 0 ? <Stars
+            default={ratAv}
+            count={5}
+            fullStar={<Icon name={'fire'} style={[styles.myStarStyle]}/>}
+            emptyStar={<Icon name={'bandcamp'} style={[styles.myStarStyle, styles.myEmptyStarStyle]}/>}
+          /> 
+          :
+          <NoStars>Not Enough Reviews</NoStars>  }
 
 
 
@@ -122,20 +148,43 @@ const RestaurantTitle = styled.Text`
 font-family: "PlayWithFire";
   font-size: 25px;
   color: #103;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  align-self: center;
 `
 
   const RestaurantText = styled.Text`
-    font-size: 15px;
+    font-size: 16px;
     color: #777;
     ${'' /* padding-bottom: 10; */}
     ${'' /* padding-top: 10; */}
+    align-self: center;
+
   `
   const RestaurantItem = styled.View`
   padding-top: 10px;
   display: flex;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
     padding-left: 10px;
+    align-self: center;
 
         `
+const NoStars = styled.Text`
+    font-size: 10px;    
+    align-self: center;
+    color: gray;
+
+`
+
+        const styles = StyleSheet.create({
+        myStarStyle: {
+          color: 'orange',
+          backgroundColor: 'transparent',
+          textShadowColor: 'black',
+          textShadowOffset: {width: 1, height: 1},
+          textShadowRadius: 1,
+          fontSize: 30,
+        },
+        myEmptyStarStyle: {
+          color: 'lightgray',
+        }})

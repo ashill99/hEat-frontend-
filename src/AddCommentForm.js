@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import {URL} from '@env'
 import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import styled from 'styled-components'
 
 const AddCommentForm = ({location}) => {
   
@@ -47,7 +47,7 @@ const AddCommentForm = ({location}) => {
     }
 
     return (
-        <View>
+        <View style={{paddingTop: 50}}>
           <Stars
             default={rating}
             count={5}
@@ -62,12 +62,11 @@ const AddCommentForm = ({location}) => {
             value={text}
             onChangeText={setText}
           />
-          <TouchableOpacity
-            style={styles.saveButton}
+          <AddComment
             onPress={handleSubmitClick}
           >
             <Text style={styles.saveButtonText}>Post Comment</Text>
-          </TouchableOpacity>
+          </AddComment>
       </View>
     )
 }
@@ -111,3 +110,14 @@ const styles = StyleSheet.create({
         color: 'white',
       }
 })
+
+const AddComment = styled.TouchableOpacity`
+background: orange;
+width: 420px;
+border-radius:20px;
+align-self: center;
+margin-top:10px;
+margin-bottom:10px;
+padding: 15px;
+
+`

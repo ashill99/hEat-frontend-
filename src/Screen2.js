@@ -48,17 +48,22 @@ console.log(longitude, "longitude")
 
     const mapRef = React.createRef();
 
-    return(
-      <>
-          <NavBar navigation={navigation}/>
-                {isLoaded ? 
-        <>
+    function loadMap() {
+      if (isLoaded === true) {
+        return (
+          <>
           <Container>
               <MapContainer mapRef={mapRef} navigation={navigation} latitude={latitude} longitude={longitude}/>
               <FilterContainer mapRef={mapRef}/>
           </Container>
         </>
-      : null }
+        )
+      }
+    }
+    return(
+      <>
+          <NavBar navigation={navigation}/>
+          {loadMap()}
       </>
     )
 }
