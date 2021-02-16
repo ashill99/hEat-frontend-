@@ -85,7 +85,7 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
       justifyContent: 'center',
     },
     screen: {
-      marginTop: 40,
+      // marginTop: 40,
       alignItems: 'center',
     },
     title: {
@@ -93,8 +93,8 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
     },
     map: {
       width: 650,
-      height: 670,
-      marginTop: 150,
+      height: 770,
+      marginTop: 40,
     },
     marker: {
       backgroundColor: "#fff",

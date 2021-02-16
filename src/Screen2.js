@@ -50,9 +50,9 @@ console.log(longitude, "longitude")
 
     return(
       <>
-        {isLoaded ? 
-        <>
           <NavBar navigation={navigation}/>
+                {isLoaded ? 
+        <>
           <Container>
               <MapContainer mapRef={mapRef} navigation={navigation} latitude={latitude} longitude={longitude}/>
               <FilterContainer mapRef={mapRef}/>
@@ -69,6 +69,8 @@ const Container = styled.View`
 width: 100%;
 height: 100%;
 display: flex;
+backgroundColor: 	#FFEFD5;
+
 `
 
 

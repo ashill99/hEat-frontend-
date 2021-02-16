@@ -5505,6 +5505,11 @@
   "resolved" "https://registry.npmjs.org/react-native-screens/-/react-native-screens-2.17.1.tgz"
   "version" "2.17.1"
 
+"react-native-stars@^1.2.2":
+  "integrity" "sha512-ROoluqPqv93ycUV3Mwf/p1fFW2TOcb6juhGrMb5oNYYTa0aTe4WgnboipNWLe5viDlC8XYLS+g5WpZBvCzwFkw=="
+  "resolved" "https://registry.npmjs.org/react-native-stars/-/react-native-stars-1.2.2.tgz"
+  "version" "1.2.2"
+
 "react-native-svg@^12.1.0":
   "integrity" "sha512-1g9qBRci7man8QsHoXn6tP3DhCDiypGgc6+AOWq+Sy+PmP6yiyf8VmvKuoqrPam/tf5x+ZaBT2KI0gl7bptZ7w=="
   "resolved" "https://registry.npmjs.org/react-native-svg/-/react-native-svg-12.1.0.tgz"

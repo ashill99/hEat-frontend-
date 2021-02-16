@@ -87,18 +87,18 @@ const FilterContainer = ({mapRef}) => {
               {label: 'Restaurant', value: 'Restaurant', icon: () => <Icon name="fastfood" size={18} color="#900" />},
             ]}
             defaultValue="All"
-            containerStyle={{height: 40}}
-            style={{backgroundColor: '#fafafa'}}
+            containerStyle={{height: 60}}
+            style={{backgroundColor: 'orange'}}
             itemStyle={{
                 justifyContent: 'flex-start'
             }}
             labelStyle={{
               fontSize: 16,
               textAlign: 'left',
-              color: '#000'
+              color: 'white'
             }}
-            containerStyle={{width: 100, height: 30}}
-              dropDownStyle={{backgroundColor: '#fafafa'}}
+            containerStyle={{width: 100, height: 40}}
+              dropDownStyle={{backgroundColor: 'blue'}}
               onChangeItem={item => dispatch(updateRestBar(item.value))}
             />
         </View>
@@ -130,6 +130,8 @@ const styles = StyleSheet.create({
         // marginTop: 30,
         paddingLeft: 500,
         paddingRight: 200,
-        position: 'absolute'
+        position: 'absolute',
+        backgroundColor: '#eefbfb',
+
       },
 })

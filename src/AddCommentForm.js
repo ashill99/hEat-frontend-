@@ -1,10 +1,13 @@
 import { useRoute } from '@react-navigation/native';
 import React, {useState} from 'react';
-import { StyleSheet, Button, Text, View, TouchableOpacity, TextInput, Keyboard } from 'react-native';
+import { StyleSheet, ScrollView, Button, Text, View, TouchableOpacity, TextInput, Keyboard } from 'react-native';
 import 'react-native-gesture-handler';
 import { updateComments } from './redux/comments'
 import { useDispatch } from 'react-redux'
 import {URL} from '@env'
+import Stars from 'react-native-stars';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 const AddCommentForm = ({location}) => {
   
@@ -35,6 +38,7 @@ const AddCommentForm = ({location}) => {
         const action2 = updateComments(newComment)
         dispatch(action2)
         setText("")
+        setRating(0)
     })
     .catch((error) => {
       console.error(error);
@@ -44,19 +48,19 @@ const AddCommentForm = ({location}) => {
 
     return (
         <View>
-          <TextInput
+          <Stars
+            default={rating}
+            count={5}
+            update={(val)=>{setRating(val)}}
+            fullStar={<Icon name={'fire'} style={[styles.myStarStyle]}/>}
+            emptyStar={<Icon name={'bandcamp'} style={[styles.myStarStyle, styles.myEmptyStarStyle]}/>}
+          />
+<TextInput
             style={styles.textInput}
             placeholder="What's good here?"
             onBlur={Keyboard.dismiss}
             value={text}
             onChangeText={setText}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Rating Placeholder"
-            onBlur={Keyboard.dismiss}
-            value={rating}
-            onChangeText={setRating}
           />
           <TouchableOpacity
             style={styles.saveButton}
@@ -64,7 +68,7 @@ const AddCommentForm = ({location}) => {
           >
             <Text style={styles.saveButtonText}>Post Comment</Text>
           </TouchableOpacity>
-        </View>
+      </View>
     )
 }
 
@@ -94,5 +98,16 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 20,
         textAlign: 'center'
+      },
+      myStarStyle: {
+        color: 'yellow',
+        backgroundColor: 'transparent',
+        textShadowColor: 'black',
+        textShadowOffset: {width: 1, height: 1},
+        textShadowRadius: 2,
+        fontSize: 30,
+      },
+      myEmptyStarStyle: {
+        color: 'white',
       }
 })

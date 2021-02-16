@@ -70,11 +70,11 @@ const styles = StyleSheet.create({
     },
     subContainer: {
 
-        backgroundColor: '#FED8B1',
+        backgroundColor: '#FFEFD5',
         paddingTop: 10,
         // marginLeft: 100,
         marginTop: 30,
-        width: 120,
+        width: 440,
         borderTopLeftRadius: 4,
         borderTopRightRadius: 4,
         flexWrap: 'wrap',
@@ -86,9 +86,9 @@ const styles = StyleSheet.create({
 
     },
     itemView: {
-        // marginHorizontal: '10%',
+        // marginHorizontal: '70%',
         backgroundColor: 'white',
-        height: 30,
+        height: 35,
         width: '100%',
         marginBottom: 10,
         justifyContent: 'center',
@@ -97,9 +97,12 @@ const styles = StyleSheet.create({
 
     },
     itemText: {
-        color: 'black',
+        color: 'blue',
         paddingHorizontal: 10,
+        textTransform: 'capitalize',
         // position: 'absolute'
+        fontSize: 18,
+        alignContent: 'center',
 
     },
     noResultView: {
@@ -116,7 +119,7 @@ const styles = StyleSheet.create({
     noResultText: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: 'white',
+        color: 'blue',
         // position: 'absolute'
 
     },

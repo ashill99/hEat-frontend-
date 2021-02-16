@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, ScrollView, Text, View, StyleSheet } from 'react-native';
 import 'react-native-gesture-handler';
 import {useSelector} from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { updateCommentLikes } from './redux/comments'
 import {URL} from '@env'
+import Stars from 'react-native-stars';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 const Comment = ({location}) => {
@@ -45,8 +47,17 @@ const Comment = ({location}) => {
       const eachComment = currentComments.map((comment, index) => {
         return (
           <View key={comment.id}> 
-            <Text>{comment.content} {'\n'}{comment.rating}{'\n'} </Text>
-            <Button onPress={() => handleLikePress(comment)} title={`👍 ${comment.likes}`} id={comment.id}/>
+              <View style={{alignItems:'center', marginTop: 10, marginBottom: 20}}>
+              <Text>{comment.content} {'\n'} </Text>
+                <Stars
+                  default={comment.rating}
+                  count={5}
+                  fullStar={<Icon name={'fire'} style={[styles.myStarStyle]}/>}
+                  emptyStar={<Icon name={'bandcamp'} style={[styles.myStarStyle, styles.myEmptyStarStyle]}/>}
+                />
+            </View> 
+                       <Button onPress={() => handleLikePress(comment)} title={`👍 ${comment.likes}`} id={comment.id}/>
+
           </View>
         )
       }
@@ -60,3 +71,19 @@ const Comment = ({location}) => {
 }
 
 export default Comment
+
+
+const styles = StyleSheet.create({
+  myStarStyle: {
+    color: 'orange',
+    backgroundColor: 'transparent',
+    textShadowColor: 'black',
+    textShadowOffset: {width: 1, height: 1},
+    textShadowRadius: 2,
+    fontSize: 30,
+    fontFamily: 'San Francisco'
+  },
+  myEmptyStarStyle: {
+    color: 'lightgray',
+  }
+});

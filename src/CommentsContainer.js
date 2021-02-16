@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import 'react-native-gesture-handler';
 import Comment from './Comment'
 import AddCommentForm from './AddCommentForm'
 import { addComments } from "./redux/comments";
 import {useDispatch} from 'react-redux'
 import {URL} from '@env'
+import styled from 'styled-components'
 
 
 const CommentsContainer = ({ navigation, route, location }) => {
@@ -28,15 +29,20 @@ const CommentsContainer = ({ navigation, route, location }) => {
     },[dispatch])
 
     return (
-        <View>
-            {isLoaded ? 
-            <>
-                <Comment location={location}/>
-                <AddCommentForm location={location}/>
-            </>
-            : null }
-        </View>
+
+          <Wrapper>
+              {isLoaded ? 
+              <>
+                  <Comment location={location}/>
+                  <AddCommentForm location={location}/>
+              </>
+              : null }
+            </Wrapper>
     )
 }
 
 export default CommentsContainer 
+
+
+const Wrapper = styled.View`
+`
