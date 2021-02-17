@@ -34,8 +34,8 @@ const Screen1 = ({ navigation, route }) => {
               title="Warm Up"
               onPress={() => {
                 navigation.navigate('Screen2', {
-                  latitude: 40.6942696,
-              longitude: -73.9187482
+                  latitude: 40.7004154,
+              longitude: -73.9089705
                 })
               }}
             >
