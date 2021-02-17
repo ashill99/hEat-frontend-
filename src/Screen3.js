@@ -23,7 +23,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
     useEffect(() => {
 
       if (location.comments.length > 0) { 
-        console.log(location.comments)
+        console.log(location.comments, "location comments")
       const ratings = location.comments.map((comment => comment.rating))
 
       function getAvg(ratings) {
@@ -36,7 +36,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
       setRatAv(Math.round(average))
     }
 
-    },[ratAv])
+    },[<CommentsContainer/>])
 
 
   const dispatch = useDispatch()
@@ -89,15 +89,15 @@ function restTypeDisplay() {
             onPress={() => Linking.openURL(location.menu)}>
             Menu{'\n'}
           </Links> 
-          <Info>Average User Rating:{'\n'} {'\n'}  
+          <Info>  
           {ratAv > 0 ? <Stars
             default={ratAv}
             count={5}
             fullStar={<Icon name={'fire'} style={[styles.myStarStyle]}/>}
             emptyStar={<Icon name={'bandcamp'} style={[styles.myStarStyle, styles.myEmptyStarStyle]}/>}
-          /> 
+          />
           :
-          <NoStars>Not Enough Reviews</NoStars>  }
+          <NoStars>Not Enough Reviews to Display</NoStars>  }
                 </Info>
                     <Image 
             source={{uri: location.imgUrl}} 

@@ -15,6 +15,7 @@ import RestaurantList from './src/RestaurantList'
 import BarList from './src/BarList'
 import Login from './src/Login'
 import Signup from './src/Signup'
+import AddLocation from './src/AddLocation'
 import { Provider } from 'react-redux'
 import store from './src/redux/store'
 import { useFonts } from 'expo-font';
@@ -58,6 +59,7 @@ export default function App() {
         <Stack.Screen name="BarList" component={BarList} options={{title: 'Bars'}}/>
         <Stack.Screen name="Login" component={Login} options={{title: 'Login'}}/>
         <Stack.Screen name="Signup" component={Signup} options={{title: 'Signup'}}/>
+        <Stack.Screen name="AddLocation" component={AddLocation} options={{title: "Add Location"}}/>
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>

@@ -93,8 +93,8 @@ background: orange;
 width: 120px;
 border-radius:20px;
 align-self: center;
-margin-top:10px;
-margin-bottom:10px;
+margin-top:15px;
+margin-bottom:5px;
 padding: 5px;
 
 `

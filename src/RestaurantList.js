@@ -9,6 +9,7 @@ import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 export default function RestaurantList({navigation, route}) {  
@@ -45,7 +46,6 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
       }
       
       const average = getAvg(ratings);
-      // setRatAv(Math.round(average))
       const ratAv = Math.round(average)
     // } 
 
@@ -91,17 +91,14 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
           /> 
           :
           <NoStars>Not Enough Reviews</NoStars>  }
-
-
-
     </ItemView>
 )
   }) 
     
     return (
-      <Scroll>
-        <Wrapper>
+      <>
         <NavBar navigation={navigation}/>
+        <Wrapper>
         <Form>
           <SearchBar
             placeholder="Search..." 
@@ -113,7 +110,7 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
           {eachLocation}
           </RestaurantItem>
         </Wrapper>
-      </Scroll>
+        </>
     );
   }
   
@@ -136,18 +133,14 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
   font-size: 20px;
 `
 
-const Scroll = styled.ScrollView`
-  flex: 1;
-  backgroundColor: 	#FFEFD5;  
-  flexGrow: 1;
-  `
-
-  const Wrapper = styled.View`
+  const Wrapper = styled.ScrollView`
 flex: 1;
 width: 100%;
-height: 95%;
+height: 90%;
 display: flex;
 backgroundColor: 	#FFEFD5;  
+flexGrow: 1;
+
 `
 
 const RestaurantTitle = styled.Text`

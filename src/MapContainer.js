@@ -1,7 +1,8 @@
 import React, { useState} from 'react';
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import { Marker } from 'react-native-maps';
+import MapView from "react-native-map-clustering";
 import { PROVIDER_GOOGLE } from 'react-native-maps' 
  import {useSelector} from 'react-redux'
  import {useDispatch} from 'react-redux'
@@ -13,11 +14,7 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
 
     const dispatch = useDispatch()
 
-    console.log(latitude, "map container lat")
-
-    // console.log(chosenLocation, "chosenLocation")
-
-        const locations = useSelector(state => {
+      const locations = useSelector(state => {
           return state.location.items
         })
 
@@ -49,7 +46,7 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
           ref={mapRef}
           style={styles.map}
           provider={PROVIDER_GOOGLE}         
-          region={region}
+          initialRegion={region}
           navigation={navigation}
           showsUserLocation={true}
         >
@@ -66,7 +63,7 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
                     })
                 }}> 
                 <View styles={styles.marker}>
-                 { region.longitudeDelta < 0.4 ? <Text styles={styles.text}>{location.name} {console.log(region.latitudeDelta)}</Text> : null }
+                 { region.longitudeDelta < 0.4 ? <Text styles={styles.text}>{location.name}</Text> : null }
                   <Text>🔥</Text>
                 </View>
               </Marker> ) 
@@ -93,8 +90,8 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
       fontSize: 42,
     },
     map: {
-      width: 650,
-      height: 770,
+      width: '100%',
+      height: '100%',
       marginTop: 40,
     },
     marker: {

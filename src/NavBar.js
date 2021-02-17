@@ -21,17 +21,11 @@ const NavBar = ({navigation, route}) => {
                 />
             </Container>
             <Container >
-                <MaterialCommunityIcons name="account" color={'blue'} size={'40'} />
-            </Container>
-            <Container>
-                <Icon 
-                name="restaurant" 
-                size="40" 
-                color='blue'
-                onPress={() => {navigation.navigate('RestaurantList', {
-                    type: "Restaurant",
-                })
-                }}
+                <MaterialCommunityIcons 
+                name="plus" 
+                color={'blue'} 
+                size={'40'} 
+                onPress={() => {navigation.navigate('AddLocation')}}    
                 />
             </Container>
             <Container>
@@ -49,7 +43,19 @@ const NavBar = ({navigation, route}) => {
             </Container>
             <Container>
                 <Icon 
-                name="nightlife" 
+                name="restaurant" 
+                size="40" 
+                color='blue'
+                onPress={() => {navigation.navigate('RestaurantList', {
+                    type: "Restaurant",
+                })
+                }}
+                />
+            </Container>
+            
+            <Container>
+                <MaterialCommunityIcons 
+                name="glass-cocktail" 
                 size="40" 
                 color='blue'
                 onPress={() => {navigation.navigate('BarList', {

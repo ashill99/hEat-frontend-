@@ -17,7 +17,6 @@ const AddCommentForm = ({location}) => {
     const [rating, setRating] = useState(0)
 
     function handleSubmitClick(e) {
-        const newUserId = 1
 
         fetch(`${URL}/api/v1/comments`,  {
         method: 'POST',
@@ -30,7 +29,8 @@ const AddCommentForm = ({location}) => {
             user_id: 1, 
             location_id: location.id,
             likes: 0,
-            rating: rating
+            rating: rating,
+            username: "adam"
         })
     })
     .then((response) => response.json())

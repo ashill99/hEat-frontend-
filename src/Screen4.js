@@ -39,7 +39,7 @@ const [ratAv, setRatAv] = useState(0)
   function handleNewSearch(search) {
     setSearch(search)
     setSearch(search)
-    console.log(search)
+    // console.log(search)
 }
 
 const faveArrays = faves.map(fave => fave.locationId)
@@ -49,7 +49,7 @@ const newLocations = locations.filter(item => { return faveArrays.includes(item.
 const filteredlocations = newLocations.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
 const sortedLocations = filteredlocations.sort((a, b) => a.name.localeCompare(b.name));
 
-console.log(newLocations, 'newlocations')
+// console.log(newLocations, 'newlocations')
 const eachLocation = sortedLocations.map(item => {
 
   const ratings = item.comments.map((comment => comment.rating))
@@ -105,12 +105,11 @@ const eachLocation = sortedLocations.map(item => {
           <NoStars>Not Enough Reviews</NoStars>  }
 
 
-
     </ItemView>
 )
   }) 
 
-console.log(eachLocation)
+// console.log(eachLocation)
   const faveLocations = locations.filter(location => location.id === faves.map(fave => fave.locationId))
 
   // console.log(faves.map(fave => fave.locationId))
@@ -150,13 +149,7 @@ padding-top: 20px;
 font-size: 20px;
 `
 
-const Scroll = styled.ScrollView`
-flex: 1;
-backgroundColor: 	#FFEFD5;  
-flexGrow: 1;
-`
-
-const Wrapper = styled.View`
+const Wrapper = styled.ScrollView`
 flex: 1;
 width: 100%;
 height: 95%;

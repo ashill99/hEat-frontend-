@@ -99,9 +99,9 @@ const sortedBars = filteredBars.sort((a, b) => a.name.localeCompare(b.name));
   }) 
     
     return (
-      <Scroll>
-        <Wrapper>
+      <>
         <NavBar navigation={navigation}/>
+        <Wrapper>
         <Form>
           <SearchBar
             placeholder="Search..." 
@@ -113,7 +113,7 @@ const sortedBars = filteredBars.sort((a, b) => a.name.localeCompare(b.name));
           {eachLocation}
           </RestaurantItem>
         </Wrapper>
-      </Scroll>
+</>
     );
   }
   
@@ -130,18 +130,15 @@ const sortedBars = filteredBars.sort((a, b) => a.name.localeCompare(b.name));
   font-size: 20px;
 `
 
-const Scroll = styled.ScrollView`
-  flex: 1;
-  backgroundColor: 	#FFEFD5;  
-  flexGrow: 1;
-  `
 
-  const Wrapper = styled.View`
+  const Wrapper = styled.ScrollView`
 flex: 1;
 width: 100%;
 height: 95%;
 display: flex;
-backgroundColor: 	#FFEFD5;  
+backgroundColor: 	#FFEFD5; 
+flexGrow: 1;
+
 `
 
 const RestaurantTitle = styled.Text`

@@ -25,7 +25,6 @@ export default function Signup({navigation, route, currentUser, setCurrentUser})
   });
 
   function handleSubmit() {
-
     setEmail("")
 }
 
@@ -103,7 +102,7 @@ backgroundColor: 	#FFEFD5;
 
 
 const Span = styled.Text`
-color: #F7F8F3
+color: #F7F8F3;
 padding: 12px;
 align-self: center
 `

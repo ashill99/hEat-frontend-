@@ -48,6 +48,7 @@ const Comment = ({location}) => {
         return (
           <View key={comment.id} style={{borderBottomWidth: 0.2, borderColor: 'orange'}}> 
               <View style={{alignItems:'center', marginTop: 10, marginBottom: 20}}>
+              <Text>{comment.username} says:</Text>
               <Text>{comment.content} {'\n'} </Text>
                 <Stars
                   default={comment.rating}

@@ -41,8 +41,8 @@ export default function SearchDropDown({dataSource, mapRef, onSearch}) {
                     dataSource.length ?
                         dataSource.map(item => {
                             return (
-                                <TouchableOpacity key={item.id} onPress={() => {setLocation(item); setLocation(item); goToSearch(item)}} style={styles.itemView}>
-                                    <Text style={styles.itemText}>{item}</Text>
+                                <TouchableOpacity onPress={() => {setLocation(item); setLocation(item); goToSearch(item)}} style={styles.itemView}>
+                                    <Text style={styles.itemText} key={item.id}>{item}</Text>
                                 </TouchableOpacity>                            
                                 )
                         })

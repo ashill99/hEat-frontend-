@@ -63,7 +63,7 @@ console.log(longitude, "longitude")
     return(
       <>
           <NavBar navigation={navigation}/>
-          {loadMap()}
+          {isLoaded ? loadMap() : null}
       </>
     )
 }
