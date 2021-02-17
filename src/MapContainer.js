@@ -48,7 +48,7 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
         <MapView 
           ref={mapRef}
           style={styles.map}
-          provider={PROVIDER_GOOGLE} 
+          provider={PROVIDER_GOOGLE}         
           region={region}
           navigation={navigation}
           showsUserLocation={true}
@@ -66,7 +66,8 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
                     })
                 }}> 
                 <View styles={styles.marker}>
-                  <Text styles={styles.text}>{location.name}🔥</Text>
+                 { region.longitudeDelta < 0.4 ? <Text styles={styles.text}>{location.name} {console.log(region.latitudeDelta)}</Text> : null }
+                  <Text>🔥</Text>
                 </View>
               </Marker> ) 
             })

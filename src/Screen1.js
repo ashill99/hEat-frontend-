@@ -67,7 +67,7 @@ const Screen1 = ({ navigation, route }) => {
             <Span>Sign Up</Span></SignUpButton>
           </> 
           }
-          <Image source={{uri: "https://media.timeout.com/images/105711851/1372/772/image.jpg"}} style={{width: '100%', height: '50%'}} />
+          <Image source={{uri: "https://media.timeout.com/images/105711851/1372/772/image.jpg"}} style={{width: '100%', height: '50%', marginTop: 30}} />
         </Container>
         </Scroll>
         </>
