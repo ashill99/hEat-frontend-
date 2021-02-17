@@ -39,14 +39,14 @@ const Screen1 = ({ navigation, route }) => {
                 })
               }}
             >
-              <Span>Warm Up</Span>
+              <WarmSpan>Warm Up</WarmSpan>
             </WarmUpButton>
-            <WarmUpButton
+            <SignOutButton
               title="Sign Out"
               onPress={() => {setCurrentUser([]), setLoggedIn(false)}}
             >
               <Span>Sign Out</Span>
-            </WarmUpButton>
+            </SignOutButton>
           </> :
           <>
           <LoginButton
@@ -98,11 +98,29 @@ margin-bottom:10px;
 padding: 5px;
 
 `
+const SignOutButton = styled(LoginButton)`
+background: blue;
+`
 
 const SignUpButton = styled(LoginButton)`
 background: blue;
 `
-const WarmUpButton = styled(LoginButton)`
+const WarmUpButton = styled.TouchableOpacity`
+background: orange;
+width: 220px;
+border-radius:20px;
+align-self: center;
+margin-top:10px;
+margin-bottom:10px;
+padding: 15px;
+font-size: 34px;
+`
+
+const WarmSpan = styled.Text`
+color: #F7F8F3;
+padding: 12px;
+align-self: center;
+font-size: 20px;
 `
 
 const Scroll = styled.ScrollView`
