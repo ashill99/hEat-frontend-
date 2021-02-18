@@ -112,7 +112,7 @@ function handleSubmit(lat, lng) {
             <DropDownPicker
     items={[
         {label: 'Bar', value: 'Bar', icon: () => <Icon name="nightlife" size={18} color="gray" />},
-              {label: 'Restaurant', value: 'Restaurant', icon: () => <Icon name="fastfood" size={18} color="#900" />},
+              {label: 'Restaurant', value: 'Restaurant', icon: () => <Icon name="fastfood" size={18} color="gray" />},
     ]}
     defaultValue={'Restaurant'}
     containerStyle={{marginTop: 20, height: 40, width: 310, marginLeft: 40, borderRadius: 20}}
@@ -157,6 +157,7 @@ function handleSubmit(lat, lng) {
 export default AddLocation
 
 const Form = styled.View`
+margin-top: 10px;
 padding:20px;
 `
 const Span = styled.Text`
@@ -164,8 +165,8 @@ color: #F7F8F3;
 padding: 12px;
 align-self: center;
 font-size: 20px;
-
 `
+
 const SearchBar = styled.TextInput`
 background: #eefbfb;
 width: 100%;
@@ -226,12 +227,12 @@ align-self: center;
 
     const AddButton = styled.TouchableOpacity`
         background: orange;
-        width: 240px;
+        width: 200px;
         margin-bottom: 20px;
         margin-top: 20px;
         border-radius:20px;
         align-self: center;
-        padding: 10px;
+        padding: 5px;
 `
 
 const Input = styled.TextInput`

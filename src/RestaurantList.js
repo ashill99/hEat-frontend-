@@ -18,7 +18,6 @@ export default function RestaurantList({navigation, route}) {
     'PlayWithFire': require('../assets/fonts/PlayWithFire.ttf'),
   });
 
-
   const [search, setSearch ] = useState("")
 
   const locations = useSelector(state => {
@@ -62,19 +61,20 @@ const sortedLocations = filteredRestaurants.sort((a, b) => a.name.localeCompare(
       >
         {item.name}
       </RestaurantTitle>
-            <RestaurantText
+        <RestaurantText
+          style={{color: 'blue'}}
           onPress={() => navigation.push('Screen2', {
           latitude: item.latitude,
           longitude: item.longitude
           })}
         >
-          Map
+          Map 📍
         </RestaurantText>
         <RestaurantText 
         style={{color: 'blue'}}
         onPress={() => Linking.openURL(item.menu)}
       >
-        Menu{'\n'}
+        Menu
       </RestaurantText> 
 
       <RestaurantText 
@@ -155,8 +155,8 @@ font-family: "PlayWithFire";
   const RestaurantText = styled.Text`
     font-size: 16px;
     color: #777;
-    ${'' /* padding-bottom: 10; */}
-    ${'' /* padding-top: 10; */}
+    padding-bottom: 5px;
+    padding-top: 10px;
     align-self: center;
 
   `
@@ -171,9 +171,10 @@ const NoStars = styled.Text`
     font-size: 10px;    
     align-self: center;
     color: gray;
+    padding-bottom: 5px;
+
 
 `
-
         const styles = StyleSheet.create({
         myStarStyle: {
           color: 'orange',
@@ -182,6 +183,8 @@ const NoStars = styled.Text`
           textShadowOffset: {width: 1, height: 1},
           textShadowRadius: 1,
           fontSize: 30,
+          paddingBottom: 5,
+
         },
         myEmptyStarStyle: {
           color: 'lightgray',

@@ -75,18 +75,19 @@ const eachLocation = sortedLocations.map(item => {
       {item.name}
     </RestaurantTitle>
     <RestaurantText
-          onPress={() => navigation.push('Screen2', {
-          latitude: item.latitude,
-          longitude: item.longitude
-          })}
-        >
-          Map
+      style={{color: 'blue'}}
+      onPress={() => navigation.push('Screen2', {
+      latitude: item.latitude,
+      longitude: item.longitude
+      })}
+    >
+          Map 📍
         </RestaurantText>
         <RestaurantText 
         style={{color: 'blue'}}
         onPress={() => Linking.openURL(item.menu)}
       >
-        Menu{'\n'}
+        Menu
       </RestaurantText> 
 
       <RestaurantText 

@@ -7,7 +7,7 @@ import { updateCommentLikes } from './redux/comments'
 import {URL} from '@env'
 import Stars from 'react-native-stars';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import styled from 'styled-components'
 
 const Comment = ({location}) => {
 
@@ -48,8 +48,8 @@ const Comment = ({location}) => {
         return (
           <View key={comment.id} style={{borderBottomWidth: 0.2, borderColor: 'orange'}}> 
               <View style={{alignItems:'center', marginTop: 10, marginBottom: 20}}>
-              <Text>{comment.username} says:</Text>
-              <Text>{comment.content} {'\n'} </Text>
+              <Text>{comment.username} says:{'\n'}</Text>
+              <CommentText>{comment.content} {'\n'} </CommentText>
                 <Stars
                   default={comment.rating}
                   count={5}
@@ -73,7 +73,10 @@ const Comment = ({location}) => {
 
 export default Comment
 
-
+const CommentText = styled.Text`
+font-size: 17px;
+font-weight: bold;
+`
 const styles = StyleSheet.create({
   myStarStyle: {
     color: 'orange',

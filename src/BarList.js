@@ -62,19 +62,20 @@ const sortedBars = filteredBars.sort((a, b) => a.name.localeCompare(b.name));
       >
         {item.name}
       </RestaurantTitle>
-            <RestaurantText
+        <RestaurantText
+          style={{color: 'blue'}}
           onPress={() => navigation.push('Screen2', {
           latitude: item.latitude,
           longitude: item.longitude
           })}
         >
-          Map
+          Map 📍
         </RestaurantText>
         <RestaurantText 
         style={{color: 'blue'}}
         onPress={() => Linking.openURL(item.menu)}
       >
-        Menu{'\n'}
+        Menu
       </RestaurantText> 
 
       <RestaurantText 
@@ -153,8 +154,8 @@ font-family: "PlayWithFire";
   const RestaurantText = styled.Text`
     font-size: 16px;
     color: #777;
-    ${'' /* padding-bottom: 10; */}
-    ${'' /* padding-top: 10; */}
+    padding-bottom: 10px;
+    padding-top: 5px;
     align-self: center;
   `
   const ItemView = styled.View`
@@ -175,6 +176,8 @@ const NoStars = styled.Text`
     font-size: 10px;    
     align-self: center;
     color: gray;
+    padding-bottom: 5px;
+
 
 `
 

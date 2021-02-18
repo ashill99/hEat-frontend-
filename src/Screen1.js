@@ -29,7 +29,7 @@ const Screen1 = ({ navigation, route }) => {
         <Container>
           <Title />
           {loggedIn ? 
-                   <>
+          <>
             <WarmUpButton
               title="Warm Up"
               onPress={() => {
@@ -51,18 +51,18 @@ const Screen1 = ({ navigation, route }) => {
           <>
           <LoginButton
           onPress={() => {
-              navigation.navigate('Login', {
-                setCurrentUser: setCurrentUser,
-                currentUser: currentUser,
-                loggedIn: loggedIn,
-                setLoggedIn: setLoggedIn,
-              })}}
+            navigation.navigate('Login', {
+              setCurrentUser: setCurrentUser,
+              currentUser: currentUser,
+              loggedIn: loggedIn,
+              setLoggedIn: setLoggedIn,
+            })}}
           >
             <Span>Login</Span>
           </LoginButton>
           <SignUpButton
-                    onPress={() => {
-              navigation.navigate('Signup')}}
+            onPress={() => {
+            navigation.navigate('Signup')}}
           >
             <Span>Sign Up</Span></SignUpButton>
           </> 
