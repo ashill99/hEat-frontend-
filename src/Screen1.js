@@ -9,18 +9,40 @@ import AppLoading from 'expo-app-loading';
 import Login from './Login'
 import Signup from './Signup'
 import {useSelector} from 'react-redux'
+import {URL} from '@env'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Screen1 = ({ navigation, route }) => {
 
   const [loggedIn, setLoggedIn] = useState(false)
-  const [currentUser, setCurrentUser] = useState([])
+  const [currentUser, setCurrentUser] = useState(null)
+
 
   let [fontsLoaded] = useFonts({
     'PlayWithFire': require('../assets/fonts/PlayWithFire.ttf'),
   });
+  
+console.log(loggedIn, "loggedin")
 
-  console.log(currentUser, "screen1 ")
+  useEffect(() => {
+    const token = AsyncStorage.getItem('token')
+
+    fetch(`${URL}/profile`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    })
+    .then((r) => r.json())
+    .then((user) => {
+      setCurrentUser(user)
+      setLoggedIn(true)
+      console.log("isthisrunning")
+    })
+  },[])
+
+  console.log(currentUser, "screen1 currentUser ")
 
     return( 
       <>

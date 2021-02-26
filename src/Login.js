@@ -11,15 +11,18 @@ import {useForm } from 'react-hook-form'
 import {URL} from '@env'
 import { useDispatch } from 'react-redux'
 import {addCurrentUser} from './redux/currentUser'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function Login({navigation, route}) {  
     
     const dispatch = useDispatch()
 
-    const { currentUser, setCurrentUser, loggedIn, setLoggedIn } = route.params;
-
+    // const { currentUser, setCurrentUser, loggedIn, setLoggedIn } = route.params;
+    const {currentUser, setCurrentUser } = route.params
     const [users, setUsers] = useState([])
-    const [email, setEmail] = useState("")
+    const [caseEmail, setCaseEmail] = useState("")
+    const [casePassword, setCasePassword] = useState("")
     const [loaded, setLoaded] = useState(false)
 
 console.log(currentUser, "currentUser")
@@ -36,15 +39,37 @@ console.log(currentUser, "currentUser")
     })
   }, [])
   
-  function handleSubmit() {
-    const thisUser = users.filter(user => user.email.toLowerCase() === email.toLowerCase())
-    // dispatchCurrentUser(thisUser)
-    setCurrentUser(thisUser) 
-    console.log(currentUser)
-    setLoggedIn(true)
-    setEmail("")
+function handleSubmit(e) {
+  e.preventDefault()
+  const email = caseEmail.toLowerCase()
+  const password = casePassword.toLowerCase()
+  const formData = { email, password };
+  console.log(formData, "formData");
+  fetch(`${URL}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(formData)
+  })
+  .then((r) => r.json())
+  .then((data) => {
+    setCurrentUser(data.user)
+    AsyncStorage.setItem("token", data.token)
     navigation.navigate("Screen1")
+  })
+  console.log(currentUser, "second currentUser")
 }
+  
+//   function handleSubmit() {
+//     const thisUser = users.filter(user => user.email.toLowerCase() === email.toLowerCase())
+//     // dispatchCurrentUser(thisUser)
+//     setCurrentUser(thisUser) 
+//     console.log(currentUser)
+//     setLoggedIn(true)
+//     setEmail("")
+//     navigation.navigate("Screen1")
+// }
 
 // function dispatchCurrentUser(user) {
 //     const action = addCurrentUser(user)
@@ -62,8 +87,14 @@ console.log(currentUser, "currentUser")
         {/* <Title>Login</Title> */}
             <Input 
                 placeholder="example@hEat.com"
-                value={email}
-                onChangeText={setEmail}
+                value={caseEmail}
+                onChangeText={setCaseEmail}
+            />
+            <Input 
+                placeholder="p@55w0rd"
+                secureTextEntry={true}
+                value={casePassword}
+                onChangeText={setCasePassword}
             />
 
             <LoginButton onPress={handleSubmit}> 
@@ -86,6 +117,7 @@ font-size: 24px;
 const LoginButton = styled.TouchableOpacity`
         background: orange;
         width: 140px;
+        margin-top: 40px;
         margin-bottom: 20px;
         border-radius:20px;
         align-self: center
@@ -97,9 +129,9 @@ width: 80%;
 border-radius:20px;
 padding-left: 12px;
 height: 50px;
-margin-top: 50px;
+margin-top: 20px;
 border-radius: 20px;
-margin-bottom: 20px;
+${'' /* margin-bottom: 20px; */}
 align-self: center;
 `
 const HeatImage = styled.Image`
