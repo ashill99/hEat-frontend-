@@ -37,7 +37,7 @@ console.log(loggedIn, "loggedin")
     .then((r) => r.json())
     .then((user) => {
       setCurrentUser(user)
-      setLoggedIn(true)
+      // setLoggedIn(true)
       console.log("isthisrunning")
     })
   },[])

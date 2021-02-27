@@ -19,7 +19,7 @@ export default function Login({navigation, route}) {
     const dispatch = useDispatch()
 
     // const { currentUser, setCurrentUser, loggedIn, setLoggedIn } = route.params;
-    const {currentUser, setCurrentUser } = route.params
+    const {currentUser, setCurrentUser, setLoggedIn } = route.params
     const [users, setUsers] = useState([])
     const [caseEmail, setCaseEmail] = useState("")
     const [casePassword, setCasePassword] = useState("")
@@ -31,13 +31,13 @@ console.log(currentUser, "currentUser")
     'PlayWithFire': require('../assets/fonts/PlayWithFire.ttf'),
   });
 
-  useEffect(() => {
-    fetch(`${URL}/api/v1/users`)
-    .then(r => r.json())
-    .then(usersArray => {
-        setUsers(usersArray)
-    })
-  }, [])
+  // useEffect(() => {
+  //   fetch(`${URL}/api/v1/users`)
+  //   .then(r => r.json())
+  //   .then(usersArray => {
+  //       setUsers(usersArray)
+  //   })
+  // }, [])
   
 function handleSubmit(e) {
   e.preventDefault()
@@ -56,6 +56,7 @@ function handleSubmit(e) {
   .then((data) => {
     setCurrentUser(data.user)
     AsyncStorage.setItem("token", data.token)
+    setLoggedIn(true)
     navigation.navigate("Screen1")
   })
   console.log(currentUser, "second currentUser")
