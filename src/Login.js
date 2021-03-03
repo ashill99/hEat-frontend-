@@ -31,13 +31,6 @@ console.log(currentUser, "currentUser")
     'PlayWithFire': require('../assets/fonts/PlayWithFire.ttf'),
   });
 
-  // useEffect(() => {
-  //   fetch(`${URL}/api/v1/users`)
-  //   .then(r => r.json())
-  //   .then(usersArray => {
-  //       setUsers(usersArray)
-  //   })
-  // }, [])
   
 function handleSubmit(e) {
   e.preventDefault()

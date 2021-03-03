@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, SafeAreaView, Linking, ScrollView, Button, Image, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Linking, ScrollView, Image, View } from 'react-native';
 import 'react-native-gesture-handler';
 import CommentsContainer from './CommentsContainer'
 import {useSelector, useDispatch} from 'react-redux'
@@ -16,7 +16,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
   const Screen3 = ({ navigation, route}) => {
     
     const [ratAv, setRatAv] = useState(0)
-    // const [average, setAverage] = useState(0)
 
     const { location } = route.params;
 
@@ -37,7 +36,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
     }
 
     },[<CommentsContainer/>])
-
 
   const dispatch = useDispatch()
 
@@ -116,7 +114,6 @@ function restTypeDisplay() {
     container: {
       flex: 1,
       height: '100%'
-      // marginTop: Constants.statusBarHeight,
     },
     scrollView: {
       backgroundColor: 'white',

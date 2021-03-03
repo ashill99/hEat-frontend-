@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { StyleSheet, Linking, Text, View} from 'react-native';
+import { StyleSheet, Linking } from 'react-native';
 import 'react-native-gesture-handler';
 import NavBar from './NavBar'
 import {URL} from '@env'
@@ -25,7 +25,6 @@ const [ratAv, setRatAv] = useState(0)
       const faveAction = addFaves(faveArray)
       dispatch(faveAction)
       setFaves(faveArray)
-      // setFavesLoaded(true)
     })
     .catch((error) => {
       console.error(error);
@@ -39,7 +38,6 @@ const [ratAv, setRatAv] = useState(0)
   function handleNewSearch(search) {
     setSearch(search)
     setSearch(search)
-    // console.log(search)
 }
 
 const faveArrays = faves.map(fave => fave.locationId)
@@ -49,7 +47,6 @@ const newLocations = locations.filter(item => { return faveArrays.includes(item.
 const filteredlocations = newLocations.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
 const sortedLocations = filteredlocations.sort((a, b) => a.name.localeCompare(b.name));
 
-// console.log(newLocations, 'newlocations')
 const eachLocation = sortedLocations.map(item => {
 
   const ratings = item.comments.map((comment => comment.rating))
@@ -110,19 +107,12 @@ const eachLocation = sortedLocations.map(item => {
 )
   }) 
 
-// console.log(eachLocation)
   const faveLocations = locations.filter(location => location.id === faves.map(fave => fave.locationId))
-
-  // console.log(faves.map(fave => fave.locationId))
-  // console.log(faveLocations, "eachLocation")
 
     return (
       <>
         <NavBar navigation={navigation}/>
         <Wrapper >
-            {/* <Title>
-              ⭐ Favorites ⭐
-            </Title> */}
             <Form>
             <SearchBar
             placeholder="Search..." 

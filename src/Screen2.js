@@ -1,9 +1,7 @@
 import React, {useRef, useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
-import { StyleSheet, View } from 'react-native';
  import {useSelector} from 'react-redux'
  import {useDispatch} from 'react-redux'
- import { addFaves } from './redux/fave'
 import FilterContainer from './FilterContainer'
 import * as Location from 'expo-location';
 import MapContainer from './MapContainer' 

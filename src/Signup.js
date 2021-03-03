@@ -1,6 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, ScrollView, Linking, Text, View, Image } from 'react-native';
 import {useSelector} from 'react-redux'
 import NavBar from './NavBar'
 import 'react-native-gesture-handler';

@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
 import 'react-native-gesture-handler';
-import Svg, { Text } from "react-native-svg";
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import styled from 'styled-components'
