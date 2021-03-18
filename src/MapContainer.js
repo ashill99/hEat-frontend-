@@ -6,7 +6,6 @@ import MapView from "react-native-map-clustering";
 import { PROVIDER_GOOGLE } from 'react-native-maps' 
  import {useSelector} from 'react-redux'
  import {useDispatch} from 'react-redux'
-//  import { addItems } from "./redux/location";
  import { addLocation } from './redux/currentLocation'
 // import * as Location from 'expo-location';
 
@@ -24,13 +23,6 @@ import { PROVIDER_GOOGLE } from 'react-native-maps'
 
         const filteredLocations = locations
         .filter(location => location.restOrBar === restOrBar)
-  
-          // const [initialRegion, setInitialRegion] = useState({
-          //   latitude: 40.6942696,
-          //   longitude: -73.9187482,
-          //   latitudeDelta: 0.06,
-          //   longitudeDelta: 0.06
-          // })
 
           const region = 
           {
